@@ -568,7 +568,7 @@ public class WorkerController {
       }
 	  
 	  /**
-		  * 3获取所有已认证工作者
+		  * 获取所有已认证工作者
 		  *
 		  * @return
 		  * @throws Exception
