@@ -1,0 +1,209 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.wzxy.fx</groupId>
+  <artifactId>qiangdan</artifactId>
+  <packaging>war</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>qiangdan Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  
+  <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.9.RELEASE</version>
+  </parent>
+  
+  <dependencies>
+  <!-- springboot web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            
+            <!-- 去除内嵌tomcat -->
+		      <exclusions>
+		        <exclusion>
+		          <groupId>org.springframework.boot</groupId>
+		          <artifactId>spring-boot-starter-tomcat</artifactId>
+		        </exclusion>
+		      </exclusions>
+            
+        </dependency>
+        
+        <!-- websocket -->
+        <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>
+        
+        <!-- thymeleaf -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        
+        <!-- mybatis -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>1.1.1</version>
+        </dependency> 
+        
+        <!-- test -->
+        <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+        </dependency>
+
+        
+        <!-- 热部署 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+        
+        <!--  cache -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+         
+        <!-- redis -->       
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        
+        <dependency>
+		    <groupId>org.springframework.data</groupId>
+		    <artifactId>spring-data-redis</artifactId>
+        </dependency>
+        
+         <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            </dependency>
+        
+        <!-- thymeleaf legacyhtml5 模式支持 -->      
+        <dependency>
+            <groupId>net.sourceforge.nekohtml</groupId>
+            <artifactId>nekohtml</artifactId>
+        </dependency>  
+                  
+        <!-- 测试支持 -->
+	    <dependency>
+	      <groupId>junit</groupId>
+	      <artifactId>junit</artifactId>
+	      <scope>test</scope>
+	    </dependency>
+    
+	    <!-- 分页 -->
+	      <dependency>
+	          <groupId>com.github.pagehelper</groupId>
+	          <artifactId>pagehelper</artifactId>
+	          <version>4.1.6</version>
+	      </dependency> 
+	          
+        <!-- tomcat的支持.-->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+        </dependency>  
+        
+        <!-- javaee-api -->
+        <dependency>
+	      <groupId>javax</groupId>
+	      <artifactId>javaee-api</artifactId>
+	      <version>7.0</version>
+	      <scope>provided</scope>
+	    </dependency>  
+	    
+        <!-- mysql-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.15</version><!--$NO-MVN-MAN-VER$-->
+         </dependency>
+        <!-- 短信api -->
+        <dependency>
+            <groupId>com.sms</groupId>
+            <artifactId>sms-sdk.java</artifactId>
+            <version>1.2</version><!--$NO-MVN-MAN-VER$-->
+        </dependency>
+            
+         <dependency>
+	         <groupId>com.commons</groupId>
+	         <artifactId>logging</artifactId>
+	         <version>1.2</version><!--$NO-MVN-MAN-VER$-->
+         </dependency>
+            
+         <dependency>
+	         <groupId>com.fx</groupId>
+	         <artifactId>gson</artifactId>
+	         <version>2.2.4</version><!--$NO-MVN-MAN-VER$-->
+         </dependency>
+            
+         <dependency>
+	         <groupId>com.fx</groupId>
+	         <artifactId>httpclient</artifactId>
+	         <version>4.3.6</version><!--$NO-MVN-MAN-VER$-->
+         </dependency>
+            
+         <dependency>
+	         <groupId>com.fx</groupId>
+	         <artifactId>httpcore</artifactId>
+	         <version>4.3.3</version><!--$NO-MVN-MAN-VER$-->
+         </dependency>
+         
+         <!-- fastjson -->
+         <dependency>
+	         <groupId>com.alibaba</groupId>
+	         <artifactId>fastjson</artifactId>
+	         <version>1.2.35</version>
+         </dependency>
+         
+         <dependency>    
+		    <groupId>net.sf.json-lib</groupId>    
+		    <artifactId>json-lib</artifactId>    
+		    <version>2.4</version>    
+		    <classifier>jdk15</classifier>    
+		</dependency>
+		
+		<!-- rabbitMQ依赖 -->
+		<dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+        
+        <dependency>
+	        <groupId>cn.hutool</groupId>
+	        <artifactId>hutool-all</artifactId>
+	        <version>4.3.1</version>
+        </dependency>
+
+                  
+  </dependencies>
+  
+  <repositories>
+    <repository>
+        <id>getui-nexus</id>
+        <url>http://mvn.gt.igexin.com/nexus/content/repositories/releases/</url>
+    </repository>
+ </repositories>
+  
+  <properties>
+        <java.version>1.8</java.version>
+  </properties>
+  
+  <build>
+    <finalName>qiangdan</finalName>
+    <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+  </build>
+</project>

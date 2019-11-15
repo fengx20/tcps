@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>测试</title>
+		<script type="text/javascript" src="js/axios.min.js"></script>
+		<script type="text/javascript" src="js/vue.min.js"></script>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		
+		<style>
+			#app{
+				text-align: center;
+			}
+			
+			#mes{
+				text-align: left;
+				margin-left: 100px;
+			}
+		</style>
+		
+	</head>
+	<body>
+		
+		
+		
+		<div id="app">
+			
+			<h2>模拟调用商家接口</h2>	
+			<h3>模拟下单--梧州市内</h3><br><br>	
+				
+				<button type="button" onclick="dingdan1()">订单1-阿迪达斯-下单</button><br><br>
+				<button type="button" onclick="dingdan2()">订单2-骏逸体育-下单</button><br><br>
+				<button type="button" onclick="dingdan3()">订单3-好友便利店-下单</button><br><br>
+				
+			<h3>查询订单配送信息及状态</h3><br>
+				 
+				 <input type="text" id="key"/>
+				 <button type="button" onclick="cxdingdan1()">查询</button><br><br>
+				 
+				 <div id="mes">
+				 	
+				 </div>
+				 
+				
+				
+				
+				
+		</div>
+	</body>
+	
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	<script  type="text/javascript">	
+	
+	       var myDate = new Date();
+	       
+		  
+		   function createRandomId() {
+            return (Math.random()*10000000).toString(16).substr(0,4)+'-'+(new Date()).getTime()+'-'+Math.random().toString().substr(2,5);
+           }
+				///console.log(createRandomId());
+			            
+			 // 订单1			
+			function dingdan1(){
+				
+				var firsttime = myDate.toLocaleString();
+				console.log(firsttime);
+				
+				var keyid = createRandomId();
+				var shopname = "阿迪达斯";
+				var shopphonenum = "14798309659";
+				var thing = "上衣 *1、裤子 *1";
+				var remark = "准时到";
+				var sendtime = "10:30";
+				var reward = "10";
+				var recphonenum = "13609289453";
+				var recname = "王先生";
+				var recaddress = "富民三路82号梧州学院";
+				var shopaddress = "旺城广场阿迪达斯专卖店";
+				
+				
+				var reclongitude = "111.314041";
+				var reclatitude = "23.496545";
+				var longitude = "111.305127";
+				var latitude = "23.478527";
+				
+	var shoporder = { keyid: keyid,firsttime:firsttime,shopname,shopphonenum: shopphonenum,thing: thing,remark: remark,sendtime: sendtime,reward: reward,recphonenum:recphonenum, recname: recname,recaddress: recaddress,shopaddress: shopaddress,reclongitude:reclongitude,reclatitude:reclatitude,longitude:longitude,latitude:latitude};
+				console.log(keyid);
+				var url = "http://129.204.188.236:8080/qiangdan/addorder";
+				axios
+				.post(url,shoporder)
+				.then(function(response){
+					console.log(response.data);  //success  /   failed
+					if(response.data == "success"){
+					    alert("发单成功");
+					}else if(response.data == "no"){
+						alert("商家附近暂无工作者");
+					}else if(response.data == "ordernosave"){
+						alert("订单未保存");
+					}else{
+						alert("下单失败，请重试");
+					}
+				})
+				.catch(function (error){
+					console.log(error);
+				});
+				
+				
+			}
+						
+			
+			
+		 		
+			// 订单2			
+			function dingdan2(){
+				
+				var firsttime = myDate.toLocaleString();
+				console.log(firsttime);
+				
+				var keyid = createRandomId();
+				var shopname = "骏逸体育";
+				var shopphonenum = "1297839084";
+				var thing = "篮球 *1、打气筒 *1、羽毛球拍 *2";
+				var remark = "准时到";
+				var sendtime = "15:10";
+				var reward = "20";
+				var recphonenum = "1947839287";
+				var recname = "冯先生";
+				var recaddress = "工厂二路逸夫小学";
+				var shopaddress = "富民二路骏逸体育";
+				var reclongitude = "111.294776";
+				var reclatitude = "23.477568";
+				var longitude = "111.308312";
+				var latitude = "23.491599";
+				
+	var shoporder = { keyid: keyid,firsttime:firsttime,shopname,shopphonenum: shopphonenum,thing: thing,remark: remark,sendtime: sendtime,reward: reward,recphonenum:recphonenum, recname: recname,recaddress: recaddress,shopaddress: shopaddress,reclongitude:reclongitude,reclatitude:reclatitude,longitude:longitude,latitude:latitude};
+				console.log(keyid);
+				var url = "http://129.204.188.236:8080/qiangdan/addorder";
+				axios
+				.post(url,shoporder)
+				.then(function(response){
+					console.log(response.data);  //success  /   failed
+					if(response.data == "success"){
+						alert("发单成功");
+					}else if(response.data == "no"){
+						alert("商家附近暂无工作者");
+					}else if(response.data == "ordernosave"){
+						alert("订单未保存");
+					}else{
+						alert("下单失败，请重试");
+					}
+				})
+				.catch(function (error){
+					console.log(error);
+				});
+				
+				
+			}
+			
+			// 订单3
+					function dingdan3(){
+						
+						var firsttime = myDate.toLocaleString();
+						console.log(firsttime);
+						
+						var keyid = createRandomId();
+						var shopname = "好友便利店";
+						var shopphonenum = "198974234";
+						var thing = "大可乐 *3、牛肉干 *5";
+						var remark = "准时到";
+						var sendtime = "20:40";
+						var reward = "15";
+						var recphonenum = "164823453";
+						var recname = "张先生";
+						var recaddress = "梧州宝石大厦";
+						var shopaddress = "好友便利店（枣冲小区店）";
+						var reclongitude = "111.296368";
+						var reclatitude = "23.485603";
+						var longitude = "111.304306";
+						var latitude = "23.48835";
+						
+			var shoporder = { keyid: keyid,firsttime:firsttime,shopname,shopphonenum: shopphonenum,thing: thing,remark: remark,sendtime: sendtime,reward: reward,recphonenum:recphonenum, recname: recname,recaddress: recaddress,shopaddress: shopaddress,reclongitude:reclongitude,reclatitude:reclatitude,longitude:longitude,latitude:latitude};
+						console.log(keyid);
+						var url = "http://129.204.188.236:8080/qiangdan/addorder";
+						axios
+						.post(url,shoporder)
+						.then(function(response){
+							console.log(response.data);  //success  /   failed
+							if(response.data == "success"){
+								alert("发单成功");
+							}else if(response.data == "no"){
+								alert("商家附近暂无工作者");
+							}else if(response.data == "ordernosave"){
+								alert("订单未保存");
+							}else{
+								alert("下单失败，请重试");
+							}
+						})
+						.catch(function (error){
+							console.log(error);
+						});
+						
+						
+					}
+					
+					function cxdingdan1(){
+						
+						$('#mes').html('');
+						
+						var keyid = document.getElementById("key").value;
+						
+						var url = "http://129.204.188.236:8080/qiangdan/shopcxorder/"+keyid;
+						axios
+						.post(url)
+						.then(function(response){
+							console.log(response.data);  //success  /   failed
+							if(response.data == "isno"){
+								
+								document.getElementById("mes").innerHTML += "订单发布中";
+							}else if(response.data == null){
+								document.getElementById("mes").innerHTML += "无此订单";
+							}else{
+								
+								if(response.data.status == 0){
+									response.data.status = "配送中";
+								}else if(response.data.status == 1){
+									response.data.status = "已完成";
+								}
+								
+								document.getElementById("mes").innerHTML += "商家店名："+response.data.shopname+'<br>'+
+																			"客户："+response.data.recname+'<br>'+
+																			"商品："+response.data.thing+'<br>'+
+																			"配送员："+response.data.name+'<br>'+
+																			"配送员电话："+response.data.phonenum+'<br>'+
+																			"订单状态："+response.data.status+'<br>';
+							}
+						})
+						.catch(function (error){
+							console.log(error);
+						});
+					}
+			
+						 <!--商家店名、客户名字、物品、配送员名字、电话、状态-->
+						
+	</script>
+	
+</html>

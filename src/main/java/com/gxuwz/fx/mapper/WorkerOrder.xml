@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+    <mapper namespace="com.gxuwz.fx.mapper.WorkerOrderMapper">
+    	
+    	<select id="shfindWorkerOrderByKey" parameterType="String" resultType="WorkerOrder">
+           select keyid,shopname,firsttime,thing,recname,phonenum,name,status from worker_order where keyid = #{keyid} 
+        </select>
+    	
+        <select id="existBykeyid" parameterType="String" resultType="boolean">
+           select ifnull((select id from worker_order where keyid = #{0} and phonenum = #{1}),false)  
+        </select>
+        
+        <select id="findStBykeyid" parameterType="String" resultType="boolean">
+           select ifnull((select phonenum from worker_order where keyid = #{keyid} and status = 2),false)  
+        </select>  
+    
+        <select id="findWorkerOrderAllByPh" parameterType="String" resultType="WorkerOrder">
+             select keyid,shopname,firsttime,shopphonenum,thing,remark,sendtime,reward,recphonenum,recname,recaddress,shopaddress,reclongitude,reclatitude,longitude,latitude,sort,phonenum,name from worker_order where phonenum = #{phonenum} and status = 0 
+        </select>
+        
+        <select id="findWorkerOrderAllByPhSo" parameterType="String" resultType="WorkerOrder">
+             select keyid,shopname,firsttime,shopphonenum,thing,remark,sendtime,reward,recphonenum,recname,recaddress,shopaddress,reclongitude,reclatitude,longitude,latitude,sort,phonenum,name from worker_order where phonenum = #{phonenum} and status = 4 and sort = 1
+        </select>
+        
+         <select id="findWorkerOrderAllByPhWo" parameterType="String" resultType="WorkerOrder">
+             select keyid,shopname,firsttime,shopphonenum,thing,remark,sendtime,reward,recphonenum,recname,recaddress,shopaddress,reclongitude,reclatitude,longitude,latitude,sort,phonenum,name from worker_order where phonenum = #{phonenum} and status = 5
+        </select>
+        
+        <select id="findWorkerEndOrderAllByPh" parameterType="String" resultType="WorkerOrder">
+             select keyid,shopname,firsttime,shopphonenum,thing,remark,sendtime,reward,recphonenum,recname,recaddress,shopaddress,reclongitude,reclatitude,longitude,latitude,sort,phonenum,name from worker_order where phonenum = #{phonenum} and status = 1
+        </select>
+        
+         <select id="findWorkerOrderAllLSDD" parameterType="String" resultType="WorkerOrder">
+             select keyid,shopname,firsttime,shopphonenum,thing,remark,sendtime,reward,recphonenum,recname,recaddress,shopaddress,reclongitude,reclatitude,longitude,latitude,sort,status,phonenum,name from worker_order where phonenum = #{phonenum} and status = 0 or status = 1
+        </select>
+        
+         <select id="findworkpsz" parameterType="String" resultType="boolean">
+            select ifnull((select phonenum from worker_order where  phonenum = #{0} and status = 5),false)
+        </select>
+        
+        
+         <select id="gettoday" parameterType="String" resultType="int">
+             select count(*) from worker_order where to_days(systime) = to_days(now()) and phonenum = #{0} and sort = 0;
+        </select>
+        
+         <select id="gettoday_qq_fi" parameterType="String" resultType="int">
+             select count(*) from worker_order where to_days(systime) = to_days(now()) and phonenum = #{0} and sort = 0 and status = 1;
+        </select>
+        
+        <select id="gettoday_zp" parameterType="String" resultType="int">
+             select count(*) from worker_order where to_days(systime) = to_days(now()) and phonenum = #{0} and sort = 1;
+        </select>
+        
+        <select id="gettoday_zp_fi" parameterType="String" resultType="int">
+             select count(*) from worker_order where to_days(systime) = to_days(now()) and phonenum = #{0} and sort = 1 and status = 1;
+        </select>
+        
+       
+        <select id="getweek" parameterType="String" resultType="int">
+             select count(*) from worker_order where YEARWEEK(date_format(systime,'%Y-%m-%d')) = YEARWEEK(now()) and phonenum = #{0} and sort = 0 ;
+        </select>
+        
+        <select id="getweek_fi" parameterType="String" resultType="int">
+             select count(*) from worker_order where YEARWEEK(date_format(systime,'%Y-%m-%d')) = YEARWEEK(now()) and phonenum = #{0} and sort = 0 and status = 1;
+        </select>
+        
+        <select id="getweek_zp" parameterType="String" resultType="int">
+             select count(*) from worker_order where YEARWEEK(date_format(systime,'%Y-%m-%d')) = YEARWEEK(now()) and phonenum = #{0} and sort = 1;
+        </select>
+        
+        <select id="getweek_zp_fi" parameterType="String" resultType="int">
+             select count(*) from worker_order where YEARWEEK(date_format(systime,'%Y-%m-%d')) = YEARWEEK(now()) and phonenum = #{0} and sort = 1 and status = 1;
+        </select>
+            
+        
+        <select id="getmonth" parameterType="String" resultType="int">
+             select count(*) from worker_order where DATE_FORMAT(systime,'%Y%m') = DATE_FORMAT(CURDATE(),'%Y%m') and phonenum = #{0} and sort = 0 ;
+        </select>
+        
+        <select id="getmonth_fi" parameterType="String" resultType="int">
+             select count(*) from worker_order where DATE_FORMAT(systime,'%Y%m') = DATE_FORMAT(CURDATE(),'%Y%m') and phonenum = #{0} and sort = 0 and status = 1;
+        </select>
+        
+        <select id="getmonth_zp" parameterType="String" resultType="int">
+             select count(*) from worker_order where DATE_FORMAT(systime,'%Y%m') = DATE_FORMAT(CURDATE(),'%Y%m') and phonenum = #{0} and sort = 1;
+        </select>
+        
+        <select id="getmonth_zp_fi" parameterType="String" resultType="int">
+             select count(*) from worker_order where DATE_FORMAT(systime,'%Y%m') = DATE_FORMAT(CURDATE(),'%Y%m') and phonenum = #{0} and sort = 1 and status = 1;
+        </select>
+        
+        
+        <select id="shouru_today" parameterType="String" resultType="int">
+            select ifnull((select sum(reward) from worker_order where to_days(systime) = to_days(now()) and phonenum = #{0} and status = 1),0)
+        </select>
+        
+         <select id="shouru_week" parameterType="String" resultType="int">
+            select ifnull((select sum(reward) from worker_order where YEARWEEK(date_format(systime,'%Y-%m-%d')) = YEARWEEK(now()) and phonenum = #{0} and status = 1),0)
+        </select> 
+        
+         <select id="shouru_month" parameterType="String" resultType="int">
+            select ifnull((select sum(reward) from worker_order where DATE_FORMAT(systime,'%Y%m') = DATE_FORMAT(CURDATE(),'%Y%m') and phonenum = #{0} and status = 1),0)
+        </select>  
+        
+        
+        
+        
+        
+        
+        
+        
+        <insert id="add" parameterType="WorkerOrder" >
+           insert into worker_order ( keyid,shopname,firsttime,systime,shopphonenum,thing,remark,sendtime,reward,recphonenum,recname,recaddress,shopaddress,reclongitude,reclatitude,longitude,latitude,sort,phonenum,name,status ) values (#{keyid},#{shopname},#{firsttime},#{systime},#{shopphonenum},#{thing},#{remark},#{sendtime},#{reward},#{recphonenum},#{recname},#{recaddress},#{shopaddress},#{reclongitude},#{reclatitude},#{longitude},#{latitude},#{sort},#{phonenum},#{name},#{status})  
+        </insert>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <update id="updateGiOrder" parameterType="WorkerOrder" >
+            update worker_order set status = 0, sort = 0 ,phonenum = #{phonenum}, name = #{name} where keyid = #{keyid}       
+        </update>
+        
+        <update id="updateWoOrder" parameterType="WorkerOrder" >
+            update worker_order set status = #{status}, sort = #{sort} where keyid = #{keyid} and phonenum = #{phonenum}       
+        </update>
+        
+         <update id="updateStatusGi" parameterType="String">
+            update worker_order set status = 2 where phonenum = #{0} and keyid = #{1}       
+        </update>
+        
+        <update id="updateStatus" parameterType="String">
+            update worker_order set status = 1 where phonenum = #{0} and keyid = #{1}       
+        </update>
+        
+        <update id="updateStatusToRe" parameterType="String">
+            update worker_order set status = 0 where phonenum = #{0} and keyid = #{1}       
+        </update>
+        
+        <update id="updateStatusToWo" parameterType="String">
+            update worker_order set status = 5 where phonenum = #{0} and keyid = #{1}       
+        </update>
+        
+       
+        
+       
+        
+       
+        <!-- Web端 -->
+        
+         <select id="getallqqd" resultType="WorkerOrder">
+             select keyid,shopname,systime,shopphonenum,thing,remark,sendtime,reward,recphonenum,recname,sort,phonenum,name,status from worker_order where sort = 0
+         </select>
+         
+         <select id="getallzpd" resultType="WorkerOrder">
+             select keyid,shopname,systime,shopphonenum,thing,remark,sendtime,reward,recphonenum,recname,sort,phonenum,name,status from worker_order where sort = 1
+         </select>
+         
+         <select id="cxoneorder" parameterType="String" resultType="WorkerOrder">
+             select shopname,systime,thing,remark,reward,recname,sort,phonenum,name,status from worker_order where keyid = #{0}
+         </select>
+         
+          <delete id="web_deletewoorder" parameterType="String" >
+            delete from worker_order where keyid = #{0}
+        </delete>
+        
+    
+    </mapper>
