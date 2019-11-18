@@ -13,19 +13,24 @@ public interface WorkerOrderService {
 	public WorkerOrder shfindWorkerOrderByKey(String keyid);
 	
 	/**
-	 * 1查询该工作者订单
+	 * 1查询该工作者所有订单
 	 * @param wo
 	 * @return
 	 */
 	public ArrayList<WorkerOrder> findWorkerOrderAllByPh(String phonenum);
 	
 	/**
-	 * 2添加生成的工作者订单
+	 * 添加生成的工作者订单
+	 * @param wo
+	 * @return
 	 */
 	public int addOrder(WorkerOrder wo);
 	
 	/**
 	 * 3更新工作者订单状态： 工作者放弃订单：2
+	 * @param phonenum
+	 * @param keyid
+	 * @return
 	 */
 	public int updateStatusGi(String phonenum, String keyid);
 	

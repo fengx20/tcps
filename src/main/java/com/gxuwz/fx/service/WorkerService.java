@@ -34,24 +34,24 @@ public interface WorkerService {
 	 public boolean certification(String Phonenum);
 	 
 	 /**
-	     * 5判断是否存在此身份证号
-	     * @param phonenum
-	     * @return
-	     */
+     * 5判断是否存在此身份证号
+     * @param phonenum
+     * @return
+     */
 	 public boolean existIdCardNum(String phonenum,String idcardnum);
 	 
 	 /**
-	     *6 修改密码
-	     * @param phonenum
-	     * @return
-	     */
+     *6 修改密码
+     * @param phonenum
+     * @return
+     */
 	 public int updatepsd(String phonenum,String password);
 	 
 	 /**
-		 * 7工作者是否正在审核
-		 * @param Phonenum
-		 * @return
-		 */
+	 * 7工作者是否正在审核
+	 * @param Phonenum
+	 * @return
+	 */
 	public boolean woreview(String Phonenum);
 	
 	 /**

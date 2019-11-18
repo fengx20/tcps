@@ -43,7 +43,7 @@ public class WorkerAddressServiceImpl implements WorkerAddressService {
 	}
 	
 	/**
-	 * 4工作者开工上传更新地理位置(5秒一次)
+	 * 工作者开工上传更新地理位置(5秒一次)
 	 */
 	@Override
 	public int updateadd(WorkerAddress wa) {
@@ -95,7 +95,6 @@ public class WorkerAddressServiceImpl implements WorkerAddressService {
 	@Override
 	public String getOneWorkWa(double longitude,double latitude) {
 		List<WorkerAddress> list = wam.select_oneworker(longitude, latitude);
-		//System.out.println(wam.select_oneworker(longitude, latitude));
 		WorkerAddress wa =  list.get(0);   //取排序第一的数据
 		Gson gson = new Gson();  
 	    String json = gson.toJson(wa); 

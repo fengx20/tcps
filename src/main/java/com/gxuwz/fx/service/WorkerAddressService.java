@@ -5,7 +5,9 @@ import com.gxuwz.fx.pojo.WorkerAddress;
 public interface WorkerAddressService {
 	
 	/**
-	 * 1工作者地理位置是否存在
+	 * 工作者地理位置是否存在
+	 * @param phonenum
+	 * @return
 	 */
 	public boolean existwa(String phonenum);
 	
@@ -17,12 +19,16 @@ public interface WorkerAddressService {
     public int work(String phonenum);
 	
 	/**
-	 * 3工作者第一次工作上传地理位置
+	 * 工作者第一次工作上传地理位置
+	 * @param wa
+	 * @return
 	 */
 	public int addfirst(WorkerAddress wa);
 	
 	/**
-	 *4 工作者开工上传更新地理位置(5秒一次)
+	 * 工作者开工上传更新地理位置(5秒一次)
+	 * @param wa
+	 * @return
 	 */
 	public int updateadd(WorkerAddress wa); 
 	
@@ -34,12 +40,17 @@ public interface WorkerAddressService {
     public int stop(String phonenum);
 	
 	/**
-	 * 6查询订单附近的正在接单的工作者
+	 * 查询订单附近的正在接单的工作者
+	 * @param longitude
+	 * @param latitude
+	 * @return
 	 */
 	public String getWorkWa(double longitude,double latitude);
 	
 	/**
-	 * 7工作者是否处于工作状态
+	 * 工作者是否处于工作状态
+	 * @param phonenum
+	 * @return
 	 */
 	public boolean iswork(String phonenum);
 	
@@ -51,7 +62,10 @@ public interface WorkerAddressService {
 	public WorkerAddress select_wolnglat(String phonenum);
 	
 	/**
-	 * 9查询指派一名工作者
+	 * 查询指派一名工作者
+	 * @param longitude
+	 * @param latitude
+	 * @return
 	 */
 	public String getOneWorkWa(double longitude,double latitude);
 	

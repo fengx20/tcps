@@ -64,7 +64,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
 	}
 	
 	/**
-	 * 4查询单个订单
+	 * 4查询单个订单所有信息
 	 * @param keyid
 	 * @return
 	 */
@@ -92,7 +92,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
 	}
 	
 	/**
-	 * 7更新订单状态：第二次无人接或别放弃
+	 * 7更新订单状态：第二次无人抢或被放弃
 	 * @param keyid
 	 * @return
 	 */
@@ -137,17 +137,17 @@ public class ShopOrderServiceImpl implements ShopOrderService {
 	@Override
 	public String getallshopnum() {
 		int numtd = som.getallshoptoday();
-		String numtdstr = String.valueOf(numtd);
+		String numtdstr = String.valueOf(numtd);  //订单数
 		int finumtd = som.getallshopfitoday();
-		String finumtdstr = String.valueOf(finumtd);
+		String finumtdstr = String.valueOf(finumtd);  //完成数
 		int zpnumtd = som.getallshopzptoday();
-		String zpnumtdstr = String.valueOf(zpnumtd);
+		String zpnumtdstr = String.valueOf(zpnumtd);   //指派订单数
 		int nummonth = som.getallshopmonth();
-		String nummonthstr = String.valueOf(nummonth);
+		String nummonthstr = String.valueOf(nummonth);   //本月订单数
 		int finumall = som.getallshopfi();
-		String finumallstr = String.valueOf(finumall);
+		String finumallstr = String.valueOf(finumall);   //总完成订单数
 		int numall = som.getallshopnum();
-		String numallstr = String.valueOf(numall);
+		String numallstr = String.valueOf(numall);   //总订单数
 		
 		JSONObject json = new JSONObject();
 		json.put("numtdstr", numtdstr);
