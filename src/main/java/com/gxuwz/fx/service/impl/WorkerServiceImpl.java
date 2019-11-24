@@ -182,8 +182,16 @@ public class WorkerServiceImpl implements WorkerService {
 	    String json = gson.toJson(list); 
         return json;
 	}
-    
-    /**
+	
+	 /**
+	     *获取一名工作者信息（监控中心）
+	  * @return
+	  */
+	public Worker web_getoneworkerjk(String phonenum) {
+		return wm.web_getoneworkerjk(phonenum);
+	}
+	    
+	    /**
      * 6修改一名工作者信息
      * @return
      */

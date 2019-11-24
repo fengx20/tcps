@@ -94,6 +94,11 @@
             select phonenum,password,name,idcardnum,sex,city,status from worker where phonenum = #{0}
         </select>
         
+        <select id="web_getoneworkerjk" parameterType="String" resultType="Worker">
+            select phonenum,password,name,idcardnum,sex,city,status from worker where phonenum = #{0}
+        </select>
+        
+        
          <update id="web_editoneworker" parameterType="Worker">
             update worker set idcardnum = #{idcardnum}, name = #{name},city = #{city}, sex = #{sex} where phonenum = #{phonenum}
         </update>

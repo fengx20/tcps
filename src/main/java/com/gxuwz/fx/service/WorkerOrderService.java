@@ -140,6 +140,30 @@ public interface WorkerOrderService {
 	
 	
 	/**
+	  * 获得今日收入明细
+	 * @param wo
+	 * @return
+	 */
+	public ArrayList<WorkerOrder> gettoday_srmx(String phonenum);
+	
+	/**
+	  * 获得本周收入明细
+	 * @param wo
+	 * @return
+	 */
+	public ArrayList<WorkerOrder> getweek_srmx(String phonenum);
+	
+	/**
+	  * 获得本月收入明细
+	 * @param wo
+	 * @return
+	 */
+	public ArrayList<WorkerOrder> getmonth_srmx(String phonenum);
+	
+	
+	
+	
+	/**
 	 *14 获取一周内数据
 	 * @param wo
 	 * @return

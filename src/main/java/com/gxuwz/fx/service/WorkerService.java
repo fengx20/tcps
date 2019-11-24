@@ -112,6 +112,12 @@ public interface WorkerService {
     public String web_getoneworker(String phonenum);
     
     /**
+          *获取一名工作者信息（监控中心）
+     * @return
+     */
+    public Worker web_getoneworkerjk(String phonenum);
+    
+    /**
      * 6修改一名工作者信息
      * @return
      */

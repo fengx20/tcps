@@ -25,6 +25,10 @@
 	    <select id="select_oneworker" resultType="WorkerAddress">
 	      call GetOneWorkerAdd(#{0},#{1})
 	    </select>
+	    
+	    <select id="get_allwa"  resultType="WorkerAddress">
+	      select phonenum,longitude,latitude from worker_address where status = 1
+	    </select>
         
         
         

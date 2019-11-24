@@ -74,6 +74,12 @@ public interface WorkerAddressMapper {
 	 */
 	public List<WorkerAddress> select_oneworker(double longitude,double latitude);
 	
+	/**
+	 * 获取所有在线工作者坐标
+	 * @return
+	 */
+	public List<WorkerAddress> get_allwa();
+	
 	
 	
 	

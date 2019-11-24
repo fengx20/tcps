@@ -16,6 +16,7 @@ import com.gxuwz.fx.pojo.WorkerAddress;
 import com.gxuwz.fx.pojo.WorkerOrder;
 import com.gxuwz.fx.service.ShopOrderService;
 import com.gxuwz.fx.service.WorkerAddressService;
+import com.gxuwz.fx.service.WorkerGradeService;
 import com.gxuwz.fx.service.WorkerOrderService;
 import com.gxuwz.fx.service.WorkerService;
 import com.gxuwz.fx.utils.RedisUtil;
@@ -44,6 +45,8 @@ public class ShopOrderController {
 	@Autowired WebSocketUtil wsu;
 	
 	@Autowired RedisUtil ru;
+	
+	@Autowired WorkerGradeService wgs;
 	
 	
 	/**
@@ -398,6 +401,8 @@ public class ShopOrderController {
 	 @PostMapping("/zzorder/{keyid}")
 	 public String zzorder(@RequestBody WorkerAddress wa,@PathVariable("keyid") String keyid) throws Exception {
 		    
+		 	wgs.updatewwc(wa.getPhonenum());
+		 	
    		    //查询订单商家信息
 		 	JSONObject json = JSONObject.fromObject(sos.findShopOrderAllByKeyId(keyid));   
 		    
@@ -509,6 +514,7 @@ public class ShopOrderController {
 	public String endorder(@PathVariable("phonenum") String phonenum,@PathVariable("keyid") String keyid) throws Exception {
 		if(wos.updateStatusRu(phonenum, keyid) == 1) {
 			if( sos.updateStatusFi(keyid) == 1) {
+				wgs.updateywc(phonenum);
 				return "success";
 			}else {
 			    return "failed";	

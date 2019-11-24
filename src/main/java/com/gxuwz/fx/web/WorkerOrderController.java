@@ -1,10 +1,13 @@
 package com.gxuwz.fx.web;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gxuwz.fx.pojo.WorkerOrder;
 import com.gxuwz.fx.service.WorkerOrderService;
 import net.sf.json.JSONArray;
 
@@ -84,8 +87,49 @@ public class WorkerOrderController {
 		  return "failed";
 	  }
  } 
+  
+  
+  /**
+	 * 获取今日收入明细
+	 * @param so
+	 * @return
+	 */
+	@PostMapping("/gettoday_srmx/{phonenum}")
+	public String gettoday_srmx(@PathVariable("phonenum") String phonenum) throws Exception {
+		  ArrayList<WorkerOrder> list = new ArrayList<WorkerOrder>();
+		  list = wos.gettoday_srmx(phonenum);  //数据库中该手机号的订单列表
+		  JSONArray listArray = JSONArray.fromObject(list); 
+		  String jsonstr = JSONArray.fromObject(listArray).toString();
+		  return jsonstr;
+	}
+	
+	/**
+	 * 获取本周收入明细
+	 * @param so
+	 * @return
+	 */
+	@PostMapping("/getweek_srmx/{phonenum}")
+	public String getweek_srmx(@PathVariable("phonenum") String phonenum) throws Exception {
+		  ArrayList<WorkerOrder> list = new ArrayList<WorkerOrder>();
+		  list = wos.getweek_srmx(phonenum);  //数据库中该手机号的订单列表
+		  JSONArray listArray = JSONArray.fromObject(list); 
+		  String jsonstr = JSONArray.fromObject(listArray).toString();
+		  return jsonstr;
+	}
 	 
-	 
+	/**
+	 * 获取本月收入明细
+	 * @param so
+	 * @return
+	 */
+	@PostMapping("/getmonth_srmx/{phonenum}")
+	public String getmonth_srmx(@PathVariable("phonenum") String phonenum) throws Exception {
+		  ArrayList<WorkerOrder> list = new ArrayList<WorkerOrder>();
+		  list = wos.getmonth_srmx(phonenum);  //数据库中该手机号的订单列表
+		  JSONArray listArray = JSONArray.fromObject(list); 
+		  String jsonstr = JSONArray.fromObject(listArray).toString();
+		  return jsonstr;
+	}
 	
 	
 

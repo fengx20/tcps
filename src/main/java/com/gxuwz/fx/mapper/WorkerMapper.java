@@ -132,6 +132,12 @@ public interface WorkerMapper {
     public List<Worker> web_getoneworker(String phonenum);
     
     /**
+     * 5获取一名工作者
+     * @return
+     */
+    public Worker web_getoneworkerjk(String phonenum);
+    
+    /**
      * 6修改一名工作者信息
      * @return
      */

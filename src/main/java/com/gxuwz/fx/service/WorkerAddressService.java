@@ -1,5 +1,7 @@
 package com.gxuwz.fx.service;
 
+import java.util.List;
+
 import com.gxuwz.fx.pojo.WorkerAddress;
 
 public interface WorkerAddressService {
@@ -68,6 +70,12 @@ public interface WorkerAddressService {
 	 * @return
 	 */
 	public String getOneWorkWa(double longitude,double latitude);
+	
+	/**
+	 * 获取所有在线工作者坐标
+	 * @return
+	 */
+	public List<WorkerAddress> get_allwa();
 	
 	
 	

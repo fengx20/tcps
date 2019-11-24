@@ -97,9 +97,19 @@ public class WorkerAddressServiceImpl implements WorkerAddressService {
 		List<WorkerAddress> list = wam.select_oneworker(longitude, latitude);
 		WorkerAddress wa =  list.get(0);   //取排序第一的数据
 		Gson gson = new Gson();  
-	    String json = gson.toJson(wa); 
-	    System.out.println(json);
+	    String json = gson.toJson(wa);
         return json;
+	}
+	
+	/**
+	 * 获取所有在线工作者坐标
+	 * @return
+	 */
+	public List<WorkerAddress> get_allwa() {
+		List<WorkerAddress> list = wam.get_allwa();
+		//Gson gson = new Gson();
+		//String json = gson.toJson(list);
+		return list;
 	}
 	
 	

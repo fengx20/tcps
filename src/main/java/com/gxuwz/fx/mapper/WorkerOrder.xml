@@ -58,7 +58,7 @@
         <select id="gettoday_zp_fi" parameterType="String" resultType="int">
              select count(*) from worker_order where to_days(systime) = to_days(now()) and phonenum = #{0} and sort = 1 and status = 1;
         </select>
-        
+      
        
         <select id="getweek" parameterType="String" resultType="int">
              select count(*) from worker_order where YEARWEEK(date_format(systime,'%Y-%m-%d')) = YEARWEEK(now()) and phonenum = #{0} and sort = 0 ;
@@ -75,6 +75,9 @@
         <select id="getweek_zp_fi" parameterType="String" resultType="int">
              select count(*) from worker_order where YEARWEEK(date_format(systime,'%Y-%m-%d')) = YEARWEEK(now()) and phonenum = #{0} and sort = 1 and status = 1;
         </select>
+        
+        
+        
             
         
         <select id="getmonth" parameterType="String" resultType="int">
@@ -92,6 +95,24 @@
         <select id="getmonth_zp_fi" parameterType="String" resultType="int">
              select count(*) from worker_order where DATE_FORMAT(systime,'%Y%m') = DATE_FORMAT(CURDATE(),'%Y%m') and phonenum = #{0} and sort = 1 and status = 1;
         </select>
+        
+        
+        
+        
+        
+        <select id="gettoday_srmx" parameterType="String" resultType="WorkerOrder">
+             select shopname,thing,reward,recname,systime from worker_order where to_days(systime) = to_days(now()) and phonenum = #{0} and status = 1;
+        </select>
+        
+        <select id="getweek_srmx" parameterType="String" resultType="WorkerOrder">
+             select shopname,thing,reward,recname,systime from worker_order where YEARWEEK(date_format(systime,'%Y-%m-%d')) = YEARWEEK(now()) and phonenum = #{0} and status = 1;
+        </select>
+        
+        <select id="getmonth_srmx" parameterType="String" resultType="WorkerOrder">
+             select shopname,thing,reward,recname,systime from worker_order where DATE_FORMAT(systime,'%Y%m') = DATE_FORMAT(CURDATE(),'%Y%m') and phonenum = #{0} and status = 1;
+        </select>
+        
+        
         
         
         <select id="shouru_today" parameterType="String" resultType="int">

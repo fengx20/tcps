@@ -201,7 +201,32 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
 	
 	
 	
+	/**
+	  * 获得今日收入明细
+	 * @param wo
+	 * @return
+	 */
+	public ArrayList<WorkerOrder> gettoday_srmx(String phonenum){
+		return wom.gettoday_srmx(phonenum);
+	}
 	
+	/**
+	  * 获得本周收入明细
+	 * @param wo
+	 * @return
+	 */
+	public ArrayList<WorkerOrder> getweek_srmx(String phonenum){
+		return wom.getweek_srmx(phonenum);
+	}
+	
+	/**
+	  * 获得本月收入明细
+	 * @param wo
+	 * @return
+	 */
+	public ArrayList<WorkerOrder> getmonth_srmx(String phonenum){
+		return wom.getmonth_srmx(phonenum);
+	}
 	
 	
 	/**

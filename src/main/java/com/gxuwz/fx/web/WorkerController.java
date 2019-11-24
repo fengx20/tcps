@@ -1,14 +1,22 @@
 package com.gxuwz.fx.web;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSON;
+import com.google.gson.Gson;
 import com.gxuwz.fx.pojo.Worker;
 import com.gxuwz.fx.pojo.WorkerAddress;
 import com.gxuwz.fx.service.WorkerAddressService;
+import com.gxuwz.fx.service.WorkerGradeService;
 import com.gxuwz.fx.service.WorkerOrderService;
 import com.gxuwz.fx.service.WorkerService;
 import com.gxuwz.fx.service.YzmService;
@@ -32,6 +40,8 @@ public class WorkerController {
 	@Autowired WorkerAddressService was;
 	
 	@Autowired WorkerOrderService wos;
+	
+	@Autowired WorkerGradeService wgs;
 	
 	/*restful 部分*/
 	
@@ -152,7 +162,7 @@ public class WorkerController {
 	  */
 	 @PostMapping("/iscertification/{phonenum}")
 	 public String iscertification(@PathVariable("phonenum") String phonenum) throws Exception {
-		 System.out.println(ws.woreview(phonenum));
+		 //System.out.println(ws.woreview(phonenum));
 		 if(ws.certification(phonenum) == true) {   //手机号是否已认证
 		     return "yes";
 		 }else {
@@ -456,6 +466,19 @@ public class WorkerController {
 				  return "isnocert"; 
 		   } 
          }
+	  
+	  
+	  /**
+		    *获取等级数据
+		  * @param phonenum
+		  * @return
+		  * @throws Exception
+		  */
+		
+		  @PostMapping("/getwo_grade/{phonenum}") 
+		  public String getwo_grade(@PathVariable("phonenum") String phonenum) throws Exception { 
+				  return wgs.getWorkerGrade(phonenum);
+	      } 
 			  
 			  
 	  //Web端
@@ -497,7 +520,7 @@ public class WorkerController {
       }
 		  
 	  /**
-	  * 3获取所有已认证工作者
+	  * 3获取所有审核中工作者
 	  *
 	  * @return
 	  * @throws Exception
@@ -586,6 +609,7 @@ public class WorkerController {
 	  @PostMapping("/web_shtgworker/{phonenum}") 
 	  public String web_shtgworker(@PathVariable("phonenum") String phonenum) throws Exception { 
 		  if(ws.web_shtgworker(phonenum) == 1) {
+			 wgs.addwg(phonenum);
 		     return "success";
 		  }else {
 			 return "failed";
@@ -608,6 +632,30 @@ public class WorkerController {
 			  return "nothisworker"; 
 		    }
 	   }  
+	   
+	   /**
+	   * 获取所有在线工作者坐标
+	   * @return
+	   * @throws Exception
+	   */
+	   @GetMapping("/get_allwa")
+	   public String get_allwa() throws Exception { 
+		  @SuppressWarnings("rawtypes")
+		  List<Map> list1 = new ArrayList<Map>();
+		  List<WorkerAddress> list = was.get_allwa();
+		  for(int i = 0; i < list.size(); i++) {
+			   Worker wo = ws.web_getoneworkerjk(list.get(i).getPhonenum());
+			   @SuppressWarnings("unchecked")
+			   Map<String, Object> a = (Map<String, Object>)JSON.toJSON(wo);  //对象转为map
+			   a.put("longitude", list.get(i).getLongitude());
+			   a.put("latitude", list.get(i).getLatitude());
+			   list1.add(a); 
+		  }
+		  Gson gson = new Gson();
+		  String json = gson.toJson(list1);
+		  return json;
+	   }  
+	   
 	  
 		
 }
