@@ -86,7 +86,7 @@
 				
 	var shoporder = { keyid: keyid,firsttime:firsttime,shopname,shopphonenum: shopphonenum,thing: thing,remark: remark,sendtime: sendtime,reward: reward,recphonenum:recphonenum, recname: recname,recaddress: recaddress,shopaddress: shopaddress,reclongitude:reclongitude,reclatitude:reclatitude,longitude:longitude,latitude:latitude};
 				console.log(keyid);
-				var url = "http://129.204.188.236:8080/qiangdan/addorder";
+				var url = "http://121.199.60.161:8080/qiangdan/addorder";
 				axios
 				.post(url,shoporder)
 				.then(function(response){
@@ -135,7 +135,7 @@
 				
 	var shoporder = { keyid: keyid,firsttime:firsttime,shopname,shopphonenum: shopphonenum,thing: thing,remark: remark,sendtime: sendtime,reward: reward,recphonenum:recphonenum, recname: recname,recaddress: recaddress,shopaddress: shopaddress,reclongitude:reclongitude,reclatitude:reclatitude,longitude:longitude,latitude:latitude};
 				console.log(keyid);
-				var url = "http://129.204.188.236:8080/qiangdan/addorder";
+				var url = "http://121.199.60.161:8080/qiangdan/addorder";
 				axios
 				.post(url,shoporder)
 				.then(function(response){
@@ -181,7 +181,7 @@
 						
 			var shoporder = { keyid: keyid,firsttime:firsttime,shopname,shopphonenum: shopphonenum,thing: thing,remark: remark,sendtime: sendtime,reward: reward,recphonenum:recphonenum, recname: recname,recaddress: recaddress,shopaddress: shopaddress,reclongitude:reclongitude,reclatitude:reclatitude,longitude:longitude,latitude:latitude};
 						console.log(keyid);
-						var url = "http://129.204.188.236:8080/qiangdan/addorder";
+						var url = "http://121.199.60.161:8080/qiangdan/addorder";
 						axios
 						.post(url,shoporder)
 						.then(function(response){
@@ -209,7 +209,7 @@
 						
 						var keyid = document.getElementById("key").value;
 						
-						var url = "http://129.204.188.236:8080/qiangdan/shopcxorder/"+keyid;
+						var url = "http://121.199.60.161:8080/qiangdan/shopcxorder/"+keyid;
 						axios
 						.post(url)
 						.then(function(response){

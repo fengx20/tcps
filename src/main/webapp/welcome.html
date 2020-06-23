@@ -21,8 +21,8 @@
     <body>
         <div class="layui-fluid">
             <div class="layui-row layui-col-space15">
-				
-				
+
+
                 <div class="layui-col-md12">
                     <div class="layui-card">
                         <div class="layui-card-body ">
@@ -32,8 +32,8 @@
                         </div>
                     </div>
                 </div>
-				
-				
+
+
                 <div class="layui-col-md12">
                     <div class="layui-card">
                         <div class="layui-card-header">数据统计</div>
@@ -46,7 +46,7 @@
                                             <cite id="0"></cite></p>
                                     </a>
                                 </li>
-								
+
                                 <li class="layui-col-md2 layui-col-xs6">
                                     <a href="javascript:;" class="x-admin-backlog-body">
                                         <h3>今日完成单数</h3>
@@ -82,12 +82,12 @@
                                             <cite id="5"></cite></p>
                                     </a>
                                 </li>
-                                
+
                             </ul>
                         </div>
                     </div>
                 </div>
-				
+
 				<div class="layui-fluid">
 				    <div class="layui-row layui-col-space15">
 				        <div class="layui-col-md12">
@@ -104,16 +104,16 @@
 				        </div>
 				    </div>
 				</div>
-				
-				
+
+
             </div>
         </div>
-		
+
 		<script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
 		    <script type="text/javascript">
 		    // 基于准备好的dom，初始化echarts实例
 		    var myChart = echarts.init(document.getElementById('main'));
-		
+
 		    // 指定图表的配置项和数据
 		    var option = {
 		        title: {
@@ -177,8 +177,8 @@
 		            }
 		        ]
 		    };
-		
-		
+
+
 		    // 使用刚指定的配置项和数据显示图表。
 		    myChart.setOption(option);
 		</script>
@@ -187,45 +187,47 @@
 		    (function() {
 		      var hm = document.createElement("script");
 		      hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-		      var s = document.getElementsByTagName("script")[0]; 
+		      var s = document.getElementsByTagName("script")[0];
 		      s.parentNode.insertBefore(hm, s);
 		    })();
 		    </script>
-		
+
 		<script type="application/javascript">
-		
-               var myDate = new Date();       	
+
+               var myDate = new Date();
 			   document.getElementById("sj").innerHTML +=  myDate.toLocaleString();
-			
+
 			   /* 进入首页事件 */
 			  window.onload=function(){
+				 alert("今日情况已更新");
 			  	 getshopnum();
 			  }
 			 
-			    function getshopnum(){    
-			   	
-			   	var url = "http://129.204.188.236:8080/qiangdan/getshopnum";
-			   	
+			    function getshopnum(){
+
+			   	var url = "http://127.0.0.1:8080/getshopnum";
+
 			   	 axios
 			   	.post(url)
 			   	.then(function(response) {
 			   		console.log(response.data);
-					
+
 			   	    document.getElementById("0").innerHTML += response.data.numtdstr;
 			   	    document.getElementById("1").innerHTML += response.data.finumtdstr;
 			   		document.getElementById("2").innerHTML += response.data.zpnumtdstr;
 					document.getElementById("3").innerHTML += response.data.nummonthstr;
 					document.getElementById("4").innerHTML += response.data.finumallstr;
 					document.getElementById("5").innerHTML += response.data.numallstr;
-			   				
+
+					console.log(response.data.numtdstr);
 			   		//window.open("member-edit.html","_blank");
-			   		
+
 			   	})
 			   	.catch(function(error){
 			   		console.log(error);
 			   	});
 			   }
-			
+
 		</script>
 
     </body>

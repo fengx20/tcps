@@ -32,7 +32,7 @@
                 <div class="layui-col-md12">
                     <div class="layui-card">
                         <div class="layui-card-body ">
-                           
+
                                <!-- <div class="layui-inline layui-show-xs-block">
                                     <input class="layui-input"  autocomplete="off" placeholder="开始日" name="start" id="start">
                                 </div>
@@ -48,8 +48,8 @@
 								<!-- <div class="layui-inline layui-show-xs-block">
 								    <button class="layui-btn" onclick="xadmin.open('添加用户','./member-add.html',600,400)"><i class="layui-icon"></i>添加</button>
 								</div> -->
-								
-                           
+
+
                         </div>
                         <div class="layui-card-header">
                            <!-- <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button> -->
@@ -62,7 +62,7 @@
                             <table class="layui-table layui-form">
                                 <thead>
                                   <tr>
-                                    
+
                                     <th>ID</th>
                                     <th>账号</th>
                                     <th>姓名</th>
@@ -73,7 +73,7 @@
                                     <th>操作</th></tr>
                                 </thead>
                                 <tbody id="message">
-                                        
+
                                 </tbody>
                             </table>
                         </div>
@@ -92,40 +92,40 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
     </body>
 	<script src="js/jquery.min.js"></script>
     <script>
-		
+
 		 /* 进入首页事件 */
 		window.onload=function(){
 			getallcertworker();
 		}
-		
+
 		function getallcertworker(){
 			/* var phonenum = getUrl();
 			 var worker_forget = {phonenum: phonenum}; */
-			 
+
 			$("#message").html("");
-			 
-			 var url = "http://129.204.188.236:8080/qiangdan/web_getallcertworker";
-			 
+
+			 var url = "http://127.0.0.1:8080/web_getallcertworker";
+
 			 axios
 			 .post(url)
 			 .then(function(response) {
 			 	console.log(response.data);
-				
+
 				if(response.data == "noworker"){
 					alert("当前无已认证工作者");
 				}else{
-				
+
 			 	 var jsonArray=eval(response.data);
 			 	 for(var i = 0; i <= jsonArray.length; i++ ){
-				 	 
+
 				 response.data[i].status = "已认证";
-				 
-				
-					
+
+
+
 				 document.getElementById("message").innerHTML += "<tr>"+
 				                        "<td>"+ i + "</td>"+
 										"<td>"+response.data[i].phonenum+"</td>"+
@@ -133,23 +133,23 @@
 										"<td>"+response.data[i].idcardnum+"</td>"+
 										"<td>"+response.data[i].sex+"</td>"+
 										"<td>"+response.data[i].city+"</td>"+
-										
+
 										"<td class='td-status'>"+
 										  "<span class='layui-btn layui-btn-zc layui-btn-mini'>"+response.data[i].status+"</span>"+"</td>"+
 										"<td class='td-manage'>"+
 										  "<a   href='javascript:;' id='"+i+"' onclick='stop(this.id)'  title='停用'>"+
 											"<i class='layui-icon'>"+'&#xe601;'+"</i>"+
 										  "</a>"+
-	
+
 										  "<a title='编辑查看详情'  id='"+i+"' onclick='editworker(this.id)' href='javascript:;'>"+
 											"<i class='layui-icon'>"+'&#xe642;'+"</i>"+
 										  "</a>"+
 										"</td>"+
 										"</tr>"+
 										 "<input type='hidden' id='ph"+i+"'>"+"</input>";
-										
+
 										document.getElementById("ph"+i+"").value = response.data[i].phonenum;
-										
+
 			     }
 				 }
 			 })
@@ -157,30 +157,30 @@
 			 	console.log(error);
 			 });
 		}
-		
+
 		function getallshworker(){
 			/* var phonenum = getUrl();
 			 var worker_forget = {phonenum: phonenum}; */
-			 
+
 			 $("#message").html("");
-			 
-			 var url = "http://129.204.188.236:8080/qiangdan/web_getallshworker";
-			 
+
+			 var url = "http://127.0.0.1:8080/web_getallshworker";
+
 			 axios
 			 .post(url)
 			 .then(function(response) {
 			 	console.log(response.data);
-				
+
 				if(response.data == "noworker"){
 					alert("当前无审核中工作者");
 				}else{
 			 	 var jsonArray=eval(response.data);
 			  for(var i = 0; i <= jsonArray.length; i++ ){
-				  
-				 response.data[i].status = "审核中";	
-				 
-				 
-					 
+
+				 response.data[i].status = "审核中";
+
+
+
 				 document.getElementById("message").innerHTML += "<tr>"+
 				                        "<td>"+ i + "</td>"+
 										"<td>"+response.data[i].phonenum+"</td>"+
@@ -188,25 +188,25 @@
 										"<td>"+response.data[i].idcardnum+"</td>"+
 										"<td>"+response.data[i].sex+"</td>"+
 										"<td>"+response.data[i].city+"</td>"+
-										
+
 										"<td class='td-status'>"+
 										  "<span class='layui-btn layui-btn-warm layui-btn-mini' >"+response.data[i].status+"</span>"+"</td>"+
 										"<td class='td-manage'>"+
 										  "<a  id='"+i+"' href='javascript:;' onclick='shtg(this.id)' title='审核通过'>"+
 											"<i class='layui-icon'>"+'&#xe601;'+"</i>"+
 										  "</a>"+
-			
-										  
-										  
-										  
+
+
+
+
 										"</td>"+
 										"</tr>"+
 										"<input type='hidden' id='ph"+i+"'>"+"</input>";
-										
+
 										document.getElementById("ph"+i+"").value = response.data[i].phonenum;
-										
-										
-										
+
+
+
 			     }
 				 }
 			 })
@@ -214,28 +214,28 @@
 			 	console.log(error);
 			 });
 		}
-		
+
 		function getallnocertworker(){
 			/* var phonenum = getUrl();
 			 var worker_forget = {phonenum: phonenum}; */
-			 
+
 			 $("#message").html("");
-			 
-			 var url = "http://129.204.188.236:8080/qiangdan/web_getallnocertworker";
-			 
+
+			 var url = "http://127.0.0.1:8080/web_getallnocertworker";
+
 			 axios
 			 .post(url)
 			 .then(function(response) {
 			 	console.log(response.data);
-				
+
 				if(response.data == "noworker"){
 					alert("当前无未认证工作者");
 				}else{
 			 	 var jsonArray=eval(response.data);
 			     for(var i = 0; i <= jsonArray.length; i++ ){
-				  
-				 response.data[i].status = "未认证";	
-					 
+
+				 response.data[i].status = "未认证";
+
 				 document.getElementById("message").innerHTML += "<tr>"+
 				                        "<td>"+ i + "</td>"+
 										"<td>"+response.data[i].phonenum+"</td>"+
@@ -243,26 +243,26 @@
 										"<td>"+response.data[i].idcardnum+"</td>"+
 										"<td>"+response.data[i].sex+"</td>"+
 										"<td>"+response.data[i].city+"</td>"+
-										
+
 										"<td class='td-status'>"+
 										  "<span class='layui-btn layui-btn-normal layui-btn-mini' >"+response.data[i].status+"</span>"+"</td>"+
 										"<td class='td-manage'>"+
 										 //  "<a onclick='member_stop(this,'10001')' id='"+i+"' href='javascript:;'  title='启用'>"+
 											// "<i class='layui-icon'>"+'&#xe601;'+"</i>"+
 										 //  "</a>"+
-			
+
 										  "<a title='编辑' id='"+i+"' onclick='editworker(this.id)' href='javascript:;'>"+
 											"<i class='layui-icon'>"+'&#xe642;'+"</i>"+
 										  "</a>"+
-										  
-										  
+
+
 										"</td>"+
 										"</tr>"+
 										"<input type='hidden' id='ph"+i+"'>"+"</input>";
-										
+
 										document.getElementById("ph"+i+"").value = response.data[i].phonenum;
-										
-										
+
+
 			     }
 				 }
 			 })
@@ -270,31 +270,31 @@
 			 	console.log(error);
 			 });
 		}
-		
+
 		function getallstopworker(){
 			/* var phonenum = getUrl();
 			 var worker_forget = {phonenum: phonenum}; */
-			 
+
 			  $("#message").html("");
-			 
-			 var url = "http://129.204.188.236:8080/qiangdan/web_getallstopworker";
-			 
+
+			 var url = "http://127.0.0.1:8080/qiangdan/web_getallstopworker";
+
 			 axios
 			 .post(url)
 			 .then(function(response) {
 			 	console.log(response.data);
-				
+
 				if(response.data == "noworker"){
 					alert("当前无已停用工作者");
 				}else{
-				
+
 			 	var jsonArray=eval(response.data);
 			 	for(var i = 0; i <= jsonArray.length; i++ ){
-					 
+
 				 response.data[i].status = "已停用";
-					
-				 
-						 
+
+
+
 				 document.getElementById("message").innerHTML += "<tr>"+
 				                        "<td>"+ i + "</td>"+
 										"<td>"+response.data[i].phonenum+"</td>"+
@@ -302,26 +302,26 @@
 										"<td>"+response.data[i].idcardnum+"</td>"+
 										"<td>"+response.data[i].sex+"</td>"+
 										"<td>"+response.data[i].city+"</td>"+
-										
+
 										"<td class='td-status'>"+
 										  "<span class='layui-btn layui-btn-danger layui-btn-mini' >"+response.data[i].status+"</span>"+"</td>"+
 										"<td class='td-manage'>"+
 										  "<a  id='"+i+"' onclick='hfsy(this.id)' href='javascript:;'  title='恢复正常'>"+
 											"<i class='layui-icon'>"+'&#xe601;'+"</i>"+
 										  "</a>"+
-			
+
 										  "<a title='编辑'  id='"+i+"' onclick='editworker(this.id)' href='javascript:;'>"+
 											"<i class='layui-icon'>"+'&#xe642;'+"</i>"+
 										  "</a>"+
-										  
-										  
+
+
 										"</td>"+
 										"</tr>"+
 										"<input type='hidden' id='ph"+i+"'>"+"</input>";
-										
+
 										document.getElementById("ph"+i+"").value = response.data[i].phonenum;
-										
-										
+
+
 			     }
 				 }
 			 })
@@ -329,24 +329,24 @@
 			 	console.log(error);
 			 });
 		}
-		
+
 		function cxoneworker(){
-			 
+
 			  var phonenum = document.getElementById("cxphonenum").value;
-			 
+
 			  $("#message").html("");
-			 
-			 var url = "http://129.204.188.236:8080/qiangdan/web_cxoneworker/"+phonenum;
-			 
+
+			 var url = "http://127.0.0.1:8080/web_cxoneworker/"+phonenum;
+
 			 axios
 			 .post(url)
 			 .then(function(response) {
 			 	console.log(response.data);
-				
+
 				if(response.data == "nothisworker"){
 					alert("工作者不存在");
 				}else{
-					
+
 					if(response.data[0].status == "0"){
 						response.data[0].status = "未认证";
 					}else if(response.data[0].status == "1"){
@@ -355,9 +355,9 @@
 						response.data[0].status = "已停用";
 					}else if(response.data[0].status == "3"){
 						response.data[0].status = "审核中";
-					}	
-				 
-		
+					}
+
+
 				 document.getElementById("message").innerHTML += "<tr>"+
 				                        "<td>"+ '0' + "</td>"+
 										"<td>"+response.data[0].phonenum+"</td>"+
@@ -365,112 +365,112 @@
 										"<td>"+response.data[0].idcardnum+"</td>"+
 										"<td>"+response.data[0].sex+"</td>"+
 										"<td>"+response.data[0].city+"</td>"+
-										
+
 										"<td class='td-status'>"+
 										  "<span class='layui-btn layui-btn-cx layui-btn-mini' >"+response.data[0].status+"</span>"+"</td>"+
 										"<td class='td-manage'>"+
-										 
-			
+
+
 										  "<a title='编辑'  id='0' onclick='editworker(this.id)' href='javascript:;'>"+
 											"<i class='layui-icon'>"+'&#xe642;'+"</i>"+
 										  "</a>"+
-										  
-										  
+
+
 										"</td>"+
 										"</tr>"+
 										"<input type='hidden' id='ph0'>"+"</input>";
-										
+
 										document.getElementById("ph0").value = response.data[0].phonenum;
-										
-										
-			     
+
+
+
 				 }
 			 })
 			 .catch(function(error){
 			 	console.log(error);
 			 });
 		}
-		
+
 		function stop(id){
 			var i = id;
 			var phonenum = document.getElementById("ph"+i+"").value;
 			//alert(phonenum);
-			var url = "http://129.204.188.236:8080/qiangdan/web_stopworker/"+phonenum;
-			
+			var url = "http://127.0.0.1:8080/web_stopworker/"+phonenum;
+
 			 axios
 			.post(url)
 			.then(function(response) {
 				console.log(response.data);
-				
-		
+
+
 				if(response.data == "success"){
 					alert("已停用");
 					location.reload();
 				}else{
 					alert("停用失败");
-				}	
+				}
 
 			})
 			.catch(function(error){
 				console.log(error);
 			});
 		}
-		
+
 		function editworker(id){
 			var i = id;
 			var phonenum = document.getElementById("ph"+i+"").value;
-	
+
 		    xadmin.open("编辑查看详情",'member-edit.html?phonenum='+phonenum,800,500);
-				
+
 		}
-		
+
 		function shtg(id){
 			var i = id;
 			var phonenum = document.getElementById("ph"+i+"").value;
-			var url = "http://129.204.188.236:8080/qiangdan/web_shtgworker/"+phonenum;
-			
+			var url = "http://127.0.0.1:8080/web_shtgworker/"+phonenum;
+
 			 axios
 			.post(url)
 			.then(function(response) {
 				console.log(response.data);
-				
-		
+
+
 				if(response.data == "success"){
 					alert("已通过");
 					location.reload();
 				}else{
 					alert("通过失败");
-				}	
-		
+				}
+
 			})
 			.catch(function(error){
 				console.log(error);
 			});
 		}
-		
+
 		function hfsy(id){
 			var i = id;
 			var phonenum = document.getElementById("ph"+i+"").value;
-			var url = "http://129.204.188.236:8080/qiangdan/web_shtgworker/"+phonenum;
-			
+			var url = "http://127.0.0.1:8080/web_shtgworker/"+phonenum;
+
 			 axios
 			.post(url)
 			.then(function(response) {
 				console.log(response.data);
-				
-		
+
+
 				if(response.data == "success"){
 					alert("已恢复使用");
 					location.reload();
 				}else{
 					alert("恢复失败");
-				}	
-		
+				}
+
 			})
 			.catch(function(error){
 				console.log(error);
 			});
 		}
-		
+
     </script>
 </html>

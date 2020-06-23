@@ -11,20 +11,20 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @EnableCaching
 public class Application extends SpringBootServletInitializer {
-	
+
 	/**
 	  * 使用外部Tomcat
 	  */
-	@Override
+	/*@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
       return application.sources(this.getClass());
-  }
-	
+  	}*/
+
 	public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
 
-	
-	
+
+
 
 }

@@ -35,7 +35,7 @@ public class WebSocketServer {
     private Session session;
     //当前发消息的人员编号
     private String userno = "";
- 
+
     /**
      * 连接建立成功调用的方法
      *
@@ -53,7 +53,7 @@ public class WebSocketServer {
         	   System.out.println("当前有工作者：phonenum= "+ phonenum );
         }
     }
- 
+
     /**
      * 连接关闭调用的方法
      */
@@ -65,7 +65,7 @@ public class WebSocketServer {
             System.out.println("有一连接关闭！当前在线人数为" + getOnlineCount());
         }
     }
-    
+
     /**
      * 给指定的人发送消息
      * @param message
@@ -82,7 +82,7 @@ public class WebSocketServer {
             e.printStackTrace();
         }
     }
-    
+
     /**
      * 这个方法与上面几个方法不一样。没有用注解，是根据自己需要添加的方法。
      *
@@ -93,7 +93,7 @@ public class WebSocketServer {
         this.session.getBasicRemote().sendText(message);
         //this.session.getAsyncRemote().sendText(message);
     }
- 
+
     /**
      * 收到客户端消息后调用的方法
      *
@@ -108,19 +108,19 @@ public class WebSocketServer {
         if (1 < 2) {
             sendAll(message);
         }
-        
+
 	    //给指定的人发消息
 	    //sendToUser(message);
-        
+
     }
-    
-    
- 
+
+
+
     /**
      * 给所有人发消息
      * @param message
      */
-    
+
     public void sendAll(String message) {
         String now = getNowTime();
         String sendMessage = message.split("[|]")[0];
@@ -137,8 +137,8 @@ public class WebSocketServer {
             }
         }
     }
- 
- 
+
+
     /**
      * 获取当前时间
      *
@@ -161,17 +161,16 @@ public class WebSocketServer {
         System.out.println("发生错误");
         error.printStackTrace();
     }
- 
-   
- 
+
+
     public static synchronized int getOnlineCount() {
         return onlineCount;
     }
- 
+
     public static synchronized void addOnlineCount() {
         WebSocketServer.onlineCount++;
     }
- 
+
     public static synchronized void subOnlineCount() {
         WebSocketServer.onlineCount--;
     }

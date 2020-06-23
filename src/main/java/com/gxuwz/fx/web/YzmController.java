@@ -9,11 +9,9 @@ import com.gxuwz.fx.service.YzmService;
 
 @RestController
 public class YzmController {
-	
+
 	@Autowired YzmService ys;
-	
-	/*restful 部分*/
-	
+
 	/**
 	 * 向手机发送验证码
 	 * @param phonenum
@@ -28,7 +26,7 @@ public class YzmController {
 			 return "failed";
 		 }
 	 }
-	
-	
+
+
 
 }

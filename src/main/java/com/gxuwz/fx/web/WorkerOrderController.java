@@ -13,14 +13,12 @@ import net.sf.json.JSONArray;
 
 @RestController
 public class WorkerOrderController {
-	
+
 	@Autowired WorkerOrderService wos;
-	
-	/*restful 部分*/
-	
+
 	/**
 	 * 1获取所有群抢单
-	 * @param phonenum
+	 * @param
 	 * @return
 	 * @throws Exception
 	 */
@@ -33,12 +31,12 @@ public class WorkerOrderController {
 		  }else {
 			  return "noqqd";
 		  }
-				 
+
 	 }
-	 
- /**
+
+ 	/**
 	 * 2获取所有群抢单
-	 * @param phonenum
+	 * @param
 	 * @return
 	 * @throws Exception
 	 */
@@ -51,12 +49,12 @@ public class WorkerOrderController {
 		  }else {
 			  return "nozpd";
 		  }
-				 
+
 	 }
-		 
- /**
+
+    /**
 	 *3获取一个订单信息
-	 * @param phonenum
+	 * @param
 	 * @return
 	 * @throws Exception
 	 */
@@ -69,68 +67,64 @@ public class WorkerOrderController {
 		  }else {
 			  return "noxx";
 		  }
-				 
-	 }	 
-	 
- /**
-  * 4删除一个订单
-  *
-  * @return
-  * @throws Exception
-  */
 
-  @PostMapping("/web_deleteonewoorder/{keyid}") 
-  public String web_deleteonewoorder(@PathVariable("keyid") String keyid ) throws Exception {
-	  if(wos.web_deletewoorder(keyid) == 1) {
-	      return "success";
-	  }else {
-		  return "failed";
-	  }
- } 
-  
-  
-  /**
-	 * 获取今日收入明细
-	 * @param so
-	 * @return
-	 */
-	@PostMapping("/gettoday_srmx/{phonenum}")
-	public String gettoday_srmx(@PathVariable("phonenum") String phonenum) throws Exception {
+	 }
+
+	 /**
+	  * 4删除一个订单
+	  *
+	  * @return
+	  * @throws Exception
+	  */
+	  @PostMapping("/web_deleteonewoorder/{keyid}")
+	  public String web_deleteonewoorder(@PathVariable("keyid") String keyid ) throws Exception {
+		  if(wos.web_deletewoorder(keyid) == 1) {
+			  return "success";
+		  }else {
+			  return "failed";
+		  }
+	 }
+
+
+	  /**
+	   * 获取今日收入明细
+	   * @param
+	   * @return
+	   */
+	  @PostMapping("/gettoday_srmx/{phonenum}")
+	  public String gettoday_srmx(@PathVariable("phonenum") String phonenum) throws Exception {
 		  ArrayList<WorkerOrder> list = new ArrayList<WorkerOrder>();
 		  list = wos.gettoday_srmx(phonenum);  //数据库中该手机号的订单列表
-		  JSONArray listArray = JSONArray.fromObject(list); 
+		  JSONArray listArray = JSONArray.fromObject(list);
 		  String jsonstr = JSONArray.fromObject(listArray).toString();
 		  return jsonstr;
-	}
-	
-	/**
-	 * 获取本周收入明细
-	 * @param so
-	 * @return
-	 */
-	@PostMapping("/getweek_srmx/{phonenum}")
-	public String getweek_srmx(@PathVariable("phonenum") String phonenum) throws Exception {
+	  }
+
+	  /**
+	   * 获取本周收入明细
+	   * @param
+	   * @return
+	   */
+	  @PostMapping("/getweek_srmx/{phonenum}")
+	  public String getweek_srmx(@PathVariable("phonenum") String phonenum) throws Exception {
 		  ArrayList<WorkerOrder> list = new ArrayList<WorkerOrder>();
 		  list = wos.getweek_srmx(phonenum);  //数据库中该手机号的订单列表
-		  JSONArray listArray = JSONArray.fromObject(list); 
+		  JSONArray listArray = JSONArray.fromObject(list);
 		  String jsonstr = JSONArray.fromObject(listArray).toString();
 		  return jsonstr;
-	}
-	 
-	/**
-	 * 获取本月收入明细
-	 * @param so
-	 * @return
-	 */
-	@PostMapping("/getmonth_srmx/{phonenum}")
-	public String getmonth_srmx(@PathVariable("phonenum") String phonenum) throws Exception {
+	  }
+
+	  /**
+	   * 获取本月收入明细
+	   * @param
+	   * @return
+	   */
+	  @PostMapping("/getmonth_srmx/{phonenum}")
+	  public String getmonth_srmx(@PathVariable("phonenum") String phonenum) throws Exception {
 		  ArrayList<WorkerOrder> list = new ArrayList<WorkerOrder>();
 		  list = wos.getmonth_srmx(phonenum);  //数据库中该手机号的订单列表
-		  JSONArray listArray = JSONArray.fromObject(list); 
+		  JSONArray listArray = JSONArray.fromObject(list);
 		  String jsonstr = JSONArray.fromObject(listArray).toString();
 		  return jsonstr;
-	}
-	
-	
-
+	  }
 }

@@ -17,11 +17,11 @@
             <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
             <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
         <![endif]--></head>
-    
+
     <body>
         <div class="layui-fluid">
             <div class="layui-row">
-                
+
                     <div class="layui-form-item">
                         <label for="L_email" class="layui-form-label">
                             <span class="x-red"></span>账号</label>
@@ -59,70 +59,69 @@
 					    <div class="layui-input-inline">
 					        <input type="text" id="city"  required="" lay-verify="repass" autocomplete="off" class="layui-input"></div>
 					</div>
-					
+
                     <div class="layui-form-item">
                         <label for="L_repass" class="layui-form-label"></label>
                         <button class="layui-btn" onclick="editworker()" lay-filter="add" >保存</button></div>
-               
+
             </div>
         </div>
         <script>
-			
+
 		   /* 截取地址中的手机号 */
 		   function getUrl(){
 		   	var loc = location.href;
 		   	var n1 = loc.length; //地址的总长度
 		   	var n2 = loc.indexOf("="); //取得=号的位置
 		   	var phonenum = decodeURI(loc.substr(n2 + 1, n1 - n2)); //从=号后面的内容
-		   	//alert(phonenum);
 		   	return phonenum;
 		   }
-		   
+
 		    /* 进入首页事件 */
 		   window.onload=function(){
 		   	getoneworkerxx();
 		   }
-		   
+
 		   function getoneworkerxx(){
-		
-		   	var phonenum = getUrl();    
-		   	
-		   	var url = "http://129.204.188.236:8080/qiangdan/web_getoneworker/"+phonenum;
-		   	
+
+		   	var phonenum = getUrl();
+
+		   	var url = "http://127.0.0.1:8080/web_getoneworker/"+phonenum;
+
 		   	 axios
 		   	.post(url)
 		   	.then(function(response) {
 		   		console.log(response.data);
-		   		
+
 		   		//alert(response.data[0].phonenum);
-				
+
 				document.getElementById("phonenum").value = response.data[0].phonenum;
 		   	    document.getElementById("password").value = response.data[0].password;
 		   		document.getElementById("idcardnum").value = response.data[0].idcardnum;
 				document.getElementById("name").value = response.data[0].name;
 				document.getElementById("sex").value = response.data[0].sex;
 				document.getElementById("city").value = response.data[0].city;
-				
+
 		   		//window.open("member-edit.html","_blank");
-		   		
+
 		   	})
 		   	.catch(function(error){
 		   		console.log(error);
 		   	});
 		   }
-		   
+
 		   function editworker(){
-			   var phonenum = getUrl();    
-			  
+			   var phonenum = getUrl();
+
 			   var idcardnum = document.getElementById("idcardnum").value;
 			   var name = document.getElementById("name").value;
 			   var sex = document.getElementById("sex").value;
 			   var city = document.getElementById("city").value;
-			   
+
 			   var worker = {phonenum: phonenum, idcardnum: idcardnum, name: name, sex: sex, city: city};
-			   
-			   var url = "http://129.204.188.236:8080/qiangdan/web_editoneworker";
-			   
+
+			   var url = "http://127.0.0.1:8080/web_editoneworker";
+
 			    axios
 			   .post(url,worker)
 			   .then(function(response) {
@@ -133,17 +132,17 @@
 				}else{
 					alert("保存失败");
 				}
-			    
+
 			   	//window.open("member-edit.html","_blank");
-			   	
+
 			   })
 			   .catch(function(error){
 			   	console.log(error);
 			   });
 		   }
-			
-			
-			
+
+
+
 			</script>
     </body>
 

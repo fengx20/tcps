@@ -10,13 +10,13 @@ import com.gxuwz.fx.service.AdminService;
 
 @RestController
 public class AdminController {
-	
+
 	@Autowired AdminService as;
-	
+
 	/**
 	 * 管理员--登录
 	 * @param admin
-	 * @param password
+	 * @param
 	 * @return
 	 */
 	@PostMapping("/adminlogin")
