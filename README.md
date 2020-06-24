@@ -7,7 +7,7 @@ Spring Boot+MyBatis+WebSocket+Redis
 ### 数据流图
 ![](https://github.com/fengx20/tcps/blob/master/src/main/webapp/images/shujuliutu.png)
 ### 部分界面展示
-![](https://github.com/fengx20/tcps/blob/master/src/main/webapp/images/pcduan.png)
+![](https://github.com/fengx20/tcps/blob/master/src/main/webapp/images/pcduan.png){:height="200px" width="100px"}
 ![](https://github.com/fengx20/tcps/blob/master/src/main/webapp/images/appduan1.png)
 ![](https://github.com/fengx20/tcps/blob/master/src/main/webapp/images/appduan2.png)
 ![](https://github.com/fengx20/tcps/blob/master/src/main/webapp/images/appduan2.png)
