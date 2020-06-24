@@ -3,7 +3,7 @@
 ### 技术栈
 Spring Boot+MyBatis+WebSocket+Redis
 ### 业务流程图
-![](https://github.com/fengx20/tcps/blob/master/src/main/webapp/images/yewuliuchengtu.png)
+<img src="https://github.com/fengx20/tcps/blob/master/src/main/webapp/images/yewuliuchengtu.png" style="width:100px;height:200px" />
 ### 数据流图
 ![](https://github.com/fengx20/tcps/blob/master/src/main/webapp/images/shujuliutu.png)
 ### 部分界面展示
