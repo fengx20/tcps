@@ -3,11 +3,10 @@
 ### 技术栈
 Spring Boot+MyBatis+WebSocket+Redis
 ### 业务流程图
-<img src="https://github.com/fengx20/tcps/blob/master/src/main/webapp/images/yewuliuchengtu.png" width="20px" height="40px" />
+![](https://github.com/fengx20/tcps/blob/master/src/main/webapp/images/yewuliuchengtu.png)
 ### 数据流图
 ![](https://github.com/fengx20/tcps/blob/master/src/main/webapp/images/shujuliutu.png)
 ### 部分界面展示
-![](https://github.com/fengx20/tcps/blob/master/src/main/webapp/images/pcduan.png){:height="200px" width="100px"}
-![](https://github.com/fengx20/tcps/blob/master/src/main/webapp/images/appduan1.png)
-![](https://github.com/fengx20/tcps/blob/master/src/main/webapp/images/appduan2.png)
-![](https://github.com/fengx20/tcps/blob/master/src/main/webapp/images/appduan2.png)
+![](https://github.com/fengx20/tcps/blob/master/src/main/webapp/images/pcduan.png)
+<img src="https://github.com/fengx20/tcps/blob/master/src/main/webapp/images/appduan1.png" width="200px" height="400px" />
+<img src="https://github.com/fengx20/tcps/blob/master/src/main/webapp/images/appduan2.png" width="200px" height="400px" />
