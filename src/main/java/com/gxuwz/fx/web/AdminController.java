@@ -11,21 +11,23 @@ import com.gxuwz.fx.service.AdminService;
 @RestController
 public class AdminController {
 
-	@Autowired AdminService as;
+    @Autowired
+    AdminService as;
 
-	/**
-	 * 管理员--登录
-	 * @param admin
-	 * @param
-	 * @return
-	 */
-	@PostMapping("/adminlogin")
-	public String adminlogin(@RequestBody Admin admin) throws Exception {
-		if(as.adminlogin(admin.getAdmin(), admin.getPassword()) == true){
-			return "success";
-		}else {
-			return "failed";
-		}
-	}
+    /**
+     * 管理员--登录
+     *
+     * @param admin
+     * @param
+     * @return
+     */
+    @PostMapping("/adminlogin")
+    public String adminlogin(@RequestBody Admin admin) throws Exception {
+        if (as.adminlogin(admin.getAdmin(), admin.getPassword()) == true) {
+            return "success";
+        } else {
+            return "failed";
+        }
+    }
 
 }

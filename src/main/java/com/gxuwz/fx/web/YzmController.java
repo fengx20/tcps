@@ -10,23 +10,24 @@ import com.gxuwz.fx.service.YzmService;
 @RestController
 public class YzmController {
 
-	@Autowired YzmService ys;
+    @Autowired
+    YzmService ys;
 
-	/**
-	 * 向手机发送验证码
-	 * @param phonenum
-	 * @return
-	 * @throws Exception
-	 */
-	 @PostMapping("/sendyzm/{phonenum}")
-	 public String sendyzm(@PathVariable("phonenum")  String phonenum) throws Exception {
-		 if( ys.sendYzm(phonenum).equals("200")) {   //发送验证码
-			 return "success";
-		 }else {
-			 return "failed";
-		 }
-	 }
-
+    /**
+     * 向手机发送验证码
+     *
+     * @param phonenum
+     * @return
+     * @throws Exception
+     */
+    @PostMapping("/sendyzm/{phonenum}")
+    public String sendyzm(@PathVariable("phonenum") String phonenum) throws Exception {
+        if (ys.sendYzm(phonenum).equals("200")) {   //发送验证码
+            return "success";
+        } else {
+            return "failed";
+        }
+    }
 
 
 }

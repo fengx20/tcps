@@ -50,7 +50,7 @@ public class WebSocketServer {
         addOnlineCount();           //在线数加1
         System.out.println("有新连接加入！当前在线人数为" + getOnlineCount());
         for (String phonenum : webSocketSet.keySet()) {
-        	   System.out.println("当前有工作者：phonenum= "+ phonenum );
+            System.out.println("当前有工作者：phonenum= " + phonenum);
         }
     }
 
@@ -68,10 +68,11 @@ public class WebSocketServer {
 
     /**
      * 给指定的人发送消息
+     *
      * @param message
      */
-    public void sendToUser(String phonenum,String message) {
-       // String now = getNowTime();
+    public void sendToUser(String phonenum, String message) {
+        // String now = getNowTime();
         try {
             if (webSocketSet.get(phonenum) != null) {
                 webSocketSet.get(phonenum).sendMessage(message);
@@ -109,15 +110,15 @@ public class WebSocketServer {
             sendAll(message);
         }
 
-	    //给指定的人发消息
-	    //sendToUser(message);
+        //给指定的人发消息
+        //sendToUser(message);
 
     }
 
 
-
     /**
      * 给所有人发消息
+     *
      * @param message
      */
 
@@ -144,12 +145,13 @@ public class WebSocketServer {
      *
      * @return
      */
-   public String getNowTime() {
+    public String getNowTime() {
         Date date = new Date();
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String time = format.format(date);
         return time;
     }
+
     /**
      * 发生错误时调用
      *

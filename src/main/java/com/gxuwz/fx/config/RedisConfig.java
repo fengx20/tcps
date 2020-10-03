@@ -12,6 +12,13 @@ import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
+/**
+ * Redis配置类
+ * 自定义RedisTemplate，
+ * 原因：
+ * RedisAutoConfiguration提供的RedisTemplate没有实现我们所需要的序列化；
+ * 泛型总是<Object, Object>，大部分场景我们更需要<String, Object>。
+ */
 @Configuration
 @EnableCaching
 public class RedisConfig extends CachingConfigurerSupport{

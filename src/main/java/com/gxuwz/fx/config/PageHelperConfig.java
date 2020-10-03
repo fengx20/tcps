@@ -7,9 +7,12 @@ import org.springframework.context.annotation.Configuration;
 
 import com.github.pagehelper.PageHelper;
 
+/**
+ * 分页插件配置
+ */
 @Configuration
 public class PageHelperConfig {
-  
+
     @Bean
     public PageHelper pageHelper() {
         PageHelper pageHelper = new PageHelper();

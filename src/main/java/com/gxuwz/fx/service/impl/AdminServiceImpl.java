@@ -8,20 +8,21 @@ import com.gxuwz.fx.service.AdminService;
 
 @Service
 public class AdminServiceImpl implements AdminService {
-	
-	@Autowired AdminMapper am;
-	
-	/**
-	 * 管理员登录
-	 * @param admin
-	 * @param password
-	 * @return
-	 */
-	@Override
-	public boolean adminlogin(String admin,String password) {
-		return am.adminlogin(admin, password);		
-	}
-	
-	
+
+    @Autowired
+    AdminMapper am;
+
+    /**
+     * 管理员登录
+     *
+     * @param admin
+     * @param password
+     * @return
+     */
+    @Override
+    public boolean adminlogin(String admin, String password) {
+        return am.adminlogin(admin, password);
+    }
+
 
 }

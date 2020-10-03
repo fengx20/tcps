@@ -1,99 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-    <mapper namespace="com.gxuwz.fx.mapper.WorkerMapper">
+<mapper namespace="com.gxuwz.fx.mapper.WorkerMapper">
 
-        <!--app端-->
+    <!--app端-->
 
-        <insert id="add" parameterType="Worker" >
+    <insert id="add" parameterType="Worker">
             insert into worker ( phonenum,password,idcardnum,name,sex,city,status ) values (#{phonenum},#{password},"空","空","空","空",0)
         </insert>
 
-        <select id="existByPhonenum" parameterType="String" resultType="boolean">
+    <select id="existByPhonenum" parameterType="String" resultType="boolean">
            select ifnull((select phonenum from worker where phonenum= #{phonenum}),false)
         </select>
 
-        <select id="existByWorker" resultType="boolean">
+    <select id="existByWorker" resultType="boolean">
            select ifnull((select phonenum from worker where phonenum = #{0} and password = #{1}),false)
         </select>
 
-        <select id="certification" parameterType="String" resultType="boolean">
+    <select id="certification" parameterType="String" resultType="boolean">
            select ifnull((select phonenum from worker where phonenum= #{phonenum} and status = 1),false)
         </select>
 
-        <select id="existIdCardNum" resultType="boolean">
+    <select id="existIdCardNum" resultType="boolean">
            select ifnull((select phonenum from worker where phonenum = #{0} and idcardnum = #{1}),false)
         </select>
 
-        <select id="review" parameterType="String" resultType="boolean">
+    <select id="review" parameterType="String" resultType="boolean">
            select ifnull((select phonenum from worker where phonenum= #{phonenum} and status = 3),false)
         </select>
 
-         <select id="getworkername" resultType="String">
+    <select id="getworkername" resultType="String">
            select name from worker where phonenum = #{0}
         </select>
 
-         <select id="getworkerid" resultType="int">
+    <select id="getworkerid" resultType="int">
            select id from worker where phonenum = #{0}
         </select>
 
-        <update id="updatepsd" parameterType="String">
+    <update id="updatepsd" parameterType="String">
            update worker set password = #{1} where phonenum=#{0}
         </update>
 
-         <update id="certificationupdate" parameterType="Worker">
+    <update id="certificationupdate" parameterType="Worker">
            update worker set idcardnum = #{idcardnum}, name = #{name}, sex = #{sex}, city = #{city}, status = 3 where phonenum=#{phonenum}
         </update>
 
-         <update id="updatezl" parameterType="Worker" >
+    <update id="updatezl" parameterType="Worker">
            update worker set city = #{city} where phonenum=#{phonenum}
         </update>
 
-        <update id="updatestatus" parameterType="String">
+    <update id="updatestatus" parameterType="String">
            update worker set status = 1 where phonenum=#{0}
         </update>
 
 
+    <!-- web端 -->
 
-        <!-- web端 -->
-
-        <select id="web_getallcertworker" resultType="Worker">
+    <select id="web_getallcertworker" resultType="Worker">
             select phonenum,name,idcardnum,sex,city,status from worker where status = 1
         </select>
 
-        <select id="web_getallnocertworker" resultType="Worker">
+    <select id="web_getallnocertworker" resultType="Worker">
             select phonenum,name,idcardnum,sex,city,status from worker where status = 0
         </select>
 
-        <select id="web_getallstopworker" resultType="Worker">
+    <select id="web_getallstopworker" resultType="Worker">
             select phonenum,name,idcardnum,sex,city,status from worker where status = 2
         </select>
 
-        <select id="web_getallshworker" resultType="Worker">
+    <select id="web_getallshworker" resultType="Worker">
             select phonenum,name,idcardnum,sex,city,status from worker where status = 3
         </select>
 
-        <update id="web_stopworker" parameterType="String">
+    <update id="web_stopworker" parameterType="String">
             update worker set status = 2 where phonenum = #{0}
         </update>
 
-        <select id="web_getoneworker" parameterType="String" resultType="Worker">
+    <select id="web_getoneworker" parameterType="String" resultType="Worker">
             select phonenum,password,name,idcardnum,sex,city,status from worker where phonenum = #{0}
         </select>
 
-        <select id="web_getoneworkerjk" parameterType="String" resultType="Worker">
+    <select id="web_getoneworkerjk" parameterType="String" resultType="Worker">
             select phonenum,password,name,idcardnum,sex,city,status from worker where phonenum = #{0}
         </select>
 
-        <update id="web_editoneworker" parameterType="Worker">
+    <update id="web_editoneworker" parameterType="Worker">
             update worker set idcardnum = #{idcardnum}, name = #{name},city = #{city}, sex = #{sex} where phonenum = #{phonenum}
         </update>
 
-        <update id="web_shtgworker" parameterType="String">
+    <update id="web_shtgworker" parameterType="String">
             update worker set status = 1 where phonenum = #{0}
         </update>
 
-    </mapper>
+</mapper>
