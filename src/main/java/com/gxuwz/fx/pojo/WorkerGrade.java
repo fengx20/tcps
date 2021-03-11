@@ -1,67 +1,60 @@
 package com.gxuwz.fx.pojo;
 
-public class WorkerGrade {
+import java.io.Serializable;
 
+/**
+ * 配送人员绩效
+ * @author fengx
+ */
+public class WorkerGrade implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    /**
+     * id
+     */
     private int id;
+    /**
+     * 手机号
+     */
     private String phonenum;
+    /**
+     * 已完成订单数量
+     */
     private int ywc;
+    /**
+     * 未完成订单量
+     */
     private int wwc;
 
-    /**
-     * @return the id
-     */
     public int getId() {
         return id;
     }
 
-    /**
-     * @param id the id to set
-     */
     public void setId(int id) {
         this.id = id;
     }
 
-    /**
-     * @return the phonenum
-     */
     public String getPhonenum() {
         return phonenum;
     }
 
-    /**
-     * @param phonenum the phonenum to set
-     */
     public void setPhonenum(String phonenum) {
         this.phonenum = phonenum;
     }
 
-    /**
-     * @return the ywc
-     */
     public int getYwc() {
         return ywc;
     }
 
-    /**
-     * @param ywc the ywc to set
-     */
     public void setYwc(int ywc) {
         this.ywc = ywc;
     }
 
-    /**
-     * @return the wwc
-     */
     public int getWwc() {
         return wwc;
     }
 
-    /**
-     * @param wwc the wwc to set
-     */
     public void setWwc(int wwc) {
         this.wwc = wwc;
     }
-
-
 }

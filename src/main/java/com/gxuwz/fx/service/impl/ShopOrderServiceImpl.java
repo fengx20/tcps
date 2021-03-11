@@ -1,32 +1,30 @@
 package com.gxuwz.fx.service.impl;
 
 import java.util.List;
-
 import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-
 import com.google.gson.Gson;
 import com.gxuwz.fx.mapper.ShopOrderMapper;
 import com.gxuwz.fx.pojo.ShopOrder;
 import com.gxuwz.fx.service.ShopOrderService;
-
 import net.sf.json.JSONObject;
 
+/**
+ * 商家订单业务实现层
+ * @author fengx
+ */
 @Service
 public class ShopOrderServiceImpl implements ShopOrderService {
 
     @Autowired
-    ShopOrderMapper som;
-
+    private ShopOrderMapper som;
     @Resource
     private RedisTemplate<String, Object> rt;
 
     /**
-     * 1添加商家订单
-     *
+     * 添加商家订单
      * @param so
      * @return
      */
@@ -37,7 +35,6 @@ public class ShopOrderServiceImpl implements ShopOrderService {
 
     /**
      * 订单是否被接
-     *
      * @param keyid
      * @return
      */
@@ -47,8 +44,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     }
 
     /**
-     * 2更新订单状态：订单已被接
-     *
+     * 更新订单状态：订单已被接
      * @param keyid
      * @return
      */
@@ -58,8 +54,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     }
 
     /**
-     * 3更新订单状态：订单被放弃
-     *
+     * 更新订单状态：订单被放弃
      * @param keyid
      * @return
      */
@@ -69,8 +64,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     }
 
     /**
-     * 4查询单个订单所有信息
-     *
+     * 查询单个订单所有信息
      * @param keyid
      * @return
      */
@@ -80,8 +74,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     }
 
     /**
-     * 5判断是否为第二次单
-     *
+     * 判断是否为第二次单
      * @param keyid
      * @return
      */
@@ -90,8 +83,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     }
 
     /**
-     * 6判断订单是否已被接
-     *
+     * 判断订单是否已被接
      * @param keyid
      * @return
      */
@@ -100,8 +92,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     }
 
     /**
-     * 7更新订单状态：第二次无人抢或被放弃
-     *
+     * 更新订单状态：第二次无人抢或被放弃
      * @param keyid
      * @return
      */
@@ -110,8 +101,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     }
 
     /**
-     * 8更新订单种类
-     *
+     * 更新订单种类
      * @param keyid
      * @return
      */
@@ -120,8 +110,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     }
 
     /**
-     * 9判断订单是否准备被指派
-     *
+     * 判断订单是否准备被指派
      * @param keyid
      * @return
      */
@@ -130,8 +119,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     }
 
     /**
-     * 10订单已完成
-     *
+     * 订单已完成
      * @param keyid
      * @return
      */
@@ -139,29 +127,31 @@ public class ShopOrderServiceImpl implements ShopOrderService {
         return som.updateStatusFi(keyid);
     }
 
-
-    //Web端
-
+    /*PC端*/
     /**
-     * 1统计订单数
-     *
+     * 统计订单数
      * @return
      */
     @Override
     public String getallshopnum() {
         int numtd = som.getallshoptoday();
-        String numtdstr = String.valueOf(numtd);  //订单数
+        // 订单数
+        String numtdstr = String.valueOf(numtd);
         int finumtd = som.getallshopfitoday();
-        String finumtdstr = String.valueOf(finumtd);  //完成数
+        // 完成数
+        String finumtdstr = String.valueOf(finumtd);
         int zpnumtd = som.getallshopzptoday();
-        String zpnumtdstr = String.valueOf(zpnumtd);   //指派订单数
+        // 指派订单数
+        String zpnumtdstr = String.valueOf(zpnumtd);
         int nummonth = som.getallshopmonth();
-        String nummonthstr = String.valueOf(nummonth);   //本月订单数
+        // 本月订单数
+        String nummonthstr = String.valueOf(nummonth);
         int finumall = som.getallshopfi();
-        String finumallstr = String.valueOf(finumall);   //总完成订单数
+        // 总完成订单数
+        String finumallstr = String.valueOf(finumall);
         int numall = som.getallshopnum();
-        String numallstr = String.valueOf(numall);   //总订单数
-
+        // 总订单数
+        String numallstr = String.valueOf(numall);
         JSONObject json = new JSONObject();
         json.put("numtdstr", numtdstr);
         json.put("finumtdstr", finumtdstr);
@@ -169,16 +159,12 @@ public class ShopOrderServiceImpl implements ShopOrderService {
         json.put("nummonthstr", nummonthstr);
         json.put("finumallstr", finumallstr);
         json.put("numallstr", numallstr);
-
         String jsonnum = json.toString();
-        System.out.println(jsonnum);
-
         return jsonnum;
     }
 
     /**
-     * 2获取所有已完成订单
-     *
+     * 获取所有已完成订单
      * @return
      */
     public String web_getallywcshoporder() {
@@ -189,8 +175,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     }
 
     /**
-     * 3获取所有未完成订单
-     *
+     * 获取所有未完成订单
      * @return
      */
     public String web_getallwwcshoporder() {
@@ -201,8 +186,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     }
 
     /**
-     * 4查询一个订单
-     *
+     * 查询一个订单
      * @return
      */
     public String web_getoneshoporder(String phonenum) {
@@ -213,8 +197,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     }
 
     /**
-     * 5删除一个订单
-     *
+     * 删除一个订单
      * @return
      */
     public int web_deleteorder(String keyid) {

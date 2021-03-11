@@ -2,25 +2,25 @@ package com.gxuwz.fx.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.google.gson.Gson;
 import com.gxuwz.fx.mapper.WorkerOrderMapper;
 import com.gxuwz.fx.pojo.WorkerOrder;
 import com.gxuwz.fx.service.WorkerOrderService;
 
+/**
+ * 配送人员订单业务实现层
+ * @author fengx
+ */
 @Service
 public class WorkerOrderServiceImpl implements WorkerOrderService {
 
     @Autowired
-    WorkerOrderMapper wom;
-
+    private WorkerOrderMapper wom;
 
     /**
      * 商家查询订单状态
-     *
      * @param keyid
      * @return
      */
@@ -29,8 +29,7 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     }
 
     /**
-     * 1 查询该工作者订单
-     *
+     * 查询该工作者订单
      * @param
      * @return
      */
@@ -40,7 +39,9 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     }
 
     /**
-     * 2添加生成的工作者订单
+     * 添加生成的工作者订单
+     * @param wo
+     * @return
      */
     @Override
     public int addOrder(WorkerOrder wo) {
@@ -48,7 +49,10 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     }
 
     /**
-     * 3更新工作者订单状态： 工作者放弃订单：2
+     * 更新工作者订单状态： 工作者放弃订单：2
+     * @param phonenum
+     * @param keyid
+     * @return
      */
     @Override
     public int updateStatusGi(String phonenum, String keyid) {
@@ -56,8 +60,7 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     }
 
     /**
-     * 4 查询该工作者的指派订单
-     *
+     * 查询该工作者的指派订单
      * @param
      * @return
      */
@@ -67,8 +70,7 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     }
 
     /**
-     * 5更新订单：形成指派单
-     *
+     * 更新订单：形成指派单
      * @param
      * @return
      */
@@ -78,8 +80,7 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     }
 
     /**
-     * 6此订单是否存在
-     *
+     * 此订单是否存在
      * @param keyid
      * @return
      */
@@ -88,7 +89,10 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     }
 
     /**
-     * 7更新工作者订单状态：工作者已完成订单：1
+     * 更新工作者订单状态：工作者已完成订单：1
+     * @param phonenum
+     * @param keyid
+     * @return
      */
     @Override
     public int updateStatusRu(String phonenum, String keyid) {
@@ -96,8 +100,7 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     }
 
     /**
-     * 8指派单接单
-     *
+     * 指派单接单
      * @param keyid
      * @return
      */
@@ -106,8 +109,7 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     }
 
     /**
-     * 9更新工作者已存在订单
-     *
+     * 更新工作者已存在订单
      * @param
      * @return
      */
@@ -117,8 +119,7 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     }
 
     /**
-     * 10工作者开始配送订单
-     *
+     * 工作者开始配送订单
      * @param keyid
      * @return
      */
@@ -128,8 +129,7 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     }
 
     /**
-     * 11 查询该工作者的配送中订单
-     *
+     * 查询该工作者的配送中订单
      * @param
      * @return
      */
@@ -139,8 +139,7 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     }
 
     /**
-     * 12 查询该工作者的配送中订单
-     *
+     * 查询该工作者的配送中订单
      * @param
      * @return
      */
@@ -150,8 +149,7 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     }
 
     /**
-     * 12 查询该工作者历史订单
-     *
+     * 查询该工作者历史订单
      * @param
      * @return
      */
@@ -160,10 +158,8 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
         return wom.findWorkerOrderAllLSDD(phonenum);
     }
 
-
     /**
      * 查询是否有未完成的订单
-     *
      * @param
      * @return
      */
@@ -173,8 +169,7 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     }
 
     /**
-     * 13 获得今日数据
-     *
+     * 获得今日数据
      * @param
      * @return
      */
@@ -184,8 +179,7 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     }
 
     /**
-     * 13 获得今日数据
-     *
+     * 获得今日数据
      * @param
      * @return
      */
@@ -195,8 +189,7 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     }
 
     /**
-     * 13 获得今日数据
-     *
+     * 获得今日数据
      * @param
      * @return
      */
@@ -206,8 +199,7 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     }
 
     /**
-     * 13 获得今日数据
-     *
+     * 获得今日数据
      * @param
      * @return
      */
@@ -216,10 +208,8 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
         return wom.gettoday_zp_fi(phonenum);
     }
 
-
     /**
      * 获得今日收入明细
-     *
      * @param
      * @return
      */
@@ -229,7 +219,6 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
 
     /**
      * 获得本周收入明细
-     *
      * @param
      * @return
      */
@@ -239,7 +228,6 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
 
     /**
      * 获得本月收入明细
-     *
      * @param
      * @return
      */
@@ -247,10 +235,8 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
         return wom.getmonth_srmx(phonenum);
     }
 
-
     /**
-     * 14 获取一周内数据
-     *
+     * 获取一周内数据
      * @param
      * @return
      */
@@ -260,8 +246,7 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     }
 
     /**
-     * 14 获取一周内数据
-     *
+     * 获取一周内数据
      * @param
      * @return
      */
@@ -271,8 +256,7 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     }
 
     /**
-     * 14 获取一周内数据
-     *
+     * 获取一周内数据
      * @param
      * @return
      */
@@ -282,8 +266,7 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     }
 
     /**
-     * 14 获取一周内数据
-     *
+     * 获取一周内数据
      * @param
      * @return
      */
@@ -292,10 +275,8 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
         return wom.getweek_zp_fi(phonenum);
     }
 
-
     /**
-     * 15 获取一个月内数据
-     *
+     * 获取一个月内数据
      * @param
      * @return
      */
@@ -305,8 +286,7 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     }
 
     /**
-     * 15 获取一个月内数据
-     *
+     * 获取一个月内数据
      * @param
      * @return
      */
@@ -316,8 +296,7 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     }
 
     /**
-     * 15 获取一个月内数据
-     *
+     * 获取一个月内数据
      * @param
      * @return
      */
@@ -327,8 +306,7 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     }
 
     /**
-     * 15 获取一个月内数据
-     *
+     * 获取一个月内数据
      * @param
      * @return
      */
@@ -337,10 +315,8 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
         return wom.getmonth_zp_fi(phonenum);
     }
 
-
     /**
-     * 16 查询该工作者的收入(当日)
-     *
+     * 查询该工作者的收入(当日)
      * @param
      * @return
      */
@@ -350,8 +326,7 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     }
 
     /**
-     * 16 查询该工作者的收入(本周)
-     *
+     * 查询该工作者的收入(本周)
      * @param
      * @return
      */
@@ -361,8 +336,7 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     }
 
     /**
-     * 16 查询该工作者的收入(当日)
-     *
+     * 查询该工作者的收入(当日)
      * @param
      * @return
      */
@@ -371,12 +345,9 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
         return wom.shouru_month(phonenum);
     }
 
-
-    //Web端
-
+    /*PC端*/
     /**
-     * 1获取所有群抢单
-     *
+     * 获取所有群抢单
      * @return
      */
     @Override
@@ -388,8 +359,7 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     }
 
     /**
-     * 2获取所有指派单
-     *
+     * 获取所有指派单
      * @return
      */
     @Override
@@ -401,8 +371,7 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     }
 
     /**
-     * 3获取一个订单信息
-     *
+     * 获取一个订单信息
      * @return
      */
     public String cxoneorder(String keyid) {
@@ -413,8 +382,7 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     }
 
     /**
-     * 4删除一个订单
-     *
+     * 删除一个订单
      * @return
      */
     public int web_deletewoorder(String keyid) {

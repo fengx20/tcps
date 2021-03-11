@@ -1,25 +1,23 @@
 package com.gxuwz.fx.service.impl;
 
 import java.io.IOException;
-import java.util.Random;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.gxuwz.fx.mapper.YzmMapper;
-import com.gxuwz.fx.pojo.Yzm;
 import com.gxuwz.fx.service.YzmService;
 
-
+/**
+ * 验证码业务实现层
+ * @author fengx
+ */
 @Service
 public class YzmServiceImpl implements YzmService {
 
     @Autowired
-    YzmMapper ym;
+    private YzmMapper ym;
 
     /**
-     * 1向手机发送验证码并保存
-     *
+     * 向手机发送验证码并保存
      * @param Phonenum
      * @return
      * @throws IOException
@@ -31,8 +29,7 @@ public class YzmServiceImpl implements YzmService {
     }
 
     /**
-     * 2验证手机号及验证码
-     *
+     * 验证手机号及验证码
      * @param phonenum
      * @param code
      * @return
@@ -41,6 +38,5 @@ public class YzmServiceImpl implements YzmService {
     public boolean verification(String phonenum, String code) {
         return ym.existByYzm(phonenum, code);
     }
-
 
 }

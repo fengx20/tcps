@@ -1,7 +1,6 @@
 package com.gxuwz.fx.filter;
 
 import java.io.IOException;
-
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -27,20 +26,11 @@ public class WebSocketFilter implements Filter {
         httpServletResponse1.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
         httpServletResponse1.setHeader("Access-Control-Max-Age", "3600");
         httpServletResponse1.setHeader("Access-Control-Allow-Headers", "x-requested-with");
-        // 设置request的编码方式
-        /*
-         * if(httpServletRequest.getMethod().equalsIgnoreCase("GET")) {
-         * if(!(httpServletRequest instanceof GetRequest)) { httpServletRequest = new
-         * GetRequest(httpServletRequest, "UTF-8");//处理get请求编码 } }
-         *//*else {
-          req.setCharacterEncoding("UTF-8");//处理post请求编码
-      }*/
         chain.doFilter(httpServletRequest, httpServletResponse);
     }
 
     @Override
     public void destroy() {
-
-        System.out.println("GIME over");
+        System.out.println("断开连接");
     }
 }

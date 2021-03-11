@@ -2,7 +2,6 @@ package com.gxuwz.fx.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.gxuwz.fx.server.WebSocketServer;
 
 @Service

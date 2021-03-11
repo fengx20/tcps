@@ -3,14 +3,12 @@ package com.gxuwz.fx.web;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
 import com.gxuwz.fx.pojo.Worker;
@@ -20,50 +18,41 @@ import com.gxuwz.fx.service.WorkerGradeService;
 import com.gxuwz.fx.service.WorkerOrderService;
 import com.gxuwz.fx.service.WorkerService;
 import com.gxuwz.fx.service.YzmService;
-
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-
 /**
- * 工作者
- *
- * @author Administrator
+ * 配送人员业务控制层
+ * @author fengx
  */
 @RestController
 public class WorkerController {
 
     @Autowired
-    WorkerService ws;
-
+    private WorkerService ws;
     @Autowired
-    YzmService ys;
-
+    private YzmService ys;
     @Autowired
-    WorkerAddressService was;
-
+    private WorkerAddressService was;
     @Autowired
-    WorkerOrderService wos;
-
+    private WorkerOrderService wos;
     @Autowired
-    WorkerGradeService wgs;
-
-    /*restful 部分*/
+    private WorkerGradeService wgs;
 
     /**
-     * 1工作者注册（发送手机验证码）
-     *
+     * 工作者注册（发送手机验证码）
      * @param worker
      * @param yzm
      * @return
-     * @throws Exception
      */
     @PostMapping("/regist/{yzm}")
-    public String regist(@RequestBody Worker worker, @PathVariable("yzm") String yzm) throws Exception {
-
-        if (ws.existph(worker.getPhonenum()) == false) {   //手机号存在
-            if (ys.verification(worker.getPhonenum(), yzm) == true) {   //验证手机验证码
-                ws.regist(worker);     //注册
+    public String regist(@RequestBody Worker worker, @PathVariable("yzm") String yzm) {
+        // 手机号存在
+        if (ws.existph(worker.getPhonenum()) == false) {
+            // 验证手机验证码
+            if (ys.verification(worker.getPhonenum(), yzm) == true) {
+                // 注册
+                ws.regist(worker);
                 return "success";
             } else {
                 return "yzmerror";
@@ -74,15 +63,15 @@ public class WorkerController {
     }
 
     /**
-     * 2工作者登录
-     *
+     * 工作者登录
      * @param worker
      * @return
      * @throws Exception
      */
     @PostMapping("/login")
-    public String login(@RequestBody Worker worker) throws Exception {
-        if (ws.existph(worker.getPhonenum()) == true) {   //手机号存在
+    public String login(@RequestBody Worker worker) {
+        // 手机号存在
+        if (ws.existph(worker.getPhonenum()) == true) {
             if (ws.login(worker.getPhonenum(), worker.getPassword()) == true) {   //手机号、密码验证
                 return "success";
             } else {
@@ -94,16 +83,17 @@ public class WorkerController {
     }
 
     /**
-     * 3忘记密码-1(验证码)
-     *
+     * 忘记密码-1(验证码)
      * @param worker
      * @return
      * @throws Exception
      */
     @PostMapping("/forgetone/{yzm}")
-    public String forgetone(@RequestBody Worker worker, @PathVariable("yzm") String yzm) throws Exception {
-        if (ws.existph(worker.getPhonenum()) == true) {   //手机号存在
-            if (ys.verification(worker.getPhonenum(), yzm) == true) {  //验证手机验证码
+    public String forgetone(@RequestBody Worker worker, @PathVariable("yzm") String yzm) {
+        // 手机号存在
+        if (ws.existph(worker.getPhonenum()) == true) {
+            // 验证手机验证码
+            if (ys.verification(worker.getPhonenum(), yzm) == true) {
                 return "yzmtrue";
             } else {
                 return "yzmerror";
@@ -114,16 +104,17 @@ public class WorkerController {
     }
 
     /**
-     * 4忘记密码-2(身份证号)
-     *
+     * 忘记密码-2(身份证号)
      * @param worker
      * @return
      * @throws Exception
      */
     @PostMapping("/forgettwo")
     public String forgettwo(@RequestBody Worker worker) throws Exception {
-        if (ws.certification(worker.getPhonenum()) == true) {   //是否认证
-            if (ws.existIdCardNum(worker.getPhonenum(), worker.getIdcardnum()) == true) {  //身份证号是否存在
+        // 是否认证
+        if (ws.certification(worker.getPhonenum()) == true) {
+            // 身份证号是否存在
+            if (ws.existIdCardNum(worker.getPhonenum(), worker.getIdcardnum()) == true) {
                 return "idtrue";
             } else {
                 return "iderror";
@@ -134,15 +125,15 @@ public class WorkerController {
     }
 
     /**
-     * 5跳过此步-忘记密码-2(身份证号)
-     *
+     * 跳过此步-忘记密码-2(身份证号)
      * @param worker
      * @return
      * @throws Exception
      */
     @PostMapping("/jumpid")
     public String jumpid(@RequestBody Worker worker) throws Exception {
-        if (ws.certification(worker.getPhonenum()) == true) {  //手机号是否已认证
+        // 手机号是否已认证
+        if (ws.certification(worker.getPhonenum()) == true) {
             return "idexist";
         } else {
             return "idnoexist";
@@ -150,15 +141,15 @@ public class WorkerController {
     }
 
     /**
-     * 6忘记密码-3(修改密码)
-     *
+     * 忘记密码-3(修改密码)
      * @param worker
      * @return
      * @throws Exception
      */
     @PostMapping("/forgetlast")
     public String forgetlast(@RequestBody Worker worker) throws Exception {
-        if (ws.updatepsd(worker.getPhonenum(), worker.getPassword()) == 1) {   //修改密码
+        // 修改密码
+        if (ws.updatepsd(worker.getPhonenum(), worker.getPassword()) == 1) {
             return "success";
         } else {
             return "failed";
@@ -166,20 +157,19 @@ public class WorkerController {
     }
 
     /**
-     * 7工作者是否已认证
-     *
+     * 工作者是否已认证
      * @param
      * @return
      * @throws Exception
      */
     @PostMapping("/iscertification/{phonenum}")
     public String iscertification(@PathVariable("phonenum") String phonenum) throws Exception {
-        //System.out.println(ws.woreview(phonenum));
-        if (ws.certification(phonenum) == true) {   //手机号是否已认证
+        // 手机号是否已认证
+        if (ws.certification(phonenum) == true) {
             return "yes";
         } else {
-
-            if (ws.woreview(phonenum) == true) {    //是否在审核中
+            // 是否在审核中
+            if (ws.woreview(phonenum) == true) {
                 return "review";
             } else {
                 return "no";
@@ -188,15 +178,15 @@ public class WorkerController {
     }
 
     /**
-     * 8工作者认证
-     *
+     * 工作者认证
      * @param worker
      * @return
      * @throws Exception
      */
     @PostMapping("/certification")
     public String certification(@RequestBody Worker worker) throws Exception {
-        if (ws.certificationupload(worker) == 1) {  //上传认证信息
+        // 上传认证信息
+        if (ws.certificationupload(worker) == 1) {
             return "success";
         } else {
             return "failed";
@@ -204,8 +194,7 @@ public class WorkerController {
     }
 
     /**
-     * 8工作者修改资料
-     *
+     * 工作者修改资料
      * @param worker
      * @return
      * @throws Exception
@@ -219,9 +208,8 @@ public class WorkerController {
         }
     }
 
-
     /**
-     * 9工作者进入工作状态
+     * 工作者进入工作状态
      *
      * @param
      * @return
@@ -229,83 +217,97 @@ public class WorkerController {
      */
     @PostMapping("/work")
     public String work(@RequestBody WorkerAddress wa) throws Exception {
-        if (ws.certification(wa.getPhonenum()) == true) { //此工作者是否已认证
-            if (was.existwa(wa.getPhonenum()) == true) {   //地理位置是否存在
-                if (was.work(wa.getPhonenum()) == 1) {    //更改工作者状态为工作状态
-                    return "success";   //开工成功
+        // 此工作者是否已认证
+        if (ws.certification(wa.getPhonenum()) == true) {
+            // 地理位置是否存在
+            if (was.existwa(wa.getPhonenum()) == true) {
+                // 更改工作者状态为工作状态
+                if (was.work(wa.getPhonenum()) == 1) {
+                    // 开工成功
+                    return "success";
                 } else {
-                    return "failed";    //开工失败
+                    // 开工失败
+                    return "failed";
                 }
             } else {
-                if (was.addfirst(wa) == 1) {     //第一次上传地理位置
-                    if (was.work(wa.getPhonenum()) == 1) {    //更改工作者状态为工作状态
-                        return "success";   //开工成功
+                // 第一次上传地理位置
+                if (was.addfirst(wa) == 1) {
+                    // 更改工作者状态为工作状态
+                    if (was.work(wa.getPhonenum()) == 1) {
+                        // 开工成功
+                        return "success";
                     } else {
-                        return "failed";    //开工失败
+                        // 开工失败
+                        return "failed";
                     }
                 } else {
                     return "firstfailed";
                 }
             }
         } else {
-            if (ws.woreview(wa.getPhonenum()) == true) {    //是否在审核中
+            // 是否在审核中
+            if (ws.woreview(wa.getPhonenum()) == true) {
                 return "review";
             } else {
-                return "nocertification"; //未认证
+                // 未认证
+                return "nocertification";
             }
         }
     }
 
     /**
-     * 10工作者进入工作状态上传地理位置
-     *
+     * 工作者进入工作状态上传地理位置
      * @param
      * @return
      * @throws Exception
      */
     @PostMapping("/uploadadd")
     public String uploadadd(@RequestBody WorkerAddress wa) throws Exception {
-        if (was.updateadd(wa) == 1) {          //更新工作者地理位置
-            return "uploadaddresssuccess";  //上传地理位置成功
+        // 更新工作者地理位置
+        if (was.updateadd(wa) == 1) {
+            // 上传地理位置成功
+            return "uploadaddresssuccess";
         } else {
-            return "uploadaddressfailed";   //上传地理位置错误
+            // 上传地理位置错误
+            return "uploadaddressfailed";
         }
     }
 
-
     /**
-     * 11工作者进入休息状态
-     *
+     * 工作者进入休息状态
      * @param phonenum
      * @return
      * @throws Exception
      */
     @PostMapping("/stop/{phonenum}")
     public String stop(@PathVariable("phonenum") String phonenum) throws Exception {
-        if (ws.certification(phonenum) == true) { //此工作者是否已认证
-            if (was.stop(phonenum) == 1) {    //休息
+        // 此工作者是否已认证
+        if (ws.certification(phonenum) == true) {
+            // 休息
+            if (was.stop(phonenum) == 1) {
                 return "success";
             } else {
                 return "failed";
             }
         } else {
-            if (ws.woreview(phonenum) == true) {    //是否在审核中
+            // 是否在审核中
+            if (ws.woreview(phonenum) == true) {
                 return "review";
             } else {
-                return "nocertification"; //未认证
+                // 未认证
+                return "nocertification";
             }
         }
     }
 
     /**
-     * 12是否为工作状态
-     *
+     * 是否为工作状态
      * @param phonenum
      * @return
      * @throws Exception
      */
     @PostMapping("/iswork/{phonenum}")
-    public String iswork(@PathVariable("phonenum") String phonenum) throws Exception {
+    public String iswork(@PathVariable("phonenum") String phonenum) {
         if (was.iswork(phonenum) == true) {
             return "true";
         } else {
@@ -315,7 +317,6 @@ public class WorkerController {
 
     /**
      * 获取工作者姓名
-     *
      * @param phonenum
      * @return
      * @throws Exception
@@ -327,8 +328,7 @@ public class WorkerController {
     }
 
     /**
-     * 13工作统计-日单量(今日)
-     *
+     * 工作统计-日单量(今日)
      * @param phonenum
      * @return
      * @throws Exception
@@ -354,7 +354,6 @@ public class WorkerController {
 
     /**
      * 工作统计-日单量(一周)
-     *
      * @param phonenum
      * @return
      * @throws Exception
@@ -380,7 +379,6 @@ public class WorkerController {
 
     /**
      * 工作统计-日单量(当月)
-     *
      * @param phonenum
      * @return
      * @throws Exception
@@ -404,16 +402,14 @@ public class WorkerController {
         }
     }
 
-
     /**
      * 工作统计-收入(当日)
-     *
      * @param phonenum
      * @return
      * @throws Exception
      */
     @PostMapping("/gzsr_today/{phonenum}")
-    public String gzsr(@PathVariable("phonenum") String phonenum) throws Exception {
+    public String gzsr(@PathVariable("phonenum") String phonenum) {
         if (ws.certification(phonenum) == true) {
             int shouru = wos.shouru_today(phonenum);
             String shourustr = String.valueOf(shouru);
@@ -426,10 +422,8 @@ public class WorkerController {
         }
     }
 
-
     /**
-     * 14工作统计-收入(本周)
-     *
+     * 工作统计-收入(本周)
      * @param phonenum
      * @return
      * @throws Exception
@@ -450,7 +444,6 @@ public class WorkerController {
 
     /**
      * 工作统计-收入(当月)
-     *
      * @param phonenum
      * @return
      * @throws Exception
@@ -471,7 +464,6 @@ public class WorkerController {
 
     /**
      * 获取等级数据
-     *
      * @param phonenum
      * @return
      * @throws Exception
@@ -481,12 +473,9 @@ public class WorkerController {
         return wgs.getWorkerGrade(phonenum);
     }
 
-
-    //Web端
-
+    /*PC端*/
     /**
-     * 1获取所有已认证工作者
-     *
+     * 获取所有已认证工作者
      * @return
      * @throws Exception
      */
@@ -502,8 +491,7 @@ public class WorkerController {
     }
 
     /**
-     * 2获取所有未认证工作者
-     *
+     * 获取所有未认证工作者
      * @return
      * @throws Exception
      */
@@ -519,8 +507,7 @@ public class WorkerController {
     }
 
     /**
-     * 3获取所有审核中工作者
-     *
+     * 获取所有审核中工作者
      * @return
      * @throws Exception
      */
@@ -537,7 +524,6 @@ public class WorkerController {
 
     /**
      * 获取所有已认证工作者
-     *
      * @return
      * @throws Exception
      */
@@ -553,8 +539,7 @@ public class WorkerController {
     }
 
     /**
-     * 4停用工作者
-     *
+     * 停用工作者
      * @return
      * @throws Exception
      */
@@ -568,8 +553,7 @@ public class WorkerController {
     }
 
     /**
-     * 5查询一位工作者信息
-     *
+     * 查询一位工作者信息
      * @return
      * @throws Exception
      */
@@ -580,8 +564,7 @@ public class WorkerController {
     }
 
     /**
-     * 6修改一位工作者信息
-     *
+     * 修改一位工作者信息
      * @return
      * @throws Exception
      */
@@ -595,8 +578,7 @@ public class WorkerController {
     }
 
     /**
-     * 7审核通过
-     *
+     * 审核通过
      * @return
      * @throws Exception
      */
@@ -611,14 +593,12 @@ public class WorkerController {
     }
 
     /**
-     * 8查询一位工作者
-     *
+     * 查询一位工作者
      * @return
      * @throws Exception
      */
     @PostMapping("/web_cxoneworker/{phonenum}")
     public String web_cxoneworker(@PathVariable("phonenum") String phonenum) throws Exception {
-
         if (ws.existph(phonenum) == true) {
             String jsononeworker = ws.web_getoneworker(phonenum);
             return jsononeworker;
@@ -629,7 +609,6 @@ public class WorkerController {
 
     /**
      * 获取所有在线工作者坐标
-     *
      * @return
      * @throws Exception
      */
@@ -650,4 +629,5 @@ public class WorkerController {
         String json = gson.toJson(list1);
         return json;
     }
+
 }

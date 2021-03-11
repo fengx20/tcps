@@ -1,314 +1,319 @@
 <!DOCTYPE html>
 <html class="x-admin-sm">
-    
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-        <meta name="renderer" content="webkit">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
-        <link rel="stylesheet" href="./css/font.css">
-        <link rel="stylesheet" href="./css/xadmin.css">
-		<script src="js/axios.min.js"></script>
-		<script src="js/vue.min.js"></script>
-        <script src="./lib/layui/layui.js" charset="utf-8"></script>
-        <script type="text/javascript" src="./js/xadmin.js"></script>
-    </head>
-    
-    <body>
-        <div class="x-nav">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <link rel="stylesheet" href="./css/font.css">
+    <link rel="stylesheet" href="./css/xadmin.css">
+    <script src="js/axios.min.js"></script>
+    <script src="js/vue.min.js"></script>
+    <script src="./lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./js/xadmin.js"></script>
+</head>
+
+<body>
+<div class="x-nav">
             <span class="layui-breadcrumb">
                 <a href="">首页</a>
  
                 <a>
                     <cite>商家订单列表</cite></a>
             </span>
-            <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
-                <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i>
-            </a>
-        </div>
-        <div class="layui-fluid">
-            <div class="layui-row layui-col-space15">
-                <div class="layui-col-md12">
-                    <div class="layui-card">
-                        <div class="layui-card-body ">
-                           
-                               <!-- <div class="layui-input-inline layui-show-xs-block">
-                                    <input class="layui-input" placeholder="开始日" name="start" id="start"></div>
-                                <div class="layui-input-inline layui-show-xs-block">
-                                    <input class="layui-input" placeholder="截止日" name="end" id="end"></div> -->
-                                <div class="layui-input-inline layui-show-xs-block">
-                                   <!-- <select name="contrller">
-                                        <option>支付方式</option>
-                                        <option>支付宝</option>
-                                        <option>微信</option>
-                                        <option>货到付款</option></select> -->
-                                </div>
-                               
-                                <div class="layui-input-inline layui-show-xs-block">
-                                    <input type="text" id="cxkeyid" placeholder="请输入订单号" autocomplete="off" class="layui-input"></div>
-                                <div class="layui-input-inline layui-show-xs-block">
-                                    <button class="layui-btn" onclick="cxoneworker()" lay-submit="" lay-filter="sreach">
-                                        <i class="layui-icon">&#xe615;</i></button>
-                                </div>
-                            
-                        </div>
-						<div class="layui-card-header">
-						   <!-- <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button> -->
-						    <button class="layui-btn layui-btn-zc" onclick="getallywcorder()"><i class="layui-icon">&#xe605;</i>已完成</button> 
-							<button class="layui-btn layui-btn-danger" onclick="getallwwcorder()"><i class="layui-icon">&#x1006;</i>未完成</button>
-						</div>
-                       
-                        <div class="layui-card-body ">
-                            <table class="layui-table layui-form">
-                                <thead>
-                                    <tr>
-                                       
-                                        <th>订单编号</th>
-                                        <th>商家名称</th>
-                                        <th>商家电话</th>
-										<!-- <th>商家地址</th> -->
-										<th>收货人姓名</th>
-										<th>收货人电话</th>
-										<!-- <th>收货人地址</th> -->
-                                        <!-- <th>商品</th>
-                                        <th>备注</th> -->
-										<th>下单时间</th>
-										<th>佣金</th>
-                                        <th>订单状态</th>
-										<th>操作</th></tr>
-                                </thead>
-                                <tbody id="message">
-                                   
-                                   
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="layui-card-body ">
-                            <div class="page">
-                                <div>
-                                    <a class="prev" href="">&lt;&lt;</a>
-									<span class="current">1</span>
-                                    <a class="num" href="">2</a>
-                                    <a class="num" href="">3</a>
-                                    <a class="num" href="">4</a>
-                                    <a class="next" href="">&gt;&gt;</a></div>
-                            </div>
-                        </div>
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
+       onclick="location.reload()" title="刷新">
+        <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i>
+    </a>
+</div>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-body ">
+
+                    <!-- <div class="layui-input-inline layui-show-xs-block">
+                         <input class="layui-input" placeholder="开始日" name="start" id="start"></div>
+                     <div class="layui-input-inline layui-show-xs-block">
+                         <input class="layui-input" placeholder="截止日" name="end" id="end"></div> -->
+                    <div class="layui-input-inline layui-show-xs-block">
+                        <!-- <select name="contrller">
+                             <option>支付方式</option>
+                             <option>支付宝</option>
+                             <option>微信</option>
+                             <option>货到付款</option></select> -->
+                    </div>
+
+                    <div class="layui-input-inline layui-show-xs-block">
+                        <input type="text" id="cxkeyid" placeholder="请输入订单号" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-input-inline layui-show-xs-block">
+                        <button class="layui-btn" onclick="cxoneworker()" lay-submit="" lay-filter="sreach">
+                            <i class="layui-icon">&#xe615;</i></button>
+                    </div>
+
+                </div>
+                <div class="layui-card-header">
+                    <!-- <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button> -->
+                    <button class="layui-btn layui-btn-zc" onclick="getallywcorder()"><i class="layui-icon">&#xe605;</i>已完成
+                    </button>
+                    <button class="layui-btn layui-btn-danger" onclick="getallwwcorder()"><i
+                            class="layui-icon">&#x1006;</i>未完成
+                    </button>
+                </div>
+
+                <div class="layui-card-body ">
+                    <table class="layui-table layui-form">
+                        <thead>
+                        <tr>
+
+                            <th>订单编号</th>
+                            <th>商家名称</th>
+                            <th>商家电话</th>
+                            <!-- <th>商家地址</th> -->
+                            <th>收货人姓名</th>
+                            <th>收货人电话</th>
+                            <!-- <th>收货人地址</th> -->
+                            <!-- <th>商品</th>
+                            <th>备注</th> -->
+                            <th>下单时间</th>
+                            <th>佣金</th>
+                            <th>订单状态</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="message">
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="layui-card-body ">
+                    <div class="page">
+                        <div>
+                            <a class="prev" href="">&lt;&lt;</a>
+                            <span class="current">1</span>
+                            <a class="num" href="">2</a>
+                            <a class="num" href="">3</a>
+                            <a class="num" href="">4</a>
+                            <a class="next" href="">&gt;&gt;</a></div>
                     </div>
                 </div>
             </div>
         </div>
-    </body>
-	<script src="js/jquery.min.js"></script>
-    <script>
-		
-		 /* 进入首页事件 */
-		window.onload=function(){
-			getallywcorder();
-		}
-		
-		function getallywcorder(){
-			/* var phonenum = getUrl();
-			 var worker_forget = {phonenum: phonenum}; */
-			 
-			$("#message").html("");
-			 
-			 var url = "http://121.199.60.161:8080/qiangdan/web_getallywcshoporder";
-			 
-			 axios
-			 .post(url)
-			 .then(function(response) {
-			 	console.log(response.data);
-				
-				if(response.data == "noywcshoporder"){
-					alert("当前无已完成订单记录");
-				}else{
-				
-			 	 var jsonArray=eval(response.data);
-			 	 for(var i = 0; i <= jsonArray.length; i++ ){
-				 	 
-				 response.data[i].status = "已完成";
-				 
-				
-					
-				 document.getElementById("message").innerHTML += "<tr>"+
-										"<td>"+response.data[i].keyid+"</td>"+
-										"<td>"+response.data[i].shopname+"</td>"+
-										"<td>"+response.data[i].shopphonenum+"</td>"+
-										"<td>"+response.data[i].recname+"</td>"+
-										"<td>"+response.data[i].recphonenum+"</td>"+
-										"<td>"+response.data[i].systime+"</td>"+
-										"<td>"+response.data[i].reward+"</td>"+
-										
-										"<td class='td-status'>"+
-										  "<span class='layui-btn layui-btn-zc layui-btn-mini'>"+response.data[i].status+"</span>"+"</td>"+
-										"<td class='td-manage'>"+
-										  "<a   href='javascript:;' id='"+i+"' onclick='editorder(this.id)'  title='订单详情'>"+
-											"<i class='layui-icon'>"+'&#xe63c;'+"</i>"+
-										  "</a>"+
-			
-										  "<a title='删除订单'  id='"+i+"' onclick='deleteorder(this.id)' href='javascript:;'>"+
-											"<i class='layui-icon'>"+'&#xe642;'+"</i>"+
-										  "</a>"+
-										"</td>"+
-										"</tr>"+
-										 "<input type='hidden' id='or"+i+"'>"+"</input>";
-										
-										document.getElementById("or"+i+"").value = response.data[i].keyid;
-										
-			     }
-				 }
-			 })
-			 .catch(function(error){
-			 	console.log(error);
-			 });
-		}
-		
-		 function getallwwcorder(){
-			 
-			$("#message").html("");
-			 
-			 var url = "http://121.199.60.161:8080/qiangdan/web_getallwwcshoporder";
-			 
-			 axios
-			 .post(url)
-			 .then(function(response) {
-			 	console.log(response.data);
-				
-				if(response.data == "nowwcshoporder"){
-					alert("当前无未完成订单记录");
-				}else{
-				
-			 	 var jsonArray=eval(response.data);
-			 	 for(var i = 0; i <= jsonArray.length; i++ ){
-				 	 
-				 response.data[i].status = "未完成";
-				 
-				
-					
-				 document.getElementById("message").innerHTML += "<tr>"+
-										"<td>"+response.data[i].keyid+"</td>"+
-										"<td>"+response.data[i].shopname+"</td>"+
-										"<td>"+response.data[i].shopphonenum+"</td>"+
-										"<td>"+response.data[i].recname+"</td>"+
-										"<td>"+response.data[i].recphonenum+"</td>"+
-										"<td>"+response.data[i].systime+"</td>"+
-										"<td>"+response.data[i].reward+"</td>"+
-										
-										"<td class='td-status'>"+
-										  "<span class='layui-btn layui-btn-danger layui-btn-mini'>"+response.data[i].status+"</span>"+"</td>"+
-										"<td class='td-manage'>"+
-										  "<a   href='javascript:;' id='"+i+"' onclick='editorder(this.id)' title='订单详情'>"+
-											"<i class='layui-icon'>"+'&#xe63c;'+"</i>"+
-										  "</a>"+
-			
-										  "<a title='删除订单'  id='"+i+"' onclick='deleteorder(this.id)' href='javascript:;'>"+
-											"<i class='layui-icon'>"+'&#xe642;'+"</i>"+
-										  "</a>"+
-										"</td>"+
-										"</tr>"+
-										 "<input type='hidden' id='or"+i+"'>"+"</input>";
-										
-										document.getElementById("or"+i+"").value = response.data[i].keyid;
-										
-			     }
-				 }
-			 })
-			 .catch(function(error){
-			 	console.log(error);
-			 });
-		} 
-		
-		 function cxoneworker(){
-			 
-			  var keyid = document.getElementById("cxkeyid").value;
-			 
-			  $("#message").html("");
-			 
-			 var url = "http://121.199.60.161:8080/qiangdan/web_getoneshoporder/"+keyid;
-			 
-			 axios
-			 .post(url)
-			 .then(function(response) {
-			 	console.log(response.data);
-				
-				if(response.data == "nothisshoporder"){
-					alert("此订单不存在");
-				}else{
-					
-					if(response.data[0].status == "0"){
-						response.data[0].status = "未完成";
-					}else if(response.data[0].status == "3"){
-						response.data[0].status = "已完成";
-					}
-				 
-		
-				 document.getElementById("message").innerHTML += "<tr>"+
-										"<td>"+response.data[0].keyid+"</td>"+
-										"<td>"+response.data[0].shopname+"</td>"+
-										"<td>"+response.data[0].shopphonenum+"</td>"+
-										"<td>"+response.data[0].recname+"</td>"+
-										"<td>"+response.data[0].recphonenum+"</td>"+
-										"<td>"+response.data[0].systime+"</td>"+
-										"<td>"+response.data[0].reward+"</td>"+
-										
-										"<td class='td-status'>"+
-										  "<span class='layui-btn layui-btn-cx layui-btn-mini'>"+response.data[0].status+"</span>"+"</td>"+
-										"<td class='td-manage'>"+
-										  "<a   href='javascript:;' id='0' onclick='editorder(this.id)' title='订单详情'>"+
-											"<i class='layui-icon'>"+'&#xe63c;'+"</i>"+
-										  "</a>"+
-			
-										  "<a title='删除订单'  id='0' onclick='deleteorder(this.id)' href='javascript:;'>"+
-											"<i class='layui-icon'>"+'&#xe642;'+"</i>"+
-										  "</a>"+
-										"</td>"+
-										"</tr>"+
-										 "<input type='hidden' id='or0'>"+"</input>";
-										
-										document.getElementById("or0").value = response.data[i].keyid;
+    </div>
+</div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script>
 
-				 }
-			 })
-			 .catch(function(error){
-			 	console.log(error);
-			 });
-		}
-		
-		function editorder(id){
-			var i = id;
-			var keyid = document.getElementById("or"+i+"").value;
-			
-		    xadmin.open("查看详情",'order-edit.html?keyid='+keyid,800,550);
-				
-		}
-		
-		function deleteorder(id){
-			var i = id;
-			var keyid = document.getElementById("or"+i+"").value;
-			//alert(phonenum);
-			var url = "http://121.199.60.161:8080/qiangdan/web_deleteoneorder/"+keyid;
-			
-			 axios
-			.post(url)
-			.then(function(response) {
-				console.log(response.data);
-				
-		
-				if(response.data == "success"){
-					alert("删除成功");
-					location.reload();
-				}else{
-					alert("停删除失败");
-				}	
-		
-			})
-			.catch(function(error){
-				console.log(error);
-			});
-		} 
-		
-	</script>
+    /* 进入首页事件 */
+    window.onload = function () {
+        getallywcorder();
+    }
+
+    function getallywcorder() {
+        /* var phonenum = getUrl();
+         var worker_forget = {phonenum: phonenum}; */
+
+        $("#message").html("");
+
+        var url = "http://localhost:8080/tcps/web_getallywcshoporder";
+
+        axios
+            .post(url)
+            .then(function (response) {
+                console.log(response.data);
+
+                if (response.data == "noywcshoporder") {
+                    alert("当前无已完成订单记录");
+                } else {
+
+                    var jsonArray = eval(response.data);
+                    for (var i = 0; i <= jsonArray.length; i++) {
+
+                        response.data[i].status = "已完成";
+
+
+                        document.getElementById("message").innerHTML += "<tr>" +
+                            "<td>" + response.data[i].keyid + "</td>" +
+                            "<td>" + response.data[i].shopname + "</td>" +
+                            "<td>" + response.data[i].shopphonenum + "</td>" +
+                            "<td>" + response.data[i].recname + "</td>" +
+                            "<td>" + response.data[i].recphonenum + "</td>" +
+                            "<td>" + response.data[i].systime + "</td>" +
+                            "<td>" + response.data[i].reward + "</td>" +
+
+                            "<td class='td-status'>" +
+                            "<span class='layui-btn layui-btn-zc layui-btn-mini'>" + response.data[i].status + "</span>" + "</td>" +
+                            "<td class='td-manage'>" +
+                            "<a   href='javascript:;' id='" + i + "' onclick='editorder(this.id)'  title='订单详情'>" +
+                            "<i class='layui-icon'>" + '&#xe63c;' + "</i>" +
+                            "</a>" +
+
+                            "<a title='删除订单'  id='" + i + "' onclick='deleteorder(this.id)' href='javascript:;'>" +
+                            "<i class='layui-icon'>" + '&#xe642;' + "</i>" +
+                            "</a>" +
+                            "</td>" +
+                            "</tr>" +
+                            "<input type='hidden' id='or" + i + "'>" + "</input>";
+
+                        document.getElementById("or" + i + "").value = response.data[i].keyid;
+
+                    }
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    function getallwwcorder() {
+
+        $("#message").html("");
+
+        var url = "http://localhost:8080/tcps/web_getallwwcshoporder";
+
+        axios
+            .post(url)
+            .then(function (response) {
+                console.log(response.data);
+
+                if (response.data == "nowwcshoporder") {
+                    alert("当前无未完成订单记录");
+                } else {
+
+                    var jsonArray = eval(response.data);
+                    for (var i = 0; i <= jsonArray.length; i++) {
+
+                        response.data[i].status = "未完成";
+
+
+                        document.getElementById("message").innerHTML += "<tr>" +
+                            "<td>" + response.data[i].keyid + "</td>" +
+                            "<td>" + response.data[i].shopname + "</td>" +
+                            "<td>" + response.data[i].shopphonenum + "</td>" +
+                            "<td>" + response.data[i].recname + "</td>" +
+                            "<td>" + response.data[i].recphonenum + "</td>" +
+                            "<td>" + response.data[i].systime + "</td>" +
+                            "<td>" + response.data[i].reward + "</td>" +
+
+                            "<td class='td-status'>" +
+                            "<span class='layui-btn layui-btn-danger layui-btn-mini'>" + response.data[i].status + "</span>" + "</td>" +
+                            "<td class='td-manage'>" +
+                            "<a   href='javascript:;' id='" + i + "' onclick='editorder(this.id)' title='订单详情'>" +
+                            "<i class='layui-icon'>" + '&#xe63c;' + "</i>" +
+                            "</a>" +
+
+                            "<a title='删除订单'  id='" + i + "' onclick='deleteorder(this.id)' href='javascript:;'>" +
+                            "<i class='layui-icon'>" + '&#xe642;' + "</i>" +
+                            "</a>" +
+                            "</td>" +
+                            "</tr>" +
+                            "<input type='hidden' id='or" + i + "'>" + "</input>";
+
+                        document.getElementById("or" + i + "").value = response.data[i].keyid;
+
+                    }
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    function cxoneworker() {
+
+        var keyid = document.getElementById("cxkeyid").value;
+
+        $("#message").html("");
+
+        var url = "http://localhost:8080/tcps/web_getoneshoporder/" + keyid;
+
+        axios
+            .post(url)
+            .then(function (response) {
+                console.log(response.data);
+
+                if (response.data == "nothisshoporder") {
+                    alert("此订单不存在");
+                } else {
+
+                    if (response.data[0].status == "0") {
+                        response.data[0].status = "未完成";
+                    } else if (response.data[0].status == "3") {
+                        response.data[0].status = "已完成";
+                    }
+
+
+                    document.getElementById("message").innerHTML += "<tr>" +
+                        "<td>" + response.data[0].keyid + "</td>" +
+                        "<td>" + response.data[0].shopname + "</td>" +
+                        "<td>" + response.data[0].shopphonenum + "</td>" +
+                        "<td>" + response.data[0].recname + "</td>" +
+                        "<td>" + response.data[0].recphonenum + "</td>" +
+                        "<td>" + response.data[0].systime + "</td>" +
+                        "<td>" + response.data[0].reward + "</td>" +
+
+                        "<td class='td-status'>" +
+                        "<span class='layui-btn layui-btn-cx layui-btn-mini'>" + response.data[0].status + "</span>" + "</td>" +
+                        "<td class='td-manage'>" +
+                        "<a   href='javascript:;' id='0' onclick='editorder(this.id)' title='订单详情'>" +
+                        "<i class='layui-icon'>" + '&#xe63c;' + "</i>" +
+                        "</a>" +
+
+                        "<a title='删除订单'  id='0' onclick='deleteorder(this.id)' href='javascript:;'>" +
+                        "<i class='layui-icon'>" + '&#xe642;' + "</i>" +
+                        "</a>" +
+                        "</td>" +
+                        "</tr>" +
+                        "<input type='hidden' id='or0'>" + "</input>";
+
+                    document.getElementById("or0").value = response.data[i].keyid;
+
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    function editorder(id) {
+        var i = id;
+        var keyid = document.getElementById("or" + i + "").value;
+
+        xadmin.open("查看详情", 'order-edit.html?keyid=' + keyid, 800, 550);
+
+    }
+
+    function deleteorder(id) {
+        var i = id;
+        var keyid = document.getElementById("or" + i + "").value;
+        //alert(phonenum);
+        var url = "http://localhost:8080/tcps/web_deleteoneorder/" + keyid;
+
+        axios
+            .post(url)
+            .then(function (response) {
+                console.log(response.data);
+
+
+                if (response.data == "success") {
+                    alert("删除成功");
+                    location.reload();
+                } else {
+                    alert("停删除失败");
+                }
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+</script>
 
 </html>

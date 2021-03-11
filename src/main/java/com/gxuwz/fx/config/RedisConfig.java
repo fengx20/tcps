@@ -21,14 +21,14 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
  */
 @Configuration
 @EnableCaching
-public class RedisConfig extends CachingConfigurerSupport{
-    
-	@Bean
+public class RedisConfig extends CachingConfigurerSupport {
+
+    @Bean
     public RedisTemplate<String, Object> redisTemplateCustomize(RedisConnectionFactory factory) {
-	    System.out.println("。。。。。。。。。。。。如果我输出了，说明自定义的redisTemplate实例化了。。。。。。。。。。。。。。。。");
-    	RedisTemplate<String, Object> template = new RedisTemplate<String, Object>();
-    	template.setConnectionFactory(factory);
-		Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<Object>(Object.class);
+        System.out.println("。。。。。。。。。。。。如果我输出了，说明自定义的redisTemplate实例化了。。。。。。。。。。。。。。。。");
+        RedisTemplate<String, Object> template = new RedisTemplate<String, Object>();
+        template.setConnectionFactory(factory);
+        Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<Object>(Object.class);
         ObjectMapper om = new ObjectMapper();
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
@@ -45,5 +45,4 @@ public class RedisConfig extends CachingConfigurerSupport{
         template.afterPropertiesSet();
         return template;
     }
-
 }

@@ -2,149 +2,136 @@ package com.gxuwz.fx.service;
 
 import com.gxuwz.fx.pojo.Worker;
 
+/**
+ * 配送人员业务接口层
+ * @author fengx
+ */
 public interface WorkerService {
 
     /**
-     * 1判断工作者手机号是否已存在
-     *
+     * 判断工作者手机号是否已存在
      * @param phonenum
      * @return
      */
-    public boolean existph(String phonenum);
+    boolean existph(String phonenum);
 
     /**
-     * 2工作者注册
-     *
+     * 工作者注册
      * @param worker
      * @return
      */
-    public int regist(Worker worker);
+    int regist(Worker worker);
 
     /**
-     * 3工作者登录验证
-     *
+     * 工作者登录验证
      * @param phonenum
      * @param password
      * @return
      */
-    public boolean login(String phonenum, String password);
+    boolean login(String phonenum, String password);
 
     /**
-     * 4工作者是否已认证
-     *
+     * 工作者是否已认证
      * @param Phonenum
      * @return
      */
-    public boolean certification(String Phonenum);
+    boolean certification(String Phonenum);
 
     /**
-     * 5判断是否存在此身份证号
-     *
+     * 判断是否存在此身份证号
      * @param phonenum
      * @return
      */
-    public boolean existIdCardNum(String phonenum, String idcardnum);
+    boolean existIdCardNum(String phonenum, String idcardnum);
 
     /**
-     * 6 修改密码
-     *
+     * 修改密码
      * @param phonenum
      * @return
      */
-    public int updatepsd(String phonenum, String password);
+    int updatepsd(String phonenum, String password);
 
     /**
-     * 7工作者是否正在审核
-     *
+     * 工作者是否正在审核
      * @param Phonenum
      * @return
      */
-    public boolean woreview(String Phonenum);
+    boolean woreview(String Phonenum);
 
     /**
-     * 8工作者上传信息认证
+     * 工作者上传信息认证
+     * @param woker
+     * @return
      */
-    public int certificationupload(Worker woker);
+    int certificationupload(Worker woker);
 
     /**
-     * 9获取工作者姓名
-     *
+     * 获取工作者姓名
      * @param phonenum
      * @return
      */
-    public String getworkername(String phonenum);
+    String getworkername(String phonenum);
 
     /**
-     * 10修改资料
-     *
+     * 修改资料
      * @param
      * @return
      */
-    public int updatezl(Worker worker);
+    int updatezl(Worker worker);
 
-    //Web端
-
+    /*Web端*/
     /**
-     * 1获取所有已认证工作者
-     *
+     * 获取所有已认证工作者
      * @return
      */
-    public String web_getallcertworker();
+    String web_getallcertworker();
 
     /**
-     * 2获取所有未认证工作者
-     *
+     * 获取所有未认证工作者
      * @return
      */
-    public String web_getallnocertworker();
+    String web_getallnocertworker();
 
     /**
-     * 3获取所有已停用工作者
-     *
+     * 获取所有已停用工作者
      * @return
      */
-    public String web_getallstopworker();
+    String web_getallstopworker();
 
     /**
-     * 3获取所有正在审核工作者
-     *
+     * 获取所有正在审核工作者
      * @return
      */
-    public String web_getallshworker();
+    String web_getallshworker();
 
     /**
-     * 4停用工作者
-     *
+     * 停用工作者
      * @return
      */
-    public int web_stopworker(String phonenum);
+    int web_stopworker(String phonenum);
 
     /**
-     * 5获取一名工作者
-     *
+     * 获取一名工作者
      * @return
      */
-    public String web_getoneworker(String phonenum);
+    String web_getoneworker(String phonenum);
 
     /**
      * 获取一名工作者信息（监控中心）
-     *
      * @return
      */
-    public Worker web_getoneworkerjk(String phonenum);
+    Worker web_getoneworkerjk(String phonenum);
 
     /**
-     * 6修改一名工作者信息
-     *
+     * 修改一名工作者信息
      * @return
      */
-    public int web_editoneworker(Worker wo);
+    int web_editoneworker(Worker wo);
 
     /**
-     * 7审核通过
-     *
+     * 审核通过
      * @return
      */
-    public int web_shtgworker(String phonenum);
+    int web_shtgworker(String phonenum);
 
 }

@@ -2,326 +2,251 @@ package com.gxuwz.fx.pojo;
 
 import java.io.Serializable;
 
-
 /**
  * 商家订单
- *
- * @author Administrator
+ * @author fengx
  */
 public class ShopOrder implements Serializable {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
+    /**
+     * id
+     */
     private int id;
+    /**
+     * 订单id
+     */
     private String keyid;
+    /**
+     * 商家名字
+     */
     private String shopname;
+    /**
+     * 第一次下单时间
+     */
     private String firsttime;
+    /**
+     * 系统时间
+     */
     private String systime;
+    /**
+     * 商品
+     */
     private String thing;
+    /**
+     * 备注
+     */
     private String remark;
+    /**
+     * 商家电话
+     */
     private String shopphonenum;
+    /**
+     * 发货时间
+     */
     private String sendtime;
+    /**
+     * 配送费
+     */
     private String reward;
+    /**
+     * 收货人电话
+     */
     private String recphonenum;
+    /**
+     * 收货人姓名
+     */
     private String recname;
+    /**
+     * 收货人地址
+     */
     private String recaddress;
+    /**
+     * 商家地址
+     */
     private String shopaddress;
+    /**
+     * 商家位置经度
+     */
     private double longitude;
+    /**
+     * 商家位置纬度
+     */
     private double latitude;
+    /**
+     * 收货人位置经度
+     */
     private double reclongitude;
+    /**
+     * 收货人位置纬度
+     */
     private double reclatitude;
+    /**
+     * 订单类别
+     */
     private int sort;
+    /**
+     * 订单状态
+     */
     private int status;
 
-    public ShopOrder() {
-
-    }
-
-    /**
-     * @return the id
-     */
     public int getId() {
         return id;
     }
 
-    /**
-     * @param id the id to set
-     */
     public void setId(int id) {
         this.id = id;
     }
 
-    /**
-     * @return the keyid
-     */
     public String getKeyid() {
         return keyid;
     }
 
-    /**
-     * @param keyid the keyid to set
-     */
     public void setKeyid(String keyid) {
         this.keyid = keyid;
     }
 
-    /**
-     * @return the shopname
-     */
     public String getShopname() {
         return shopname;
     }
 
-    /**
-     * @param shopname the shopname to set
-     */
     public void setShopname(String shopname) {
         this.shopname = shopname;
     }
 
-
-    /**
-     * @return the firsttime
-     */
     public String getFirsttime() {
         return firsttime;
     }
 
-    /**
-     * @param firsttime the firsttime to set
-     */
     public void setFirsttime(String firsttime) {
         this.firsttime = firsttime;
     }
 
-
-    /**
-     * @return the systime
-     */
     public String getSystime() {
         return systime;
     }
 
-    /**
-     * @param systime the systime to set
-     */
     public void setSystime(String systime) {
         this.systime = systime;
     }
 
-    /**
-     * @return the recaddress
-     */
-    public String getRecaddress() {
-        return recaddress;
-    }
-
-    /**
-     * @param recaddress the recaddress to set
-     */
-    public void setRecaddress(String recaddress) {
-        this.recaddress = recaddress;
-    }
-
-    /**
-     * @return the shopaddress
-     */
-    public String getShopaddress() {
-        return shopaddress;
-    }
-
-    /**
-     * @param shopaddress the shopaddress to set
-     */
-    public void setShopaddress(String shopaddress) {
-        this.shopaddress = shopaddress;
-    }
-
-    /**
-     * @return the longitude
-     */
-    public double getLongitude() {
-        return longitude;
-    }
-
-    /**
-     * @param longitude the longitude to set
-     */
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
-
-    /**
-     * @return the latitude
-     */
-    public double getLatitude() {
-        return latitude;
-    }
-
-    /**
-     * @param latitude the latitude to set
-     */
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
-
-    /**
-     * @return the sort
-     */
-    public int getSort() {
-        return sort;
-    }
-
-    /**
-     * @param sort the sort to set
-     */
-    public void setSort(int sort) {
-        this.sort = sort;
-    }
-
-    /**
-     * @return the status
-     */
-    public int getStatus() {
-        return status;
-    }
-
-    /**
-     * @param status the status to set
-     */
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    /**
-     * @return the thing
-     */
     public String getThing() {
         return thing;
     }
 
-    /**
-     * @param thing the thing to set
-     */
     public void setThing(String thing) {
         this.thing = thing;
     }
 
-    /**
-     * @return the remark
-     */
     public String getRemark() {
         return remark;
     }
 
-    /**
-     * @param remark the remark to set
-     */
     public void setRemark(String remark) {
         this.remark = remark;
     }
 
-    /**
-     * @return the shopphonenum
-     */
     public String getShopphonenum() {
         return shopphonenum;
     }
 
-    /**
-     * @param shopphonenum the shopphonenum to set
-     */
     public void setShopphonenum(String shopphonenum) {
         this.shopphonenum = shopphonenum;
     }
 
-    /**
-     * @return the sendtime
-     */
     public String getSendtime() {
         return sendtime;
     }
 
-
-    /**
-     * @return the reward
-     */
-    public String getReward() {
-        return reward;
-    }
-
-    /**
-     * @param reward the reward to set
-     */
-    public void setReward(String reward) {
-        this.reward = reward;
-    }
-
-    /**
-     * @param sendtime the sendtime to set
-     */
     public void setSendtime(String sendtime) {
         this.sendtime = sendtime;
     }
 
-    /**
-     * @return the recphonenum
-     */
+    public String getReward() {
+        return reward;
+    }
+
+    public void setReward(String reward) {
+        this.reward = reward;
+    }
+
     public String getRecphonenum() {
         return recphonenum;
     }
 
-    /**
-     * @param recphonenum the recphonenum to set
-     */
     public void setRecphonenum(String recphonenum) {
         this.recphonenum = recphonenum;
     }
 
-    /**
-     * @return the recname
-     */
     public String getRecname() {
         return recname;
     }
 
-    /**
-     * @param recname the recname to set
-     */
     public void setRecname(String recname) {
         this.recname = recname;
     }
 
-    /**
-     * @return the reclongitude
-     */
+    public String getRecaddress() {
+        return recaddress;
+    }
+
+    public void setRecaddress(String recaddress) {
+        this.recaddress = recaddress;
+    }
+
+    public String getShopaddress() {
+        return shopaddress;
+    }
+
+    public void setShopaddress(String shopaddress) {
+        this.shopaddress = shopaddress;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
     public double getReclongitude() {
         return reclongitude;
     }
 
-    /**
-     * @param reclongitude the reclongitude to set
-     */
     public void setReclongitude(double reclongitude) {
         this.reclongitude = reclongitude;
     }
 
-    /**
-     * @return the reclatitude
-     */
     public double getReclatitude() {
         return reclatitude;
     }
 
-    /**
-     * @param reclatitude the reclatitude to set
-     */
     public void setReclatitude(double reclatitude) {
         this.reclatitude = reclatitude;
     }
 
+    public int getSort() {
+        return sort;
+    }
 
+    public void setSort(int sort) {
+        this.sort = sort;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 }

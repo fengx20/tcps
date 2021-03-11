@@ -5,92 +5,94 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.gxuwz.fx.mapper.ShopOrderMapper">
-
     <!--App端-->
     <insert id="add" parameterType="ShopOrder">
-            insert into shop_order ( keyid,shopname,firsttime,systime,shopphonenum,thing,remark,sendtime,reward,recphonenum,recname,recaddress,shopaddress,reclongitude,reclatitude,longitude,latitude,sort,status ) values (#{keyid},#{shopname},#{firsttime},#{systime},#{shopphonenum},#{thing},#{remark},#{sendtime},#{reward},#{recphonenum},#{recname},#{recaddress},#{shopaddress},#{reclongitude},#{reclatitude},#{longitude},#{latitude},0,0)
-        </insert>
+        insert into shop_order (
+        keyid,shopname,firsttime,systime,shopphonenum,thing,remark,sendtime,reward,recphonenum,recname,recaddress,shopaddress,reclongitude,reclatitude,longitude,latitude,sort,status
+        ) values
+        (#{keyid},#{shopname},#{firsttime},#{systime},#{shopphonenum},#{thing},#{remark},#{sendtime},#{reward},#{recphonenum},#{recname},#{recaddress},#{shopaddress},#{reclongitude},#{reclatitude},#{longitude},#{latitude},0,0)
+    </insert>
 
     <update id="updateStatusReByKeyId" parameterType="String">
-             update shop_order set status = 1 where keyid = #{0}
-        </update>
+        update shop_order set status = 1 where keyid = #{0}
+    </update>
 
     <update id="updateStatusGiByKeyId" parameterType="String">
-             update shop_order set status = 0 where keyid = #{keyid}
-        </update>
+        update shop_order set status = 0 where keyid = #{keyid}
+    </update>
 
     <update id="updateSortByKeyId" parameterType="String">
-             update shop_order set sort = 1 where keyid = #{keyid}
-        </update>
+        update shop_order set sort = 1 where keyid = #{keyid}
+    </update>
 
     <update id="updateStatusInTwice" parameterType="String">
-             update shop_order set status = 2 where keyid = #{keyid}
-        </update>
+        update shop_order set status = 2 where keyid = #{keyid}
+    </update>
 
     <update id="updateStatusFi" parameterType="String">
-             update shop_order set status = 3 where keyid = #{keyid}
-        </update>
+        update shop_order set status = 3 where keyid = #{keyid}
+    </update>
 
     <select id="isnorec" parameterType="String" resultType="boolean">
-             select ifnull((select id from shop_order where keyid = #{keyid} and status = 0),false)
-        </select>
+        select ifnull((select id from shop_order where keyid = #{keyid} and status = 0),false)
+    </select>
 
     <select id="findShopOrderAllByKeyId" parameterType="String" resultType="ShopOrder">
-             select keyid,shopname,firsttime,shopphonenum,thing,remark,sendtime,systime,recphonenum,recname,recaddress,shopaddress,reward,longitude,latitude,reclongitude,reclatitude from shop_order where keyid = #{keyid}
-        </select>
+        select
+        keyid,shopname,firsttime,shopphonenum,thing,remark,sendtime,systime,recphonenum,recname,recaddress,shopaddress,reward,longitude,latitude,reclongitude,reclatitude
+        from shop_order where keyid = #{keyid}
+    </select>
 
     <select id="findStatusTwiceByKeyId" parameterType="String" resultType="boolean">
-             select ifnull((select id from shop_order where keyid = #{keyid} and status = 2),false)
-        </select>
+        select ifnull((select id from shop_order where keyid = #{keyid} and status = 2),false)
+    </select>
 
     <select id="findStatusReByKeyId" parameterType="String" resultType="boolean">
-             select ifnull((select id from shop_order where keyid = #{keyid} and status = 1),false)
-        </select>
+        select ifnull((select id from shop_order where keyid = #{keyid} and status = 1),false)
+    </select>
 
     <select id="findSortByKeyId" parameterType="String" resultType="boolean">
-             select ifnull((select id from shop_order where keyid = #{keyid} and sort = 1),false)
-        </select>
-
+        select ifnull((select id from shop_order where keyid = #{keyid} and sort = 1),false)
+    </select>
 
     <!-- Web端 -->
     <select id="getallshoptoday" resultType="int">
-             select count(*) from shop_order where to_days(systime) = to_days(now())
-        </select>
+        select count(*) from shop_order where to_days(systime) = to_days(now())
+    </select>
 
     <select id="getallshopfitoday" resultType="int">
-             select count(*) from shop_order where to_days(systime) = to_days(now()) and status = 3
-        </select>
+        select count(*) from shop_order where to_days(systime) = to_days(now()) and status = 3
+    </select>
 
     <select id="getallshopzptoday" resultType="int">
-             select count(*) from shop_order where to_days(systime) = to_days(now()) and sort = 1
-        </select>
+        select count(*) from shop_order where to_days(systime) = to_days(now()) and sort = 1
+    </select>
 
     <select id="getallshopmonth" resultType="int">
-             select count(*) from shop_order where DATE_FORMAT(systime,'%Y%m') = DATE_FORMAT(CURDATE(),'%Y%m')
-        </select>
+        select count(*) from shop_order where DATE_FORMAT(systime,'%Y%m') = DATE_FORMAT(CURDATE(),'%Y%m')
+    </select>
 
     <select id="getallshopfi" resultType="int">
-             select count(*) from shop_order where status = 3
-        </select>
+        select count(*) from shop_order where status = 3
+    </select>
 
     <select id="getallshopnum" resultType="int">
-             select count(*) from shop_order
-        </select>
+        select count(*) from shop_order
+    </select>
 
     <select id="web_getallywcshoporder" resultType="ShopOrder">
-            select keyid,shopname,shopphonenum,recname,recphonenum,systime,reward,status from shop_order where status = 3
-        </select>
+        select keyid,shopname,shopphonenum,recname,recphonenum,systime,reward,status from shop_order where status = 3
+    </select>
 
     <select id="web_getallwwcshoporder" resultType="ShopOrder">
-            select keyid,shopname,shopphonenum,recname,recphonenum,systime,reward,status from shop_order where status = 0
-        </select>
+        select keyid,shopname,shopphonenum,recname,recphonenum,systime,reward,status from shop_order where status = 0
+    </select>
 
     <select id="web_getoneshoporder" parameterType="String" resultType="ShopOrder">
-            select keyid,shopname,shopphonenum,recname,recphonenum,systime,reward,status from shop_order where keyid = #{0}
-        </select>
+        select keyid,shopname,shopphonenum,recname,recphonenum,systime,reward,status from shop_order where keyid = #{0}
+    </select>
 
     <delete id="web_deleteorder" parameterType="String">
-            delete from shop_order where keyid = #{0}
-        </delete>
-
+        delete from shop_order where keyid = #{0}
+    </delete>
 </mapper>

@@ -1,25 +1,25 @@
 package com.gxuwz.fx.service.impl;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.google.gson.Gson;
 import com.gxuwz.fx.mapper.WorkerMapper;
 import com.gxuwz.fx.pojo.Worker;
 import com.gxuwz.fx.service.WorkerService;
 
+/**
+ * 配送人员业务实现层
+ * @author fengx
+ */
 @Service
 public class WorkerServiceImpl implements WorkerService {
 
     @Autowired
-    WorkerMapper wm;
-
+    private WorkerMapper wm;
 
     /**
-     * 1判断工作者手机号是否已存在
-     *
+     * 判断工作者手机号是否已存在
      * @param phonenum
      * @return
      */
@@ -29,8 +29,7 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     /**
-     * 2 工作者注册
-     *
+     * 工作者注册
      * @param worker
      * @return
      */
@@ -40,8 +39,7 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     /**
-     * 3工作者登录验证
-     *
+     * 工作者登录验证
      * @param phonenum
      * @param password
      * @return
@@ -52,8 +50,7 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     /**
-     * 4工作者是否已认证
-     *
+     * 工作者是否已认证
      * @param Phonenum
      * @return
      */
@@ -63,8 +60,7 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     /**
-     * 5判断是否存在此身份证号
-     *
+     * 判断是否存在此身份证号
      * @param phonenum
      * @return
      */
@@ -73,8 +69,7 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     /**
-     * 6修改密码
-     *
+     * 修改密码
      * @param phonenum
      * @return
      */
@@ -83,8 +78,7 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     /**
-     * 7 工作者是否正在审核
-     *
+     * 工作者是否正在审核
      * @param Phonenum
      * @return
      */
@@ -94,7 +88,9 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     /**
-     * 8 工作者上传信息认证
+     * 工作者上传信息认证
+     * @param woker
+     * @return
      */
     @Override
     public int certificationupload(Worker woker) {
@@ -102,8 +98,7 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     /**
-     * 9获取工作者姓名
-     *
+     * 获取工作者姓名
      * @param phonenum
      * @return
      */
@@ -113,8 +108,7 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     /**
-     * 10修改资料
-     *
+     * 修改资料
      * @param
      * @return
      */
@@ -123,11 +117,9 @@ public class WorkerServiceImpl implements WorkerService {
         return wm.updatezl(worker);
     }
 
-    //Web端
-
+    /*PC端*/
     /**
-     * 1获取所有已认证工作者
-     *
+     * 获取所有已认证工作者
      * @return
      */
     @Override
@@ -139,8 +131,7 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     /**
-     * 2获取所有未认证工作者
-     *
+     * 获取所有未认证工作者
      * @return
      */
     @Override
@@ -152,8 +143,7 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     /**
-     * 3获取所有已停用工作者
-     *
+     * 获取所有已停用工作者
      * @return
      */
     @Override
@@ -165,8 +155,7 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     /**
-     * 3获取所有正在审核工作者
-     *
+     * 获取所有正在审核工作者
      * @return
      */
     public String web_getallshworker() {
@@ -177,8 +166,7 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     /**
-     * 4停用工作者
-     *
+     * 停用工作者
      * @return
      */
     @Override
@@ -187,8 +175,7 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     /**
-     * 5获取一名工作者
-     *
+     * 获取一名工作者
      * @return
      */
     @Override
@@ -201,7 +188,6 @@ public class WorkerServiceImpl implements WorkerService {
 
     /**
      * 获取一名工作者信息（监控中心）
-     *
      * @return
      */
     public Worker web_getoneworkerjk(String phonenum) {
@@ -209,8 +195,7 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     /**
-     * 6修改一名工作者信息
-     *
+     * 修改一名工作者信息
      * @return
      */
     @Override
@@ -219,13 +204,11 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     /**
-     * 7审核通过
-     *
+     * 审核通过
      * @return
      */
     public int web_shtgworker(String phonenum) {
         return wm.web_shtgworker(phonenum);
     }
-
 
 }
