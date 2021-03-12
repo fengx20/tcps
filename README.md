@@ -1,7 +1,7 @@
 ## 同城配送服务平台后台
 > 注：本项目以技术学习为主，业务做的较简单
 ### 技术栈
-Spring Boot+MyBatis+WebSocket+Redis
+Layui+Spring Boot+MyBatis+WebSocket+Redis+MySQL
 ### 业务流程图
 ![](https://cdn.jsdelivr.net/gh/fengx20/cdn/img/tcps/yewuliuchengtu.png)
 ### 数据流图
