@@ -46,21 +46,19 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     /**
      * 更新订单状态：订单已被接
      * @param keyid
-     * @return
      */
     @Override
-    public int updateStatusRe(String keyid) {
-        return som.updateStatusReByKeyId(keyid);
+    public void updateStatusRe(String keyid) {
+        som.updateStatusReByKeyId(keyid);
     }
 
     /**
      * 更新订单状态：订单被放弃
      * @param keyid
-     * @return
      */
     @Override
-    public int updateStatusGi(String keyid) {
-        return som.updateStatusGiByKeyId(keyid);
+    public void updateStatusGi(String keyid) {
+        som.updateStatusGiByKeyId(keyid);
     }
 
     /**
@@ -74,15 +72,6 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     }
 
     /**
-     * 判断是否为第二次单
-     * @param keyid
-     * @return
-     */
-    public boolean findStatusTwiceByKeyId(String keyid) {
-        return som.findStatusTwiceByKeyId(keyid);
-    }
-
-    /**
      * 判断订单是否已被接
      * @param keyid
      * @return
@@ -92,21 +81,11 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     }
 
     /**
-     * 更新订单状态：第二次无人抢或被放弃
-     * @param keyid
-     * @return
-     */
-    public int updateStatusInTwice(String keyid) {
-        return som.updateStatusInTwice(keyid);
-    }
-
-    /**
      * 更新订单种类
      * @param keyid
-     * @return
      */
-    public int updateSortByKeyId(String keyid) {
-        return som.updateSortByKeyId(keyid);
+    public void updateSortByKeyId(String keyid) {
+        som.updateSortByKeyId(keyid);
     }
 
     /**
@@ -159,8 +138,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
         json.put("nummonthstr", nummonthstr);
         json.put("finumallstr", finumallstr);
         json.put("numallstr", numallstr);
-        String jsonnum = json.toString();
-        return jsonnum;
+        return json.toString();
     }
 
     /**
@@ -170,8 +148,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     public String web_getallywcshoporder() {
         List<ShopOrder> list = som.web_getallywcshoporder();
         Gson gson = new Gson();
-        String json = gson.toJson(list);
-        return json;
+        return gson.toJson(list);
     }
 
     /**
@@ -181,8 +158,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     public String web_getallwwcshoporder() {
         List<ShopOrder> list = som.web_getallwwcshoporder();
         Gson gson = new Gson();
-        String json = gson.toJson(list);
-        return json;
+        return gson.toJson(list);
     }
 
     /**
@@ -192,8 +168,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     public String web_getoneshoporder(String phonenum) {
         List<ShopOrder> list = som.web_getoneshoporder(phonenum);
         Gson gson = new Gson();
-        String json = gson.toJson(list);
-        return json;
+        return gson.toJson(list);
     }
 
     /**

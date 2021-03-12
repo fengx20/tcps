@@ -48,9 +48,9 @@ public class WorkerController {
     @PostMapping("/regist/{yzm}")
     public String regist(@RequestBody Worker worker, @PathVariable("yzm") String yzm) {
         // 手机号存在
-        if (ws.existph(worker.getPhonenum()) == false) {
+        if (!ws.existph(worker.getPhonenum())) {
             // 验证手机验证码
-            if (ys.verification(worker.getPhonenum(), yzm) == true) {
+            if (ys.verification(worker.getPhonenum(), yzm)) {
                 // 注册
                 ws.regist(worker);
                 return "success";
@@ -71,8 +71,8 @@ public class WorkerController {
     @PostMapping("/login")
     public String login(@RequestBody Worker worker) {
         // 手机号存在
-        if (ws.existph(worker.getPhonenum()) == true) {
-            if (ws.login(worker.getPhonenum(), worker.getPassword()) == true) {   //手机号、密码验证
+        if (ws.existph(worker.getPhonenum())) {
+            if (ws.login(worker.getPhonenum(), worker.getPassword())) {   //手机号、密码验证
                 return "success";
             } else {
                 return "failed";
@@ -91,9 +91,9 @@ public class WorkerController {
     @PostMapping("/forgetone/{yzm}")
     public String forgetone(@RequestBody Worker worker, @PathVariable("yzm") String yzm) {
         // 手机号存在
-        if (ws.existph(worker.getPhonenum()) == true) {
+        if (ws.existph(worker.getPhonenum())) {
             // 验证手机验证码
-            if (ys.verification(worker.getPhonenum(), yzm) == true) {
+            if (ys.verification(worker.getPhonenum(), yzm)) {
                 return "yzmtrue";
             } else {
                 return "yzmerror";
@@ -107,14 +107,13 @@ public class WorkerController {
      * 忘记密码-2(身份证号)
      * @param worker
      * @return
-     * @throws Exception
      */
     @PostMapping("/forgettwo")
-    public String forgettwo(@RequestBody Worker worker) throws Exception {
+    public String forgettwo(@RequestBody Worker worker) {
         // 是否认证
-        if (ws.certification(worker.getPhonenum()) == true) {
+        if (ws.certification(worker.getPhonenum())) {
             // 身份证号是否存在
-            if (ws.existIdCardNum(worker.getPhonenum(), worker.getIdcardnum()) == true) {
+            if (ws.existIdCardNum(worker.getPhonenum(), worker.getIdcardnum())) {
                 return "idtrue";
             } else {
                 return "iderror";
@@ -128,12 +127,11 @@ public class WorkerController {
      * 跳过此步-忘记密码-2(身份证号)
      * @param worker
      * @return
-     * @throws Exception
      */
     @PostMapping("/jumpid")
-    public String jumpid(@RequestBody Worker worker) throws Exception {
+    public String jumpid(@RequestBody Worker worker) {
         // 手机号是否已认证
-        if (ws.certification(worker.getPhonenum()) == true) {
+        if (ws.certification(worker.getPhonenum())) {
             return "idexist";
         } else {
             return "idnoexist";
@@ -144,10 +142,9 @@ public class WorkerController {
      * 忘记密码-3(修改密码)
      * @param worker
      * @return
-     * @throws Exception
      */
     @PostMapping("/forgetlast")
-    public String forgetlast(@RequestBody Worker worker) throws Exception {
+    public String forgetlast(@RequestBody Worker worker) {
         // 修改密码
         if (ws.updatepsd(worker.getPhonenum(), worker.getPassword()) == 1) {
             return "success";
@@ -160,16 +157,15 @@ public class WorkerController {
      * 工作者是否已认证
      * @param
      * @return
-     * @throws Exception
      */
     @PostMapping("/iscertification/{phonenum}")
-    public String iscertification(@PathVariable("phonenum") String phonenum) throws Exception {
+    public String iscertification(@PathVariable("phonenum") String phonenum) {
         // 手机号是否已认证
-        if (ws.certification(phonenum) == true) {
+        if (ws.certification(phonenum)) {
             return "yes";
         } else {
             // 是否在审核中
-            if (ws.woreview(phonenum) == true) {
+            if (ws.woreview(phonenum)) {
                 return "review";
             } else {
                 return "no";
@@ -181,10 +177,9 @@ public class WorkerController {
      * 工作者认证
      * @param worker
      * @return
-     * @throws Exception
      */
     @PostMapping("/certification")
-    public String certification(@RequestBody Worker worker) throws Exception {
+    public String certification(@RequestBody Worker worker) {
         // 上传认证信息
         if (ws.certificationupload(worker) == 1) {
             return "success";
@@ -197,10 +192,9 @@ public class WorkerController {
      * 工作者修改资料
      * @param worker
      * @return
-     * @throws Exception
      */
     @PostMapping("/xgzl")
-    public String xgzl(@RequestBody Worker worker) throws Exception {
+    public String xgzl(@RequestBody Worker worker) {
         if (ws.updatezl(worker) == 1) {
             return "success";
         } else {
@@ -213,14 +207,13 @@ public class WorkerController {
      *
      * @param
      * @return
-     * @throws Exception
      */
     @PostMapping("/work")
-    public String work(@RequestBody WorkerAddress wa) throws Exception {
+    public String work(@RequestBody WorkerAddress wa) {
         // 此工作者是否已认证
-        if (ws.certification(wa.getPhonenum()) == true) {
+        if (ws.certification(wa.getPhonenum())) {
             // 地理位置是否存在
-            if (was.existwa(wa.getPhonenum()) == true) {
+            if (was.existwa(wa.getPhonenum())) {
                 // 更改工作者状态为工作状态
                 if (was.work(wa.getPhonenum()) == 1) {
                     // 开工成功
@@ -246,7 +239,7 @@ public class WorkerController {
             }
         } else {
             // 是否在审核中
-            if (ws.woreview(wa.getPhonenum()) == true) {
+            if (ws.woreview(wa.getPhonenum())) {
                 return "review";
             } else {
                 // 未认证
@@ -259,10 +252,9 @@ public class WorkerController {
      * 工作者进入工作状态上传地理位置
      * @param
      * @return
-     * @throws Exception
      */
     @PostMapping("/uploadadd")
-    public String uploadadd(@RequestBody WorkerAddress wa) throws Exception {
+    public String uploadadd(@RequestBody WorkerAddress wa) {
         // 更新工作者地理位置
         if (was.updateadd(wa) == 1) {
             // 上传地理位置成功
@@ -282,7 +274,7 @@ public class WorkerController {
     @PostMapping("/stop/{phonenum}")
     public String stop(@PathVariable("phonenum") String phonenum) throws Exception {
         // 此工作者是否已认证
-        if (ws.certification(phonenum) == true) {
+        if (ws.certification(phonenum)) {
             // 休息
             if (was.stop(phonenum) == 1) {
                 return "success";
@@ -291,7 +283,7 @@ public class WorkerController {
             }
         } else {
             // 是否在审核中
-            if (ws.woreview(phonenum) == true) {
+            if (ws.woreview(phonenum)) {
                 return "review";
             } else {
                 // 未认证
@@ -308,7 +300,7 @@ public class WorkerController {
      */
     @PostMapping("/iswork/{phonenum}")
     public String iswork(@PathVariable("phonenum") String phonenum) {
-        if (was.iswork(phonenum) == true) {
+        if (was.iswork(phonenum)) {
             return "true";
         } else {
             return "false";
@@ -319,23 +311,20 @@ public class WorkerController {
      * 获取工作者姓名
      * @param phonenum
      * @return
-     * @throws Exception
      */
     @PostMapping("/getname/{phonenum}")
-    public String getname(@PathVariable("phonenum") String phonenum) throws Exception {
-        String name = ws.getworkername(phonenum);
-        return name;
+    public String getname(@PathVariable("phonenum") String phonenum) {
+        return ws.getworkername(phonenum);
     }
 
     /**
      * 工作统计-日单量(今日)
      * @param phonenum
      * @return
-     * @throws Exception
      */
     @PostMapping("/gztj/{phonenum}")
-    public String gztj(@PathVariable("phonenum") String phonenum) throws Exception {
-        if (ws.certification(phonenum) == true) {
+    public String gztj(@PathVariable("phonenum") String phonenum) {
+        if (ws.certification(phonenum)) {
             int qqd = wos.gettoday(phonenum);
             int qqd_fi = wos.gettoday_qq_fi(phonenum);
             int zpd = wos.gettoday_zp(phonenum);
@@ -345,8 +334,7 @@ public class WorkerController {
             jsonobj.put("qqd_fi", qqd_fi);
             jsonobj.put("zpd", zpd);
             jsonobj.put("zpd_fi", zpd_fi);
-            String qunstr = jsonobj.toString();
-            return qunstr;
+            return jsonobj.toString();
         } else {
             return "isnocert";
         }
@@ -356,11 +344,10 @@ public class WorkerController {
      * 工作统计-日单量(一周)
      * @param phonenum
      * @return
-     * @throws Exception
      */
     @PostMapping("/gztj_week/{phonenum}")
-    public String gztj_week(@PathVariable("phonenum") String phonenum) throws Exception {
-        if (ws.certification(phonenum) == true) {
+    public String gztj_week(@PathVariable("phonenum") String phonenum) {
+        if (ws.certification(phonenum)) {
             int qqd = wos.getweek(phonenum);
             int qqd_fi = wos.getweek_fi(phonenum);
             int zpd = wos.getweek_zp(phonenum);
@@ -370,8 +357,7 @@ public class WorkerController {
             jsonobj.put("qqd_fi", qqd_fi);
             jsonobj.put("zpd", zpd);
             jsonobj.put("zpd_fi", zpd_fi);
-            String qunstr = jsonobj.toString();
-            return qunstr;
+            return jsonobj.toString();
         } else {
             return "isnocert";
         }
@@ -381,11 +367,10 @@ public class WorkerController {
      * 工作统计-日单量(当月)
      * @param phonenum
      * @return
-     * @throws Exception
      */
     @PostMapping("/gztj_month/{phonenum}")
-    public String gztj_month(@PathVariable("phonenum") String phonenum) throws Exception {
-        if (ws.certification(phonenum) == true) {
+    public String gztj_month(@PathVariable("phonenum") String phonenum) {
+        if (ws.certification(phonenum)) {
             int qqd = wos.getmonth(phonenum);
             int qqd_fi = wos.getmonth_fi(phonenum);
             int zpd = wos.getmonth_zp(phonenum);
@@ -395,8 +380,7 @@ public class WorkerController {
             jsonobj.put("qqd_fi", qqd_fi);
             jsonobj.put("zpd", zpd);
             jsonobj.put("zpd_fi", zpd_fi);
-            String qunstr = jsonobj.toString();
-            return qunstr;
+            return jsonobj.toString();
         } else {
             return "isnocert";
         }
@@ -410,13 +394,12 @@ public class WorkerController {
      */
     @PostMapping("/gzsr_today/{phonenum}")
     public String gzsr(@PathVariable("phonenum") String phonenum) {
-        if (ws.certification(phonenum) == true) {
+        if (ws.certification(phonenum)) {
             int shouru = wos.shouru_today(phonenum);
             String shourustr = String.valueOf(shouru);
             JSONObject jsonobj = new JSONObject();
             jsonobj.put("shouru", shourustr);
-            String sr = jsonobj.toString();
-            return sr;
+            return jsonobj.toString();
         } else {
             return "isnocert";
         }
@@ -426,17 +409,15 @@ public class WorkerController {
      * 工作统计-收入(本周)
      * @param phonenum
      * @return
-     * @throws Exception
      */
     @PostMapping("/gzsr_week/{phonenum}")
-    public String gzsr_week(@PathVariable("phonenum") String phonenum) throws Exception {
-        if (ws.certification(phonenum) == true) {
+    public String gzsr_week(@PathVariable("phonenum") String phonenum) {
+        if (ws.certification(phonenum)) {
             int shouru = wos.shouru_week(phonenum);
             String shourustr = String.valueOf(shouru);
             JSONObject jsonobj = new JSONObject();
             jsonobj.put("shouru", shourustr);
-            String sr = jsonobj.toString();
-            return sr;
+            return jsonobj.toString();
         } else {
             return "isnocert";
         }
@@ -446,17 +427,15 @@ public class WorkerController {
      * 工作统计-收入(当月)
      * @param phonenum
      * @return
-     * @throws Exception
      */
     @PostMapping("/gzsr_month/{phonenum}")
-    public String gzsr_month(@PathVariable("phonenum") String phonenum) throws Exception {
-        if (ws.certification(phonenum) == true) {
+    public String gzsr_month(@PathVariable("phonenum") String phonenum) {
+        if (ws.certification(phonenum)) {
             int shouru = wos.shouru_month(phonenum);
             String shourustr = String.valueOf(shouru);
             JSONObject jsonobj = new JSONObject();
             jsonobj.put("shouru", shourustr);
-            String sr = jsonobj.toString();
-            return sr;
+            return jsonobj.toString();
         } else {
             return "isnocert";
         }
@@ -466,10 +445,9 @@ public class WorkerController {
      * 获取等级数据
      * @param phonenum
      * @return
-     * @throws Exception
      */
     @PostMapping("/getwo_grade/{phonenum}")
-    public String getwo_grade(@PathVariable("phonenum") String phonenum) throws Exception {
+    public String getwo_grade(@PathVariable("phonenum") String phonenum) {
         return wgs.getWorkerGrade(phonenum);
     }
 
@@ -477,10 +455,9 @@ public class WorkerController {
     /**
      * 获取所有已认证工作者
      * @return
-     * @throws Exception
      */
     @PostMapping("/web_getallcertworker")
-    public String web_getallcertworker() throws Exception {
+    public String web_getallcertworker() {
         String jsonallworker = ws.web_getallcertworker();
         JSONArray ja = JSONArray.fromObject(jsonallworker);
         if (ja.size() > 0) {
@@ -493,10 +470,9 @@ public class WorkerController {
     /**
      * 获取所有未认证工作者
      * @return
-     * @throws Exception
      */
     @PostMapping("/web_getallnocertworker")
-    public String web_getallnocertworker() throws Exception {
+    public String web_getallnocertworker() {
         String jsonallworker = ws.web_getallnocertworker();
         JSONArray ja = JSONArray.fromObject(jsonallworker);
         if (ja.size() > 0) {
@@ -509,10 +485,9 @@ public class WorkerController {
     /**
      * 获取所有审核中工作者
      * @return
-     * @throws Exception
      */
     @PostMapping("/web_getallstopworker")
-    public String web_getallworker() throws Exception {
+    public String web_getallworker() {
         String jsonallworker = ws.web_getallstopworker();
         JSONArray ja = JSONArray.fromObject(jsonallworker);
         if (ja.size() > 0) {
@@ -525,10 +500,9 @@ public class WorkerController {
     /**
      * 获取所有已认证工作者
      * @return
-     * @throws Exception
      */
     @PostMapping("/web_getallshworker")
-    public String web_getallshworker() throws Exception {
+    public String web_getallshworker() {
         String jsonallworker = ws.web_getallshworker();
         JSONArray ja = JSONArray.fromObject(jsonallworker);
         if (ja.size() > 0) {
@@ -541,10 +515,9 @@ public class WorkerController {
     /**
      * 停用工作者
      * @return
-     * @throws Exception
      */
     @PostMapping("/web_stopworker/{phonenum}")
-    public String web_stopworker(@PathVariable("phonenum") String phonenum) throws Exception {
+    public String web_stopworker(@PathVariable("phonenum") String phonenum) {
         if (ws.web_stopworker(phonenum) == 1) {
             return "success";
         } else {
@@ -555,21 +528,18 @@ public class WorkerController {
     /**
      * 查询一位工作者信息
      * @return
-     * @throws Exception
      */
     @PostMapping("/web_getoneworker/{phonenum}")
-    public String web_getoneworker(@PathVariable("phonenum") String phonenum) throws Exception {
-        String jsononeworker = ws.web_getoneworker(phonenum);
-        return jsononeworker;
+    public String web_getoneworker(@PathVariable("phonenum") String phonenum) {
+        return ws.web_getoneworker(phonenum);
     }
 
     /**
      * 修改一位工作者信息
      * @return
-     * @throws Exception
      */
     @PostMapping("/web_editoneworker")
-    public String web_editoneworker(@RequestBody Worker wo) throws Exception {
+    public String web_editoneworker(@RequestBody Worker wo) {
         if (ws.web_editoneworker(wo) == 1) {
             return "success";
         } else {
@@ -580,10 +550,9 @@ public class WorkerController {
     /**
      * 审核通过
      * @return
-     * @throws Exception
      */
     @PostMapping("/web_shtgworker/{phonenum}")
-    public String web_shtgworker(@PathVariable("phonenum") String phonenum) throws Exception {
+    public String web_shtgworker(@PathVariable("phonenum") String phonenum) {
         if (ws.web_shtgworker(phonenum) == 1) {
             wgs.addwg(phonenum);
             return "success";
@@ -595,13 +564,11 @@ public class WorkerController {
     /**
      * 查询一位工作者
      * @return
-     * @throws Exception
      */
     @PostMapping("/web_cxoneworker/{phonenum}")
-    public String web_cxoneworker(@PathVariable("phonenum") String phonenum) throws Exception {
-        if (ws.existph(phonenum) == true) {
-            String jsononeworker = ws.web_getoneworker(phonenum);
-            return jsononeworker;
+    public String web_cxoneworker(@PathVariable("phonenum") String phonenum) {
+        if (ws.existph(phonenum)) {
+            return ws.web_getoneworker(phonenum);
         } else {
             return "nothisworker";
         }
@@ -610,24 +577,22 @@ public class WorkerController {
     /**
      * 获取所有在线工作者坐标
      * @return
-     * @throws Exception
      */
     @GetMapping("/get_allwa")
-    public String get_allwa() throws Exception {
+    public String get_allwa() {
         @SuppressWarnings("rawtypes")
-        List<Map> list1 = new ArrayList<Map>();
+        List<Map> list1 = new ArrayList<>();
         List<WorkerAddress> list = was.get_allwa();
-        for (int i = 0; i < list.size(); i++) {
-            Worker wo = ws.web_getoneworkerjk(list.get(i).getPhonenum());
+        for (WorkerAddress workerAddress : list) {
+            Worker wo = ws.web_getoneworkerjk(workerAddress.getPhonenum());
             @SuppressWarnings("unchecked")
             Map<String, Object> a = (Map<String, Object>) JSON.toJSON(wo);  //对象转为map
-            a.put("longitude", list.get(i).getLongitude());
-            a.put("latitude", list.get(i).getLatitude());
+            a.put("longitude", workerAddress.getLongitude());
+            a.put("latitude", workerAddress.getLatitude());
             list1.add(a);
         }
         Gson gson = new Gson();
-        String json = gson.toJson(list1);
-        return json;
+        return gson.toJson(list1);
     }
 
 }

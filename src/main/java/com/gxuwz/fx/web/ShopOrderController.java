@@ -1,25 +1,21 @@
 package com.gxuwz.fx.web;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.Set;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 import com.gxuwz.fx.pojo.ShopOrder;
 import com.gxuwz.fx.pojo.WorkerAddress;
 import com.gxuwz.fx.pojo.WorkerOrder;
-import com.gxuwz.fx.service.ShopOrderService;
-import com.gxuwz.fx.service.WorkerAddressService;
-import com.gxuwz.fx.service.WorkerGradeService;
-import com.gxuwz.fx.service.WorkerOrderService;
-import com.gxuwz.fx.service.WorkerService;
+import com.gxuwz.fx.service.*;
 import com.gxuwz.fx.utils.RedisUtil;
 import com.gxuwz.fx.utils.WebSocketUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import redis.clients.jedis.Jedis;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Set;
 
 /**
  * 商家订单业务控制层
@@ -51,13 +47,12 @@ public class ShopOrderController {
     @PostMapping("/shopcxorder/{keyid}")
     public String shopcxOrder(@PathVariable("keyid") String keyid){
         // 判断此订单是否已被接单
-        if (sos.isnorec(keyid) == true) {
+        if (sos.isnorec(keyid)) {
             return "isno";
         } else {
             // 查询此工作者订单并返回
             JSONObject obj = JSONObject.fromObject(wos.shfindWorkerOrderByKey(keyid));
-            String jsonorder = obj.toString();
-            return jsonorder;
+            return obj.toString();
         }
     }
 
@@ -69,7 +64,7 @@ public class ShopOrderController {
     @PostMapping("/findOrderById/{keyid}")
     public String findOrderById(@PathVariable("keyid") String keyid) {
         // 此订单抢单还没有结束（判断订单是否还存在）
-        if (ru.iskey(keyid) == true) {
+        if (ru.iskey(keyid)) {
             new JSONObject();
             // 获得缓存中该订单的数据
             JSONObject obj = JSONObject.fromObject(ru.getjson(keyid));
@@ -96,8 +91,7 @@ public class ShopOrderController {
         // 查询此订单数据
         JSONObject json = JSONObject.fromObject(sos.findShopOrderAllByKeyId(keyid));
         // json对象转换为json字符串
-        String jsonorder = json.toString();
-        return jsonorder;
+        return json.toString();
     }
 
     /**
@@ -123,7 +117,7 @@ public class ShopOrderController {
     @PostMapping("/startorder/{phonenum}/{keyid}")
     public String startorder(@PathVariable("phonenum") String phonenum, @PathVariable("keyid") String keyid) {
         // 工作者只能有一个配送中的订单
-        if (wos.findworkpsz(phonenum) == false) {
+        if (!wos.findworkpsz(phonenum)) {
             if (wos.updateStatusToWo(phonenum, keyid) == 1) {
                 return "success";
             } else {
@@ -142,10 +136,10 @@ public class ShopOrderController {
     @PostMapping("/getpszorder/{phonenum}")
     public String getpszorder(@PathVariable("phonenum") String phonenum) {
         // 工作者为工作状态
-        if (was.iswork(phonenum) == true) {
+        if (was.iswork(phonenum)) {
             // 查询该工作者地理位置(传到前台计算距离)
             WorkerAddress wa = was.select_wolnglat(phonenum);
-            ArrayList<WorkerOrder> list = new ArrayList<WorkerOrder>();
+            ArrayList<WorkerOrder> list;
             // 获取该工作者配送中订单
             list = wos.findWorkerOrderAllByPhWo(phonenum);
             // List数组转为Json数组
@@ -158,8 +152,7 @@ public class ShopOrderController {
                     job.put("wolat", wa.getLatitude());
                 }
             }
-            String jsonstr = JSONArray.fromObject(listArray).toString();
-            return jsonstr;
+            return JSONArray.fromObject(listArray).toString();
         } else {
             return "isrelax";
         }
@@ -198,26 +191,23 @@ public class ShopOrderController {
         json.put("wolat", wa.getLatitude());
         json.put("wophonenum", phonenum);
         // json对象转换为json字符串
-        String jsonorder = json.toString();
-        return jsonorder;
+        return json.toString();
     }
 
     /**
      * 工作者获取已配送订单
-     *
      * @param phonenum
      * @return
      */
     @PostMapping("/getypsorder/{phonenum}")
     public String getypsorder(@PathVariable("phonenum") String phonenum) {
         // 判断是否为工作状态
-        if (was.iswork(phonenum) == true) {
-            ArrayList<WorkerOrder> list = new ArrayList<WorkerOrder>();
+        if (was.iswork(phonenum)) {
+            ArrayList<WorkerOrder> list;
             // 获取该工作者配送中订单
             list = wos.findWorkerEndOrderAllByPh(phonenum);
             JSONArray listArray = JSONArray.fromObject(list);
-            String jsonstr = JSONArray.fromObject(listArray).toString();
-            return jsonstr;
+            return JSONArray.fromObject(listArray).toString();
         } else {
             return "isrelax";
         }
@@ -282,9 +272,9 @@ public class ShopOrderController {
     @PostMapping("/getorder/{phonenum}")
     public String getOrder(@PathVariable("phonenum") String phonenum) {
         // 判断是否为工作状态
-        if (was.iswork(phonenum) == true) {
+        if (was.iswork(phonenum)) {
             // 该手机号的订单列表
-            ArrayList<String> list = new ArrayList<String>();
+            ArrayList<String> list = new ArrayList<>();
             // 连接本地的Redis服务
             @SuppressWarnings("resource")
             Jedis jedis = new Jedis("localhost", 6379);
@@ -295,10 +285,8 @@ public class ShopOrderController {
             System.out.println("服务正在运行: " + jedis.ping());
             // 获取缓存中所有key
             Set<String> keys = jedis.keys("*");
-            Iterator<String> it = keys.iterator();
             // 遍历每一个key，获得value
-            while (it.hasNext()) {
-                String key = it.next();
+            for (String key : keys) {
                 // 处理缓存中乱码数据
                 if (key.length() < 8) {
                     ru.delstr(key);
@@ -319,8 +307,7 @@ public class ShopOrderController {
             }
             // list数组转为Json数组
             JSONArray listArray = JSONArray.fromObject(list);
-            String jsonstr = JSONArray.fromObject(listArray).toString();
-            return jsonstr;
+            return JSONArray.fromObject(listArray).toString();
         } else {
             return "isrelax";
         }
@@ -334,10 +321,10 @@ public class ShopOrderController {
     @PostMapping("/getdborder/{phonenum}/{sort}")
     public String getDbOrder(@PathVariable("phonenum") String phonenum, @PathVariable("sort") String sort) {
         // 工作者为工作状态
-        if (was.iswork(phonenum) == true) {
+        if (was.iswork(phonenum)) {
             // 查询该工作者地理位置(传到前台计算距离)
             WorkerAddress wa = was.select_wolnglat(phonenum);
-            ArrayList<WorkerOrder> list = new ArrayList<WorkerOrder>();
+            ArrayList<WorkerOrder> list = new ArrayList<>();
             // 查询的是非指派的订单（订单-待配送）
             if (sort.equals("nozhipai")) {
                 // 数据库中该手机号的订单列表
@@ -356,8 +343,7 @@ public class ShopOrderController {
                     job.put("wolat", wa.getLatitude());
                 }
             }
-            String jsonstr = JSONArray.fromObject(listArray).toString();
-            return jsonstr;
+            return JSONArray.fromObject(listArray).toString();
         } else {
             return "isrelax";
         }
@@ -373,10 +359,10 @@ public class ShopOrderController {
         // 字符串转为Json对象
         JSONObject getdata = JSONObject.fromObject(datastr);
         // 缓存中此订单抢单未结束
-        if (ru.iskey(getdata.getString("redisid")) == true) {
+        if (ru.iskey(getdata.getString("redisid"))) {
             new JSONObject();
             // 数据库中该订单未被接
-            if (sos.findStatusReByKeyId(getdata.getString("keyid")) == false) {
+            if (!sos.findStatusReByKeyId(getdata.getString("keyid"))) {
                 // 更新订单状态：已被抢
                 sos.updateStatusRe(getdata.getString("keyid"));
                 // 获取工作者姓名
@@ -399,7 +385,7 @@ public class ShopOrderController {
                 // 转换成WorkerOrder实体类，生成工作者订单存入数据库
                 WorkerOrder wo = (WorkerOrder) JSONObject.toBean(json, WorkerOrder.class);
                 // 工作者订单在数据库不存在
-                if (wos.existBykeyid(getdata.getString("keyid"), getdata.getString("phonenum")) == false) {
+                if (!wos.existBykeyid(getdata.getString("keyid"), getdata.getString("phonenum"))) {
                     // 工作者的订单写入数据库
                     wos.addOrder(wo);
                 } else {
@@ -430,7 +416,7 @@ public class ShopOrderController {
      */
     @PostMapping("/giveuporder/{phonenum}/{keyid}")
     public String giveuporder(@PathVariable("phonenum") String phonenum, @PathVariable("keyid") String keyid) {
-        if (sos.findSortByKeyId(keyid) == false) {
+        if (!sos.findSortByKeyId(keyid)) {
             // sort:0 -> 1
             sos.updateSortByKeyId(keyid);
             // status:1->0
@@ -490,7 +476,7 @@ public class ShopOrderController {
             json.put("name", name);
             // 转换成WorkerOrder实体类
             WorkerOrder wo = (WorkerOrder) JSONObject.toBean(json, WorkerOrder.class);
-            if (wos.existBykeyid(keyid, phonenum2) == false) {
+            if (!wos.existBykeyid(keyid, phonenum2)) {
                 // 转换成工作者的订单写入数据库
                 wos.addOrder(wo);
             } else {
@@ -526,7 +512,7 @@ public class ShopOrderController {
         json.put("name", name);
         // 转换成WorkerOrder实体类
         WorkerOrder wo = (WorkerOrder) JSONObject.toBean(json, WorkerOrder.class);
-        if (wos.existBykeyid(keyid, phonenum2) == false) {
+        if (!wos.existBykeyid(keyid, phonenum2)) {
             // 转换成工作者的订单写入数据库
             wos.addOrder(wo);
         } else {
@@ -545,12 +531,11 @@ public class ShopOrderController {
      */
     @PostMapping("/getlsdd/{phonenum}")
     public String getlsdd(@PathVariable("phonenum") String phonenum) {
-        ArrayList<WorkerOrder> list = new ArrayList<WorkerOrder>();
+        ArrayList<WorkerOrder> list;
         // 数据库中该手机号的订单列表
         list = wos.findWorkerOrderAllLSDD(phonenum);
         JSONArray listArray = JSONArray.fromObject(list);
-        String jsonstr = JSONArray.fromObject(listArray).toString();
-        return jsonstr;
+        return JSONArray.fromObject(listArray).toString();
     }
 
     /*PC端*/
@@ -561,8 +546,7 @@ public class ShopOrderController {
      */
     @GetMapping("/getshopnum")
     public String getshopnum() {
-        String jsonnum = sos.getallshopnum();
-        return jsonnum;
+        return sos.getallshopnum();
     }
 
     /**

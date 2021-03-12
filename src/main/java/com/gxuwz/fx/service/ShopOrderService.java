@@ -25,16 +25,14 @@ public interface ShopOrderService {
     /**
      * 更新订单状态：订单已被接
      * @param keyid
-     * @return
      */
-    int updateStatusRe(String keyid);
+    void updateStatusRe(String keyid);
 
     /**
      * 更新订单状态：订单被放弃
      * @param keyid
-     * @return
      */
-    int updateStatusGi(String keyid);
+    void updateStatusGi(String keyid);
 
     /**
      * 查询单个订单
@@ -44,13 +42,6 @@ public interface ShopOrderService {
     ShopOrder findShopOrderAllByKeyId(String keyid);
 
     /**
-     * 判断是否为第二次单
-     * @param keyid
-     * @return
-     */
-    boolean findStatusTwiceByKeyId(String keyid);
-
-    /**
      * 判断订单是否已被接
      * @param keyid
      * @return
@@ -58,18 +49,10 @@ public interface ShopOrderService {
     boolean findStatusReByKeyId(String keyid);
 
     /**
-     * 更新订单状态：第二次无人接或别放弃
-     * @param keyid
-     * @return
-     */
-    int updateStatusInTwice(String keyid);
-
-    /**
      * 更新订单种类
      * @param keyid
-     * @return
      */
-    int updateSortByKeyId(String keyid);
+    void updateSortByKeyId(String keyid);
 
     /**
      * 判断订单是否准备被指派

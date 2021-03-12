@@ -41,22 +41,20 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     /**
      * 添加生成的工作者订单
      * @param wo
-     * @return
      */
     @Override
-    public int addOrder(WorkerOrder wo) {
-        return wom.add(wo);
+    public void addOrder(WorkerOrder wo) {
+        wom.add(wo);
     }
 
     /**
      * 更新工作者订单状态： 工作者放弃订单：2
      * @param phonenum
      * @param keyid
-     * @return
      */
     @Override
-    public int updateStatusGi(String phonenum, String keyid) {
-        return wom.updateStatusGi(phonenum, keyid);
+    public void updateStatusGi(String phonenum, String keyid) {
+        wom.updateStatusGi(phonenum, keyid);
     }
 
     /**
@@ -72,11 +70,10 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     /**
      * 更新订单：形成指派单
      * @param
-     * @return
      */
     @Override
-    public int updateGiOrder(WorkerOrder wo) {
-        return wom.updateGiOrder(wo);
+    public void updateGiOrder(WorkerOrder wo) {
+        wom.updateGiOrder(wo);
     }
 
     /**
@@ -111,11 +108,10 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     /**
      * 更新工作者已存在订单
      * @param
-     * @return
      */
     @Override
-    public int updateWoOrder(WorkerOrder wo) {
-        return wom.updateWoOrder(wo);
+    public void updateWoOrder(WorkerOrder wo) {
+        wom.updateWoOrder(wo);
     }
 
     /**
@@ -266,16 +262,6 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     }
 
     /**
-     * 获取一周内数据
-     * @param
-     * @return
-     */
-    @Override
-    public int getweek_zp_fi(String phonenum) {
-        return wom.getweek_zp_fi(phonenum);
-    }
-
-    /**
      * 获取一个月内数据
      * @param
      * @return
@@ -354,8 +340,7 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     public String getallqqd() {
         List<WorkerOrder> list = wom.getallqqd();
         Gson gson = new Gson();
-        String json = gson.toJson(list);
-        return json;
+        return gson.toJson(list);
     }
 
     /**
@@ -366,8 +351,7 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     public String getallzpd() {
         List<WorkerOrder> list = wom.getallzpd();
         Gson gson = new Gson();
-        String json = gson.toJson(list);
-        return json;
+        return gson.toJson(list);
     }
 
     /**
@@ -377,8 +361,7 @@ public class WorkerOrderServiceImpl implements WorkerOrderService {
     public String cxoneorder(String keyid) {
         List<WorkerOrder> list = wom.cxoneorder(keyid);
         Gson gson = new Gson();
-        String json = gson.toJson(list);
-        return json;
+        return gson.toJson(list);
     }
 
     /**

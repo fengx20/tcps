@@ -18,9 +18,8 @@ public interface WorkerService {
     /**
      * 工作者注册
      * @param worker
-     * @return
      */
-    int regist(Worker worker);
+    void regist(Worker worker);
 
     /**
      * 工作者登录验证

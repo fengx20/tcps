@@ -8,6 +8,7 @@ import com.gxuwz.fx.pojo.WorkerOrder;
  * 配送人员订单业务接口层
  * @author fengx
  */
+@SuppressWarnings("BooleanMethodIsAlwaysInverted")
 public interface WorkerOrderService {
 
     /**
@@ -27,17 +28,15 @@ public interface WorkerOrderService {
     /**
      * 添加生成的工作者订单
      * @param wo
-     * @return
      */
-    int addOrder(WorkerOrder wo);
+    void addOrder(WorkerOrder wo);
 
     /**
      * 更新工作者订单状态： 工作者放弃订单：2
      * @param phonenum
      * @param keyid
-     * @return
      */
-    int updateStatusGi(String phonenum, String keyid);
+    void updateStatusGi(String phonenum, String keyid);
 
     /**
      * 查询该工作者的指派订单
@@ -49,9 +48,8 @@ public interface WorkerOrderService {
     /**
      * 更新订单：形成指派单
      * @param
-     * @return
      */
-    int updateGiOrder(WorkerOrder wo);
+    void updateGiOrder(WorkerOrder wo);
 
     /**
      * 此订单是否存在
@@ -78,9 +76,8 @@ public interface WorkerOrderService {
     /**
      * 更新工作者已存在订单
      * @param
-     * @return
      */
-    int updateWoOrder(WorkerOrder wo);
+    void updateWoOrder(WorkerOrder wo);
 
     /**
      * 工作者开始配送订单
@@ -186,13 +183,6 @@ public interface WorkerOrderService {
      * @return
      */
     int getweek_zp(String phonenum);
-
-    /**
-     * 获取一周内数据
-     * @param
-     * @return
-     */
-    int getweek_zp_fi(String phonenum);
 
     /**
      * 获取一个月内数据

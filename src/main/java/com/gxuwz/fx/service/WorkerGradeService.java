@@ -9,23 +9,20 @@ public interface WorkerGradeService {
     /**
      * 添加所有数据
      * @param
-     * @return
      */
-    int addwg(String phonenum);
+    void addwg(String phonenum);
 
     /**
      * 增加已完成数
      * @param phonenum
-     * @return
      */
-    int updateywc(String phonenum);
+    void updateywc(String phonenum);
 
     /**
      * 增加未完成数
      * @param phonenum
-     * @return
      */
-    int updatewwc(String phonenum);
+    void updatewwc(String phonenum);
 
     /**
      * 获取所有数据

@@ -31,11 +31,10 @@ public class WorkerServiceImpl implements WorkerService {
     /**
      * 工作者注册
      * @param worker
-     * @return
      */
     @Override
-    public int regist(Worker worker) {
-        return wm.add(worker);
+    public void regist(Worker worker) {
+        wm.add(worker);
     }
 
     /**
@@ -126,8 +125,7 @@ public class WorkerServiceImpl implements WorkerService {
     public String web_getallcertworker() {
         List<Worker> list = wm.web_getallcertworker();
         Gson gson = new Gson();
-        String json = gson.toJson(list);
-        return json;
+        return gson.toJson(list);
     }
 
     /**
@@ -138,8 +136,7 @@ public class WorkerServiceImpl implements WorkerService {
     public String web_getallnocertworker() {
         List<Worker> list = wm.web_getallnocertworker();
         Gson gson = new Gson();
-        String json = gson.toJson(list);
-        return json;
+        return gson.toJson(list);
     }
 
     /**
@@ -150,8 +147,7 @@ public class WorkerServiceImpl implements WorkerService {
     public String web_getallstopworker() {
         List<Worker> list = wm.web_getallstopworker();
         Gson gson = new Gson();
-        String json = gson.toJson(list);
-        return json;
+        return gson.toJson(list);
     }
 
     /**
@@ -161,8 +157,7 @@ public class WorkerServiceImpl implements WorkerService {
     public String web_getallshworker() {
         List<Worker> list = wm.web_getallshworker();
         Gson gson = new Gson();
-        String json = gson.toJson(list);
-        return json;
+        return gson.toJson(list);
     }
 
     /**
@@ -182,8 +177,7 @@ public class WorkerServiceImpl implements WorkerService {
     public String web_getoneworker(String phonenum) {
         List<Worker> list = wm.web_getoneworker(phonenum);
         Gson gson = new Gson();
-        String json = gson.toJson(list);
-        return json;
+        return gson.toJson(list);
     }
 
     /**

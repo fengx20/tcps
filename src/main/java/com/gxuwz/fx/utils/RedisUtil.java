@@ -1,17 +1,17 @@
 package com.gxuwz.fx.utils;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
+
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 @Component
 public class RedisUtil {
@@ -33,19 +33,15 @@ public class RedisUtil {
      * @param key   键
      * @param value 值
      * @param time  时间(秒) time要大于0 如果time小于等于0 将设置无限期
-     * @return true成功 false 失败
      */
-    public boolean setattime(String key, String value, long time) {
+    public void setattime(String key, String value, long time) {
         try {
             if (time > 0) {
                 stringRedisTemplate.opsForValue().set(key, value, time, TimeUnit.SECONDS);
-            } else {
-                //set(key, value);
-            }
-            return true;
+            }  //set(key, value);
+
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
         }
     }
 
@@ -56,22 +52,6 @@ public class RedisUtil {
      */
     public String getjson(String key) {
         return stringRedisTemplate.opsForValue().get(key);
-    }
-
-    /**
-     * 获取所有缓存
-     * @return
-     */
-    public Map getorder() {
-        Set<String> keys = redisTemplate.keys("*");
-        System.out.println(keys);
-        HashMap<Object, Object> map = new HashMap<>();
-        for (String key : keys) {
-            String value = stringRedisTemplate.opsForValue().get(key);
-            System.out.println(value);
-            map.put(key, value);
-        }
-        return map;
     }
 
     /**
@@ -104,17 +84,14 @@ public class RedisUtil {
      * 指定缓存失效时间
      * @param key  键
      * @param time 时间(秒)
-     * @return
      */
-    public boolean expire(String key, long time) {
+    public void expire(String key, long time) {
         try {
             if (time > 0) {
                 redisTemplate.expire(key, time, TimeUnit.SECONDS);
             }
-            return true;
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
         }
     }
 

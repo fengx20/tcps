@@ -92,12 +92,11 @@ public class WorkerOrderController {
      */
     @PostMapping("/gettoday_srmx/{phonenum}")
     public String gettoday_srmx(@PathVariable("phonenum") String phonenum) {
-        ArrayList<WorkerOrder> list = new ArrayList<WorkerOrder>();
+        ArrayList<WorkerOrder> list;
         // 数据库中该手机号的订单列表
         list = wos.gettoday_srmx(phonenum);
         JSONArray listArray = JSONArray.fromObject(list);
-        String jsonstr = JSONArray.fromObject(listArray).toString();
-        return jsonstr;
+        return JSONArray.fromObject(listArray).toString();
     }
 
     /**
@@ -107,12 +106,11 @@ public class WorkerOrderController {
      */
     @PostMapping("/getweek_srmx/{phonenum}")
     public String getweek_srmx(@PathVariable("phonenum") String phonenum) {
-        ArrayList<WorkerOrder> list = new ArrayList<WorkerOrder>();
+        ArrayList<WorkerOrder> list;
         // 数据库中该手机号的订单列表
         list = wos.getweek_srmx(phonenum);
         JSONArray listArray = JSONArray.fromObject(list);
-        String jsonstr = JSONArray.fromObject(listArray).toString();
-        return jsonstr;
+        return JSONArray.fromObject(listArray).toString();
     }
 
     /**
@@ -122,12 +120,11 @@ public class WorkerOrderController {
      */
     @PostMapping("/getmonth_srmx/{phonenum}")
     public String getmonth_srmx(@PathVariable("phonenum") String phonenum) {
-        ArrayList<WorkerOrder> list = new ArrayList<WorkerOrder>();
+        ArrayList<WorkerOrder> list;
         // 数据库中该手机号的订单列表
         list = wos.getmonth_srmx(phonenum);
         JSONArray listArray = JSONArray.fromObject(list);
-        String jsonstr = JSONArray.fromObject(listArray).toString();
-        return jsonstr;
+        return JSONArray.fromObject(listArray).toString();
     }
 
 }

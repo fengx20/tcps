@@ -1,10 +1,9 @@
 package com.gxuwz.fx.service.impl;
 
-import java.io.IOException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import com.gxuwz.fx.mapper.YzmMapper;
 import com.gxuwz.fx.service.YzmService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * 验证码业务实现层
@@ -20,12 +19,10 @@ public class YzmServiceImpl implements YzmService {
      * 向手机发送验证码并保存
      * @param Phonenum
      * @return
-     * @throws IOException
      */
     @Override
-    public String sendYzm(String Phonenum) throws IOException {
-        String result = "";
-        return result;
+    public String sendYzm(String Phonenum) {
+        return "";
     }
 
     /**

@@ -78,8 +78,7 @@ public class WorkerAddressServiceImpl implements WorkerAddressService {
     public String getWorkWa(double longitude, double latitude) {
         List<WorkerAddress> list = wam.select_worker(longitude, latitude);
         Gson gson = new Gson();
-        String json = gson.toJson(list);
-        return json;
+        return gson.toJson(list);
     }
 
     /**
@@ -114,8 +113,7 @@ public class WorkerAddressServiceImpl implements WorkerAddressService {
         // 取排序第一的数据
         WorkerAddress wa = list.get(0);
         Gson gson = new Gson();
-        String json = gson.toJson(wa);
-        return json;
+        return gson.toJson(wa);
     }
 
     /**
@@ -123,8 +121,7 @@ public class WorkerAddressServiceImpl implements WorkerAddressService {
      * @return
      */
     public List<WorkerAddress> get_allwa() {
-        List<WorkerAddress> list = wam.get_allwa();
-        return list;
+        return wam.get_allwa();
     }
 
 }

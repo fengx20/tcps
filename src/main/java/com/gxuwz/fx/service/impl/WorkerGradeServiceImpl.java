@@ -20,28 +20,25 @@ public class WorkerGradeServiceImpl implements WorkerGradeService {
     /**
      * 添加所有数据
      * @param
-     * @return
      */
-    public int addwg(String phonenum) {
-        return wgm.add(phonenum);
+    public void addwg(String phonenum) {
+        wgm.add(phonenum);
     }
 
     /**
      * 增加已完成数
      * @param phonenum
-     * @return
      */
-    public int updateywc(String phonenum) {
-        return wgm.updateywc(phonenum);
+    public void updateywc(String phonenum) {
+        wgm.updateywc(phonenum);
     }
 
     /**
      * 增加未完成数
      * @param phonenum
-     * @return
      */
-    public int updatewwc(String phonenum) {
-        return wgm.updatewwc(phonenum);
+    public void updatewwc(String phonenum) {
+        wgm.updatewwc(phonenum);
     }
 
     /**
@@ -52,8 +49,7 @@ public class WorkerGradeServiceImpl implements WorkerGradeService {
     public String getWorkerGrade(String phonenum) {
         WorkerGrade wg = wgm.getworkergrade(phonenum);
         Gson gson = new Gson();
-        String json = gson.toJson(wg);
-        return json;
+        return gson.toJson(wg);
     }
 
 }
