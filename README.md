@@ -1,4 +1,4 @@
-## 同城配送服务平台后台
+## 配送服务平台后台
 > 注：本项目以技术学习为主，业务做的较简单
 ### 技术栈
 Layui+Spring Boot+MyBatis+WebSocket+Redis+MySQL
